@@ -244,7 +244,7 @@ rule dada2_stats:
 rule assign_tax:
   input:
     rep = SCRATCH + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
-    db_classified = DB_classifier
+    DB_classifier
   output:
     sklearn = SCRATCH + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza"
   log:
@@ -253,7 +253,7 @@ rule assign_tax:
     "envs/qiime2-2019.4.yaml"
   shell:
     "qiime feature-classifier classify-sklearn \
-	--i-classifier {input.db_classified} \
+	--i-classifier {input} \
 	--i-reads {input.rep} \
 	--o-classification {output.sklearn}"
 
