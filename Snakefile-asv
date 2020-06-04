@@ -253,9 +253,9 @@ rule assign_tax:
     "envs/qiime2-2019.4.yaml"
   shell:
     "qiime feature-classifier classify-sklearn \
-	--i-classifier {input.DB_classifier} \
-	--i-reads {input.rep} \
-	--o-classification {output.sklearn}"
+	     --i-classifier {input.DB_classifier} \
+	     --i-reads {input.rep} \
+	     --o-classification {output.sklearn}"
 
 rule gen_table:
   input:
