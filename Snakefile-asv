@@ -244,7 +244,7 @@ rule dada2_stats:
 rule assign_tax:
   input:
     rep = SCRATCH + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
-    db_classified = DB_classifier
+    db_classified = config["database_classified"]
   output:
     sklearn = SCRATCH + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza"
   log:
