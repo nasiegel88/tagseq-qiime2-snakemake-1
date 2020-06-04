@@ -2,7 +2,7 @@ proj_name: slo-pier
 raw_data: ~/MLD/tagseq-qiime2-snakemake-1/raw_dir
 scratch:  ~/MLD/tagseq-qiime2-snakemake-1/scratch
 outputDIR: ~/MLD/tagseq-qiime2-snakemake-1/output
-manifest: ~/MLD/tagseq-qiime2-snakemake-1/manifest-orig.txt
+manifest: ~/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
 # Fastq file suffix, following the read pair designation
