@@ -41,7 +41,7 @@ minlength: 270
 
 ## Database
 database: ~/MLD/db-build-microeuks/V4-pr2_4.12.0.qza
-database_classified: ~/MLD/db-build-microeuks/V4-pr2_4.12.0-classifier.qza
+DB_classifier: ~/MLD/db-build-microeuks/V4-pr2_4.12.0-classifier.qza
 database_tax: ~/MLD/db-build-microeuks/pr2_4.12.0_tax.qza
 
 ## DADA2 - ASV flags
