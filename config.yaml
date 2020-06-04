@@ -40,9 +40,9 @@ minlength: 270
 #minlength: 200
 
 ## Database
-database: /vortexfs1/omics/huber/shu/db/pr2-db/V4-pr2_4.12.0.qza
-database_classified: /vortexfs1/omics/huber/shu/db/pr2-db/V4-pr2_4.12.0-classifier.qza
-database_tax: /vortexfs1/omics/huber/shu/db/pr2-db/pr2_4.12.0_tax.qza
+database: ~/MLD/db-build-microeuks/V4-pr2_4.12.0.qza
+database_classified: ~/MLD/db-build-microeuks/V4-pr2_4.12.0-classifier.qza
+database_tax: ~/MLD/db-build-microeuks/pr2_4.12.0_tax.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2
