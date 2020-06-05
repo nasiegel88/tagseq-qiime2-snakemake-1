@@ -1,8 +1,8 @@
 proj_name: slo-pier
-raw_data: ~/MLD/tagseq-qiime2-snakemake-1/raw_dir
-scratch:  ~/MLD/tagseq-qiime2-snakemake-1/scratch
-outputDIR: ~/MLD/tagseq-qiime2-snakemake-1/output
-manifest: ~/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
+raw_data: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir
+scratch:  /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/scratch
+outputDIR: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/output
+manifest: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
 # Fastq file suffix, following the read pair designation
@@ -40,9 +40,9 @@ minlength: 270
 #minlength: 200
 
 ## Database
-database: ~/MLD/db-build-microeuks/V4-pr2_4.12.0.qza
-database_classified: ~/MLD/db-build-microeuks/V4-pr2_4.12.0-classifier.qza
-database_tax: ~/MLD/db-build-microeuks/pr2_4.12.0_tax.qza
+database: /home/nasiegel/MLD/db-build-microeuks/V4-pr2_4.12.0.qza
+database_classified: /home/nasiegel/MLD/db-build-microeuks/V4-pr2_4.12.0-classifier.qza
+database_tax: /home/nasiegel/MLD/db-build-microeuks/pr2_4.12.0_tax.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2
