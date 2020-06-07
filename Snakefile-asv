@@ -60,6 +60,10 @@ rule all:
     # Trimmed data output
     trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
     trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    html = SCRATCH + "/fastqc/{sample}_{num}_fastqc.html",
+    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip",
+    html = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.html",
+    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip",
     raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", #next change to include proj name
