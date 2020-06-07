@@ -156,7 +156,7 @@ rule multiqc:
 
 rule import_qiime:
   input:
-    MANIFEST_FINAL
+    MANIFEST
   output:
     q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza"
   log:
