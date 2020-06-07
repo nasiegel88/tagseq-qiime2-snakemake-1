@@ -41,7 +41,7 @@ NEWPATH = os.path.join(SCRATCH, PATH_TRIMMED)
 MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq.gz")
 MANIFEST['absolute-filepath'] = NEWPATH+ "/" + MANIFEST['filename']    
 MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed.txt')
-MANIFEST_FINAL = config["manifest-trimmed"]
+MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
 DB = config["database"]
