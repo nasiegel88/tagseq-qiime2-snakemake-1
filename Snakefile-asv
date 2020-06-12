@@ -79,17 +79,19 @@ rule all:
     biom = SCRATCH + "/qiime2/asv/table/feature-table.biom",
     table_tsv = SCRATCH + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
     table_tax = SCRATCH + "/qiime2/asv/tax_assigned/taxonomy.tsv",
-    html = SCRATCH + "/fastqc/{sample}_{num}_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip",
-    r1 = SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq.gz",
-    r2 = SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq.gz"
+    html = expand(SCRATCH + "/fastqc/{sample}_{num}_fastqc.html"),
+    zip = expand(SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip"),
+    r1 = expand(SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq.gz)",
+    r2 = expand(SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq.gz)",
+    r1_unpaired = expand(SCRATCH + "/trimmed/{sample}_1.unpaired.fastq.gz"),
+    r2_unpaired = expand(SCRATCH + "/trimmed/{sample}_2.unpaired.fastq.gz")
 
 rule fastqc:
   input:    
     INPUTDIR + "/{sample}_{num}" + SUF
   output:
-    html = SCRATCH + "/fastqc/{sample}_{num}_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip"
+    html = expand(SCRATCH + "/fastqc/{sample}_{num}_fastqc.html"),
+    zip = expand(SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip")
   params: ""
   log:
     SCRATCH + "/logs/fastqc/{sample}_{num}.log"
@@ -101,11 +103,11 @@ rule trimmomatic_pe:
     r1 = INPUTDIR + "/{sample}_" + R1_SUF + SUF,
     r2 = INPUTDIR + "/{sample}_" + R2_SUF + SUF
   output:
-    r1 = SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq.gz",
-    r2 = SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq.gz",
+    r1 = expand(SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq.gz"),
+    r2 = expand(SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq.gz"),
     # reads where trimming entirely removed the mate
-    r1_unpaired = SCRATCH + "/trimmed/{sample}_1.unpaired.fastq.gz",
-    r2_unpaired = SCRATCH + "/trimmed/{sample}_2.unpaired.fastq.gz"
+    r1_unpaired = expand(SCRATCH + "/trimmed/{sample}_1.unpaired.fastq.gz"),
+    r2_unpaired = expand(SCRATCH + "/trimmed/{sample}_2.unpaired.fastq.gz")
   log:
     SCRATCH + "/trimmed/logs/trimmomatic/{sample}.log"
   params:
@@ -118,8 +120,8 @@ rule fastqc_trim:
   input:
     SCRATCH + "/trimmed/{sample}_{num}_trim.fastq.gz"
   output:
-    html = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip"
+    html = expand(SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.html"),
+    zip = expand(SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip")
   params: ""
   log:
     SCRATCH + "/logs/fastqc/{sample}_{num}_trimmed.log"
