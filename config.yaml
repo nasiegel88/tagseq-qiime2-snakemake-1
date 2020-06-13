@@ -46,8 +46,8 @@ database_tax: /home/nasiegel/MLD/db-build-microeuks/pr2_4.12.0_tax.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2
-truncation_len-f: 100
-truncation_len-r: 100
+truncation_len-f: 50
+truncation_len-r: 50
 quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
