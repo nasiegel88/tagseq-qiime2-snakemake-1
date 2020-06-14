@@ -54,14 +54,14 @@ rule all:
   input:
     # fastqc output before trimming
     raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html",
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
     # Trimmed data output
     trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
     trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", #next change to include proj name
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
     # QIIME2 outputs
@@ -85,7 +85,7 @@ rule fastqc:
     INPUTDIR + "/{sample}_{num}" + SUF
   output:
     html = SCRATCH + "/fastqc/{sample}_{num}_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc"
+    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip"
   params: ""
   log:
     SCRATCH + "/logs/fastqc/{sample}_{num}.log"
@@ -115,7 +115,7 @@ rule fastqc_trim:
     SCRATCH + "/trimmed/{sample}_{num}_trim.fastq.gz"
   output:
     html = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc"
+    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip"
   params: ""
   log:
     SCRATCH + "/logs/fastqc/{sample}_{num}_trimmed.log"
@@ -124,8 +124,8 @@ rule fastqc_trim:
 
 rule multiqc:
   input:
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
   output:
     raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html", 
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
