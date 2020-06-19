@@ -6,14 +6,14 @@ manifest: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
 # Fastq file suffix, following the read pair designation
-# suffix: .fastq.gz
-suffix: _001.fastq.gz
+suffix: .fastq.gz
+# suffix: _001.fastq.gz
 
 # Read pair designations
-#r1_suf: 1
-#r2_suf: 2
-r1_suf: R1
-r2_suf: R2
+r1_suf: 1
+r2_suf: 2
+#r1_suf: R1
+#r2_suf: R2
 
 # QIIME2-specific flags
 # Defaults for amplicon tag-sequencing - uncomment only parameters you need.
