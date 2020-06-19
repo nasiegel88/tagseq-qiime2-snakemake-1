@@ -146,8 +146,6 @@ rule multiqc:
     mv multiqc_data/multiqc_general_stats.txt {output.trim_multi_stats} #move and rename stats
     rm -rf multiqc_data	#clean-up
     """ 
-  wrapper:
-    "0.27.1/bio/multiqc"
 
 rule import_qiime:
   input:
