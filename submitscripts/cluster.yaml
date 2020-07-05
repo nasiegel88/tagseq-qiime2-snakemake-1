@@ -1,7 +1,7 @@
 __default__:
     system: 'slurm'
     account: nasiegel
-    time: 300 # in minutes
+    time: 3:00:00
     mem: 10 # in GB
     threads: 8
     queue: high
@@ -20,7 +20,7 @@ __default__:
 
 assign_tax_otu:
    queue: high
-   time: 720
+   time: 3:00:00
    mem: 32
    threads: 16
 
@@ -33,6 +33,6 @@ dada2:
 
 assign_tax:
    queue: high
-   time: 1440
+   time: 3:00:00
    mem: 16
    threads: 8
