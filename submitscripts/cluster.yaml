@@ -1,10 +1,10 @@
 __default__:
     system: 'slurm'
-    account: sarahhu
+    account: nasiegel
     time: 300 # in minutes
     mem: 10 # in GB
     threads: 8
-    queue: compute
+    queue: high
     nodes: 1
     command_options:
         slurm:
@@ -19,20 +19,20 @@ __default__:
             nodes: "-N {}"  # number of tasks
 
 assign_tax_otu:
-   queue: compute
+   queue: high
    time: 720
    mem: 32
    threads: 16
 
 
 dada2:
-   queue: compute
+   queue: high
    time: 1440
    mem: 16
    threads: 8
 
 assign_tax:
-   queue: compute
+   queue: high
    time: 1440
    mem: 16
    threads: 8
