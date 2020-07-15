@@ -289,7 +289,7 @@ rule denovo:
         --p-perc-identity {config[denovo_perc_id]} \
         --o-clustered-table {output.q2_cluster_table} \
         --o-clustered-sequences {output.q2_cluster_seqs}  \
-        --o-unmatched-sequences {output.unmatched_seqs}
+        --o-unmatched-sequences {output.unmatched_seqs} \
         --p-threads {config[denovo_otu-thread]}"
 
 rule chimera_find:
