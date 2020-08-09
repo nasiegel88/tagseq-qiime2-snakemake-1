@@ -1,0 +1,387 @@
+---
+title: "MLD fecal sample preliminary analysis"
+author: "Noah Siegel"
+date: "August 06, 2020"
+output: pdf_document
+---
+
+```{r include=FALSE}
+library("phyloseq"); packageVersion("phyloseq")
+library("ggplot2"); packageVersion("ggplot2")
+library("readr")
+library("OTUtable")
+library("tidyverse")
+library("dplyr")
+theme_set(theme_bw())
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch/qiime2/asv")
+list.files()
+```
+
+
+```{r}
+otu <- read_tsv("tax_assigned/taxonomy.tsv")
+
+asv_table = read.table("mld-test-fecal-asv-table.tsv " ,  header = F)
+
+colnames(asv_table) <- c("Feature ID", "Blank", "animal-1", "animal-2", "animal-3", "animal-4")
+```
+
+```{r}
+otu_table <- otu %>% separate(Taxon, c("Kingdom","Phylum","Class","Order","Family","Genus","Species"), sep=";")
+drop_na(otu_table)
+```
+
+```{r}
+otumat <- as.matrix(asv_table)
+taxmat <- as.matrix(otu_table)
+class(otumat) <- "numeric"
+```
+
+```{r}
+OTU = otu_table(otumat[,-1], taxa_are_rows = TRUE)
+# Not sure why I am seeign 2 different Genus' of Provetella
+taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 9", "D_5__Prevotella")
+taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 2", "D_5__Prevotella")
+
+TAX = tax_table(taxmat)
+```
+
+
+```{r}
+metadata <- read.table("sample-metadata.tsv", row.names = 1, header = TRUE)
+```
+
+```{r}
+physeq = phyloseq(OTU, TAX, sample_data(metadata))
+physeq <- transform_sample_counts(physeq, function(OTU) OTU/sum(OTU))
+# Remove blank
+physeq = subset_samples(physeq, sample_names(physeq)!="Blank")
+```
+
+# Abundance for each level of classification
+
+```{r}
+# Select top 20 taxa from each level of classification
+top20 <- names(sort(taxa_sums(physeq), decreasing=TRUE))[1:16]
+ps.top20 <- transform_sample_counts(physeq, function(OTU) OTU/sum(OTU))
+ps.top20 <- prune_taxa(top20, ps.top20)
+```
+
+
+# PowerPoint
+
+```{r}
+library("officer")
+library("flextable")
+```
+
+```{r}
+# Create a PowerPoint document
+my_pres <- read_pptx()
+```
+
+# slide 1
+```{r}
+my_pres <- add_slide(my_pres, layout = "Title and Content", master = "Office Theme")
+my_pres <- ph_with(my_pres, value = "Priminary MLD Fecal Abundance", location = ph_location_type(type = "title"))
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+my_pres <- ph_with(my_pres, value = "slide 1", location = ph_location_type(type = "sldNum"))
+my_pres <- ph_with(my_pres, value = c("Control animals",
+                                      "Month 0"), location = ph_location_type(type = "body"))
+```
+
+
+# Slide
+
+```{r}
+# plot
+## total wbc concentration
+ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill = "Phylum")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, All Animals, Phylum",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+# Slide
+
+```{r}
+# plot
+## total wbc concentration
+ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill = "Class")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, All Animals, Class",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+# Slide
+
+```{r}
+# plot
+## total wbc concentration
+ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill = "Order")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, All Animals, Order",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+
+```{r}
+# plot
+## total wbc concentration
+ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill = "Family")
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres,"Fecal % Abundance, All Animals, Family",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+# plot
+## total wbc concentration
+ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill = "Genus")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, All Animals, Genus",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+sample_data(ps.top20)$dummy_var <- 1
+sample_data(physeq)$dummy_var <- 1
+```
+
+```{r}
+ps <- tax_glom(ps.top20, "Phylum")
+ps1 <- merge_samples(ps, "Group")
+ps2 <- transform_sample_counts(ps1, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill="Phylum")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Phlyum",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+df <- psmelt(ps2)
+top_phyla <- df %>%
+    group_by(Phylum) %>%
+    summarize(Mean = mean(Abundance)) %>%
+    arrange(-Mean)
+top_phyla
+
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Phlyum",
+               location = ph_location_type(
+                 type = "title") )
+ft <- flextable(top_phyla)
+ft <- autofit(ft)
+my_pres <- ph_with(x = my_pres, ft,
+   location = ph_location_type(type = "body") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+
+```{r}
+ps <- tax_glom(ps.top20, "Class")
+ps0 <- transform_sample_counts(ps, function(x) x / sum(x))
+ps1 <- merge_samples(ps0, "Group")
+ps2 <- transform_sample_counts(ps1, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill="Class")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Class",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+df <- psmelt(ps2)
+top_phyla <- df %>%
+    group_by(Class) %>%
+    summarize(Mean = mean(Abundance)) %>%
+    arrange(-Mean)
+top_phyla
+
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Class",
+               location = ph_location_type(
+                 type = "title") )
+ft <- flextable(top_phyla)
+ft <- autofit(ft)
+my_pres <- ph_with(x = my_pres, ft,
+   location = ph_location_type(type = "body") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+ps <- tax_glom(ps.top20, "Order")
+ps0 <- transform_sample_counts(ps, function(x) x / sum(x))
+ps1 <- merge_samples(ps0, "Group")
+ps2 <- transform_sample_counts(ps1, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill="Order")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Order",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+df <- psmelt(ps2)
+top_phyla <- df %>%
+    group_by(Order) %>%
+    summarize(Mean = mean(Abundance)) %>%
+    arrange(-Mean)
+top_phyla
+
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Order",
+               location = ph_location_type(
+                 type = "title") )
+ft <- flextable(top_phyla)
+ft <- autofit(ft)
+my_pres <- ph_with(x = my_pres, ft,
+   location = ph_location_type(type = "body") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+ps <- tax_glom(ps.top20, "Family")
+ps0 <- transform_sample_counts(ps, function(x) x / sum(x))
+ps1 <- merge_samples(ps0, "Group")
+ps2 <- transform_sample_counts(ps1, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill="Family")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Family",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+df <- psmelt(ps2)
+top_phyla <- df %>%
+    group_by(Family) %>%
+    summarize(Mean = mean(Abundance)) %>%
+    arrange(-Mean)
+top_phyla
+
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Family",
+               location = ph_location_type(
+                 type = "title") )
+ft <- flextable(top_phyla)
+ft <- autofit(ft)
+my_pres <- ph_with(x = my_pres, ft,
+   location = ph_location_type(type = "body") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+ps <- tax_glom(ps.top20, "Genus")
+ps0 <- transform_sample_counts(ps, function(x) x / sum(x))
+ps1 <- merge_samples(ps0, "Group")
+ps2 <- transform_sample_counts(ps1, function(x) x / sum(x))
+gg_plot <- plot_bar(ps2, fill="Genus")
+
+# slide
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, value = gg_plot,
+               location = ph_location_type(type = "body") )
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Genus",
+               location = ph_location_type(
+                 type = "title") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+
+```{r}
+df <- psmelt(ps2)
+top_phyla <- df %>%
+    group_by(Genus) %>%
+    summarize(Mean = mean(Abundance)) %>%
+    arrange(-Mean)
+top_phyla
+
+my_pres <- add_slide(my_pres)
+my_pres <- ph_with(x = my_pres, "Fecal % Abundance, Avg. Animals, Genus",
+               location = ph_location_type(
+                 type = "title") )
+ft <- flextable(top_phyla)
+ft <- autofit(ft)
+my_pres <- ph_with(x = my_pres, ft,
+   location = ph_location_type(type = "body") )
+my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(type = "ftr"))
+my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
+```
+```{r}
+print(my_pres, target = "pilot_resp-microbiome.pptx")
+```
