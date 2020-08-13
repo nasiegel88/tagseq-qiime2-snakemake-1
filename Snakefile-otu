@@ -267,7 +267,7 @@ rule dedup:
         --o-dereplicated-table {output.q2_dedup} \
 	--o-dereplicated-sequences {output.q2_dedup_seq}"
 
-rule closed-ref:
+rule closed_ref:
   input:
     q2_dedup = SCRATCH + "/qiime2/otu/" + PROJ + "-PE-demux-joined-filtered-dedup_table.qza",
     q2_dedup_seq = SCRATCH + "/qiime2/otu/" + PROJ + "-PE-demux-joined-filtered-dedup_seqs.qza",
