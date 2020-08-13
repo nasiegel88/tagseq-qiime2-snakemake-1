@@ -52,8 +52,12 @@ TAX = tax_table(taxmat)
 
 
 ```{r}
-metadata <- read.table("sample-metadata.tsv", row.names = 1, header = TRUE)
+metadata = read.table("C:/Users/noahs/tagseq-qiime2-snakemake-1/tagseq-qiime2-snakemake-1/sample-metadata.tsv", row.names = 1, header = TRUE)
+
+rownames(metadata) <- c("Blank", "animal-1", "animal-2", "animal-3", "animal-4")
 ```
+
+
 
 ```{r}
 physeq = phyloseq(OTU, TAX, sample_data(metadata))
@@ -383,5 +387,5 @@ my_pres <- ph_with(my_pres, value = "Noah Siegel", location = ph_location_type(t
 my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_type(type = "dt"))
 ```
 ```{r}
-print(my_pres, target = "pilot_resp-microbiome.pptx")
+print(my_pres, target = "pilot_resp-microbiome-otu.pptx")
 ```
