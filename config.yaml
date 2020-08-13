@@ -1,7 +1,8 @@
-proj_name: slo-pier
+proj_name: prelim-mld-fecal
 raw_data: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir
 scratch:  /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/scratch
 outputDIR: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/output
+metadata: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/sample-metadata.tsv
 manifest: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
