@@ -96,7 +96,7 @@ Migrate to raw_dir and download one of the test datasets:
 # if you want to run the preliminary 16S data:
  bash practice-data.sh
  ```
-This command will download the practice samples from my account on [OSF](osf.io/c4g95).
+This command will download the practice samples from my account on [OSF](https://osf.io/c4g95/).
 
 
 To make the manifest file that is required for qiime2, enable an R environment and run the provided R script: ```scripts/write-manifest-current.R```
