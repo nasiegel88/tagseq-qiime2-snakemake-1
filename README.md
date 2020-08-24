@@ -1,7 +1,7 @@
 # Pipeline to run qiime2 with snakemake
-*Noah Siegel
-August 2020
-adapted from [https://github.com/shu251/tagseq-qiime2-snakemake](https://github.com/shu251/tagseq-qiime2-snakemake)*
+*Noah Siegel*
+*August 2020*
+*adapted from [https://github.com/shu251/tagseq-qiime2-snakemake](https://github.com/shu251/tagseq-qiime2-snakemake)*
 
 Run [QIIME2](https://www.nature.com/articles/s41587-019-0209-9) using [snakemake](https://academic.oup.com/bioinformatics/article/28/19/2520/290322). Requires input of raw .fastq reads. Below describes steps to set up environment and run a test dataset.
 This Snakemake pipeline can be easily scaled up to larger datasets and includes scripts to submit Snakemake jobs to slurm.    
