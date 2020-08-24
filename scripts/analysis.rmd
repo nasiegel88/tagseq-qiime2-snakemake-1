@@ -49,7 +49,7 @@ class(otumat) <- "numeric"
 
 ```{r}
 OTU = otu_table(otumat[,-1], taxa_are_rows = TRUE)
-# Not sure why I am seeign 2 different Genus' of Provetella
+# Not sure why I am seeing 2 different Genus' of Provetella
 taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 9", "D_5__Prevotella")
 taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 2", "D_5__Prevotella")
 
