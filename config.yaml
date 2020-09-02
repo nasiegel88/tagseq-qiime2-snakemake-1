@@ -32,7 +32,7 @@ r2_suf: R2
 ### 16S default (Parada et al. modified EMP primers)
 #primerF: GTGYCAGCMGCCGCGGTAA
 #primerR: GGACTACNVGGGTWTCTAAT
-## Illummina !6S V3-V4 primeres
+## Illumina 16S V3-V4 primeres
 primerF: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
 primerR: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
 # Parada et al. 2016 MEP primers for 16S
