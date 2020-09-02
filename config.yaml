@@ -45,7 +45,7 @@ minlength: 200
 
 ## Database
 database: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-138-99-seqs.qza
-database_classified: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-138-99-nb-classifier.qza
+database_classified: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-132-99-nb-classifier.qza
 database_tax: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-138-99-tax.qza
 
 ## DADA2 - ASV flags
