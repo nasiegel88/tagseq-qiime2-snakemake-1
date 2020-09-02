@@ -17,7 +17,7 @@ theme_set(theme_bw())
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "C:/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch/qiime2/asv")
+knitr::opts_knit$set(root.dir = "C:/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch/qiime2/otu")
 list.files()
 ```
 
@@ -25,9 +25,15 @@ list.files()
 ```{r}
 otu <- read_tsv("tax_assigned/taxonomy.tsv")
 
-asv_table = read.table("mld-test-fecal-asv-table.tsv " ,  header = F)
+asv_table = read.table("prelim-mld-fecal-otu-table.tsv " ,  header = F)
 
 colnames(asv_table) <- c("Feature ID", "Blank", "animal-1", "animal-2", "animal-3", "animal-4")
+```
+
+```{r}
+metadata = read.table("C:/Users/noahs/tagseq-qiime2-snakemake-1/tagseq-qiime2-snakemake-1/sample-metadata.tsv", row.names = 1, header = TRUE)
+
+rownames(metadata) <- c("Blank", "animal-1", "animal-2", "animal-3", "animal-4")
 ```
 
 ```{r}
@@ -43,21 +49,12 @@ class(otumat) <- "numeric"
 
 ```{r}
 OTU = otu_table(otumat[,-1], taxa_are_rows = TRUE)
-# Not sure why I am seeign 2 different Genus' of Provetella
+# Not sure why I am seeing 2 different Genus' of Provetella
 taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 9", "D_5__Prevotella")
 taxmat <- replace(taxmat, taxmat == "D_5__Prevotella 2", "D_5__Prevotella")
 
 TAX = tax_table(taxmat)
 ```
-
-
-```{r}
-metadata = read.table("C:/Users/noahs/tagseq-qiime2-snakemake-1/tagseq-qiime2-snakemake-1/sample-metadata.tsv", row.names = 1, header = TRUE)
-
-rownames(metadata) <- c("Blank", "animal-1", "animal-2", "animal-3", "animal-4")
-```
-
-
 
 ```{r}
 physeq = phyloseq(OTU, TAX, sample_data(metadata))
@@ -105,7 +102,6 @@ my_pres <- ph_with(my_pres, value = c("Control animals",
 
 ```{r}
 # plot
-## total wbc concentration
 ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
 gg_plot <- plot_bar(ps2, fill = "Phylum")
 
@@ -124,7 +120,6 @@ my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_t
 
 ```{r}
 # plot
-## total wbc concentration
 ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
 gg_plot <- plot_bar(ps2, fill = "Class")
 
@@ -143,7 +138,6 @@ my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_t
 
 ```{r}
 # plot
-## total wbc concentration
 ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
 gg_plot <- plot_bar(ps2, fill = "Order")
 
@@ -161,7 +155,6 @@ my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_t
 
 ```{r}
 # plot
-## total wbc concentration
 ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
 gg_plot <- plot_bar(ps2, fill = "Family")
 # slide
@@ -177,7 +170,6 @@ my_pres <- ph_with(my_pres, value = format(Sys.Date()), location = ph_location_t
 
 ```{r}
 # plot
-## total wbc concentration
 ps2 <- transform_sample_counts(ps.top20, function(x) x / sum(x))
 gg_plot <- plot_bar(ps2, fill = "Genus")
 

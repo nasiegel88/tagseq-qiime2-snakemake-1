@@ -1,6 +1,7 @@
 # Pipeline to run qiime2 with snakemake
-_January 2020_
-_Sarah Hu_
+* *Noah Siegel*
+* *August 2020*
+* *adapted from [https://github.com/shu251/tagseq-qiime2-snakemake](https://github.com/shu251/tagseq-qiime2-snakemake)*
 
 Run [QIIME2](https://www.nature.com/articles/s41587-019-0209-9) using [snakemake](https://academic.oup.com/bioinformatics/article/28/19/2520/290322). Requires input of raw .fastq reads. Below describes steps to set up environment and run a test dataset.
 This Snakemake pipeline can be easily scaled up to larger datasets and includes scripts to submit Snakemake jobs to slurm.    
@@ -11,7 +12,7 @@ Make tag-sequencing analyses higher throughput, more robust, and reproducible.
 1. Set up working directory, conda environments, and taxonomy database
 	1.1 Create and launch a conda environment to run this pipeline.
 	1.2 Place all raw fastq files in one place
-	1.3 Prep taxonomy database
+	1.3 download taxonomy database
 2. Modify config.yaml to run snakemake with your data
 3. Run a dry run of snakemake pipeline
 	3.1 Enable to run on HPC with SLURM
@@ -67,12 +68,12 @@ _New to QIIME2?_
 
 ## 1. Set up working directory, conda environments, and taxonomy database
 ### 1.1 Create and launch a conda environment to run this pipeline.
-All environments to run this pipeline are in ```/tagseq-qiime2-snakemake/envs/```, including an environment to run snakemake.
+All environments to run this pipeline are in ```/tagseq-qiime2-snakemake-1/envs/```, including an environment to run snakemake.
 
 ```
 # Download this repo and enter
-git clone https://github.com/shu251/tagseq-qiime2-snakemake.git
-cd tagseq-qiime2-snakemake
+git clone https://github.com/nasiegel88/tagseq-qiime2-snakemake-1.git
+cd tagseq-qiime2-snakemake-1
 
 # Create conda environment from exisiting yaml file:
 conda env create --name snake-tagseq --file envs/snake.yaml 
@@ -92,13 +93,12 @@ Either within the downloaded repo (e.g., raw_dir/) or elsewhere you have access 
 #### **Run with test data**
 Migrate to raw_dir and download one of the test datasets:
 ```
-cd raw_dir #migrate to raw_dir directory
-bash 18S-download-testdata.sh
+# if you want to run the preliminary 16S data:
+ bash practice-data.sh
+ ```
+This command will download the practice samples from my account on [OSF](https://osf.io/c4g95/).
 
-# if you want to run the 16S tes data:
-# bash 16S-download-testdata.sh
 
-```
 To make the manifest file that is required for qiime2, enable an R environment and run the provided R script: ```scripts/write-manifest-current.R```
 ```
 # Enable an R working environment
@@ -111,17 +111,23 @@ Rscript $PATH/tagseq-qiime2-snakemake/scripts/write-manifest-current.R
 ```
 
 #### **If using your own fastq files**  
-1. Place them in their own ```raw_data``` directory (see step to update config.yaml to tell snakemake where these are located).   
+1. Place them in their own ```raw_dir``` directory (see step to update config.yaml to tell snakemake where these are located).   
 2. Create a manifest file for these sequences. You can also follow the instructions above to use the provided R script to automatically generate one. ```scripts/write-manifest-current.R``` detects all fastq.gz files in the curren directory and creates a manifest file ready for qiime2 import.
 
 *Make your own manifest file without the R script*: 
 Format your own txt file (using a text editor or a CSV file) exactly this way. Every line must be comma separated, with sample-id, followed by the path of fastq file, followed by either "forward" or "reverse". 
 ```
 sample-id,absolute-filepath,direction
-sample1,$PWD/raw_seqs_dir/Test01_full_L001_R1.fastq.gz,forward
-sample1,$PWD/raw_seqs_dir/Test01_full_L001_R2.fastq.gz,reverse
-sample2,$PWD/raw_seqs_dir/Test02_full_L001_R1.fastq.gz,forward
-sample2,$PWD/raw_seqs_dir/Test02_full_L001_R2.fastq.gz,reverse
+NS.Blank5,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.Blank5_R1.fastq.gz,forward
+NS.Blank5,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.Blank5_R2.fastq.gz,reverse
+NS.C,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.C_R1.fastq.gz,forward
+NS.C,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.C_R2.fastq.gz,reverse
+NS.D,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.D_R1.fastq.gz,forward
+NS.D,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.D_R2.fastq.gz,reverse
+NS.E,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.E_R1.fastq.gz,forward
+NS.E,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.E_R2.fastq.gz,reverse
+NS.O,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.O_R1.fastq.gz,forward
+NS.O,/home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/NS.O_R2.fastq.gz,reverse
 ```
 Guidelines:   
 * Replace $PWD with your path
@@ -129,41 +135,13 @@ Guidelines:
 * List all of your fastq files. 
 * Save the file and name it "manifest.txt".
 
-**Disclaimer**: the above manifest file format has changed in later versions of qiime2. (_Jan 1. 2020))_
-
 ### 1.3 Prep taxonomy database
 
-Qiime2 requires that all sequence files are imported as artifact files. This is no different for reference databases. Do this [manually using the qiime2 website instructions](https://docs.qiime2.org/2019.10/tutorials/feature-classifier/). You can also automate this using [a snakemake pipeline here](https://github.com/shu251/db-build-microeuks) - while this shows how to download the PR2 18S reference database, this can be swapped for other. A quick explanation of how to do this manually:
+Qiime2 requires that all sequence files are imported as artifact files. This is no different for reference databases. Do this [manually using the qiime2 website instructions](https://docs.qiime2.org/2019.10/tutorials/feature-classifier/). I am using the silva database, running the below bash script will populate your directory with the necessary .qza files to generate ASV and OTU tables in Qiime 2019.4
 
 ```
-conda activate qiime2-2019.4 # If using verion with this tutorial
-# First import the database
-qiime tools import \
-  --type 'FeatureData[Sequence]' \
-  --input-path $PWD/db/pr2.fasta \
-  --output-path $PWD/db/pr2.qza
-
-# Then the taxonomy file
-qiime tools import \
-  --type 'FeatureData[Taxonomy]' \
-  --input-format HeaderlessTSVTaxonomyFormat \
-  --input-path $PWD/db/pr2_tax.txt \
-  --output-path $PWD/db/pr2_tax.qza
-
-# Select V4 region from the PR2 database
-# Use appropriate forward and reverse primers
-qiime feature-classifier extract-reads \
-  --i-sequences $PWD/db/pr2.qza \
-  --p-f-primer CCAGCASCYGCGGTAATTCC \
-  --p-r-primer ACTTTCGTTCTTGATYRA \
-  --p-trunc-len 150 \
-  --o-reads $PWD/db/v4_extracts.qza
-
-# Train the classifier
-qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads $PWD/db/v4_extracts.qza \
-  --i-reference-taxonomy $PWD/db/pr2_tax.qza \
-  --o-classifier $PWD/db/pr2_classifier.qza
+cd/database
+bash download-classifier.sh
 ```
 
 *Note where this qiime2 artifact (.qza file) is stored to reference below.
@@ -179,7 +157,7 @@ Checklist of all the things you need to know ahead of time:
 - [ ] What is the designation of read 1 (forward) and read 2 (reverse)? Examples of *file name/read pair designation*: sample01_S30_R1_001.fastq.gz/R1, sampleXX_jan2015_2.fastq/2
 - [ ] Primer sequence of the target amplicon
 _Operational Taxonomic Units_
-- [ ] What is the target final length of your amplicon? (e.g., 18S rRNA gene V4 hypervariable region is ~400bp). Related, think about how much error you can live with when you merge the sequences (overlap and error)
+- [ ] What is the target final length of your amplicon? (e.g., 16S rRNA gene V4 hypervariable region is ~460bp). Related, think about how much error you can live with when you merge the sequences (overlap and error)
 - [ ] What is your desired quality score (q-score, Phred score) cut off? If you're not sure, and think you need to deviate from the default, see below suggestion and option for this.
 - [ ] For _de novo_ OTUs, what is your percent ID? Currently at 3%, or 97% seq similarity (0.97)
 _Amplicon Sequence Variants
@@ -187,22 +165,22 @@ _Amplicon Sequence Variants
 
 This config.yaml file is set up to run with the test sequences downloaded from above:
 
-* ```proj_name: Diel_18S``` Replace this with your project name. This will be what the final ASV qiime2 artifact and ASV table is named.  
-* ```raw_data: /vortexfs1/omics/huber/shu/tagseq-qiime2-snakemake/raw_data``` Point config file to location of your raw fastq reads, in this case a directory called 'raw_data'   
-* ```scratch:  /vortexfs1/scratch/sarahhu``` Change this to where you want all your outputs to be written. Since I am working on a HPC, I write all of this to scratch and move it later.
-* ```outputDIR: /vortexfs1/omics/huber/shu/tagseq-qiime2-snakemake/``` Output directory for qiime2 visualization files to be written to. This is for QCing sequences.
+* ```proj_name: prelim-mld-fecal ``` Replace this with your project name. This will be what the final ASV qiime2 artifact and ASV table is named.  
+* ```raw_dir: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir``` Point config file to location of your raw fastq reads, in this case a directory called 'raw_data'   
+* ```scratch:  /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/scratch``` Change this to where you want all your outputs to be written. Since I am working on a HPC, I write all of this to scratch and move it later.
+* ```outputDIR: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/output``` Output directory for qiime2 visualization files to be written to. This is for QCing sequences.
 * ```manifest: manifest.txt``` Input of manifest file that you need to provide, generated using R script or created by you.   
 * ```manifest-trimmed: manifest-trimmed.txt``` Final manifest file, the Snakemake pipeline will create this file, as the first few steps generate the trimmed fastq files which we ACTUALLY want to use in the QIIME2 part, so the Snakemake file is written to input your manifest file and modify the filepath   
 Designations for file names:
 * ```suffix:``` and ```r1_suf/r2_suf``` comment out ```#``` the lines not applicable to your sample names.
 Modify lines specific for OTU or ASV determination:
-* ```primerF: CCAGCASCYGCGGTAATTCC``` Forward primer sequence, in this case I'm using the V4 hypervariable region for 18S. Comment out the one you are not using, the config.yaml file already has the Stoeck et al. primers for 18S and Parada et al. primers for 16S.
-* ```primerR: ACTTTCGTTCTTGATYRA``` Reverse primer sequence   
+* ```primerF: GTGYCAGCMGCCGCGGTAA``` Forward primer sequence, in this case I'm using the V3-V4 hypervariable region for 16S. Comment out the one you are not using, the config.yaml file already has the Stoeck et al. primers for 18S and Parada et al. primers for 16S.
+* ```primerR: GGACTACNVGGGTWTCTAAT``` Reverse primer sequence   
 Reference database:
 #### Database
-* ```database: /vortexfs1/omics/huber/shu/db/pr2-db/V4-pr2_4.12.0.qza``` Reference sequence database imported as a QIIME2 artifact
-* ```database_classified: /vortexfs1/omics/huber/shu/db/pr2-db/V4-pr2_4.12.0-classifier.qza``` Classified reference database, processed be subsetting with your primer sequence and running the qiime2 classifier
-* ```database_tax: /vortexfs1/omics/huber/shu/db/pr2-db/pr2_4.12.0_tax.qza``` Replace with the taxonomy names associated with the above database
+* ```database: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-seqs.qza``` Reference sequence database imported as a QIIME2 artifact
+* ```database_classified: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-nb-classifier.qza``` Classified reference database, processed be subsetting with your primer sequence and running the qiime2 classifier
+* ```database_tax: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-tax.qza``` Replace with the taxonomy names associated with the above database
 
 
 #### DADA2 parameters 
@@ -404,7 +382,3 @@ To look for additional code error that may result in Syntax errors, try adding t
 * R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
 ***
 
-
-#### To do:
-* Update so R script is integrated into snakemake and creates tables with taxonomy for both ASV and OTU pipelines
-* Add in final step to generate a fasta file with fasta headers which correspond to the reference sequences

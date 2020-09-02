@@ -1,5 +1,5 @@
 # Snakemake file - input raw fastq reads to generate OTUs
-## Last updated 11-20-2019 SHu
+## Last updated 8-18-2019 NS
 configfile: "config.yaml"
 
 import io 
