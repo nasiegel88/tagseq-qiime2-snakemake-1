@@ -4,8 +4,7 @@
 * *adapted from [https://github.com/shu251/tagseq-qiime2-snakemake](https://github.com/shu251/tagseq-qiime2-snakemake)*
 
 Run [QIIME2](https://www.nature.com/articles/s41587-019-0209-9) using [snakemake](https://academic.oup.com/bioinformatics/article/28/19/2520/290322). Requires input of raw .fastq reads. Below describes steps to set up environment and run a test dataset.
-This Snakemake pipeline can be easily scaled up to larger datasets and includes scripts to submit Snakemake jobs to slurm.    
-Make tag-sequencing analyses higher throughput, more robust, and reproducible.
+This Snakemake pipeline can be easily scaled up to larger datasets and includes scripts to submit Snakemake jobs to slurm.   
 
 ## Overview
 ### Outline
@@ -93,7 +92,7 @@ Either within the downloaded repo (e.g., raw_dir/) or elsewhere you have access 
 #### **Run with test data**
 Migrate to raw_dir and download one of the test datasets:
 ```
-# if you want to run the preliminary 16S data:
+# If you want to run the preliminary 16S data:
  bash practice-data.sh
  ```
 This command will download the practice samples from my account on [OSF](https://osf.io/c4g95/).
@@ -105,7 +104,7 @@ To make the manifest file that is required for qiime2, enable an R environment a
 conda activate r_3.5.1
 
 # Make sure you are in the directory with all the raw sequence files.
-Rscript $PATH/tagseq-qiime2-snakemake/scripts/write-manifest-current.R
+Rscript $PATH/tagseq-qiime2-snakemake-1/scripts/write-manifest-current.R
 
 # Output file:manifest-orig.txt
 ```
@@ -174,8 +173,8 @@ This config.yaml file is set up to run with the test sequences downloaded from a
 Designations for file names:
 * ```suffix:``` and ```r1_suf/r2_suf``` comment out ```#``` the lines not applicable to your sample names.
 Modify lines specific for OTU or ASV determination:
-* ```primerF: GTGYCAGCMGCCGCGGTAA``` Forward primer sequence, in this case I'm using the V3-V4 hypervariable region for 16S. Comment out the one you are not using, the config.yaml file already has the Stoeck et al. primers for 18S and Parada et al. primers for 16S.
-* ```primerR: GGACTACNVGGGTWTCTAAT``` Reverse primer sequence   
+* ```primerF: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG``` Forward primer sequence, in this case I'm using the V3-V4 hypervariable region for 16S.
+* ```primerR: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG``` Reverse primer sequence   
 Reference database:
 #### Database
 * ```database: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-seqs.qza``` Reference sequence database imported as a QIIME2 artifact
