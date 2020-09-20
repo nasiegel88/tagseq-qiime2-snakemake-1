@@ -93,6 +93,7 @@ Either within the downloaded repo (e.g., raw_dir/) or elsewhere you have access 
 Migrate to raw_dir and download one of the test datasets:
 ```
 # If you want to run the preliminary 16S data:
+ cd raw_dir
  bash practice-data.sh
  ```
 This command will download the practice samples from my account on [OSF](https://osf.io/c4g95/).
