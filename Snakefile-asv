@@ -88,7 +88,7 @@ rule all:
     metagenome_unstrat = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
     seqtab_norm = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv.gz",
     weighted_nsti =SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz",
-    marker_describe = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/marker_predicted_and_nsti_descrip.tsv.gz",
+  	marker_describe = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
     
@@ -402,7 +402,7 @@ rule add_describe:
 		metagenome_unstrat = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
 		path_abun_unstrat = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
 	output:
-		marker_describe = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/marker_predicted_and_nsti_descrip.tsv.gz",
+		marker_describe = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
 		path_abun_unstrat_describe = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
 	log:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust.log"
