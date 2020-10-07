@@ -1,9 +1,9 @@
 proj_name: prelim-mld-fecal
-raw_data: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir
-scratch:  /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/scratch
-outputDIR: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/output
-metadata: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/sample-metadata.tsv
-manifest: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
+raw_data: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/raw_dir
+scratch:  /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch
+outputDIR: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/output
+metadata: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv
+manifest: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
 # Fastq file suffix, following the read pair designation
@@ -29,9 +29,12 @@ r2_suf: R2
 #maxdiff: 4
 #minlength: 270
 
-## 16S default (Parada et al. modified EMP primers)
-primerF: GTGYCAGCMGCCGCGGTAA
-primerR: GGACTACNVGGGTWTCTAAT
+### 16S default (Parada et al. modified EMP primers)
+#primerF: GTGYCAGCMGCCGCGGTAA
+#primerR: GGACTACNVGGGTWTCTAAT
+## Illumina 16S V3-V4 primeres
+primerF: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+primerR: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
 # Parada et al. 2016 MEP primers for 16S
 primer_err: 0.1
 primer_overlap: 3 
@@ -41,9 +44,9 @@ maxdiff: 4
 minlength: 200
 
 ## Database
-database: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-seqs.qza
-database_classified: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-nb-classifier.qza
-database_tax: /home/nasiegel/MLD/tagseq-qiime2-snakemake-1/database/silva-138-99-tax.qza
+database: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-138-99-seqs.qza
+database_classified: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-132-99-nb-classifier.qza
+database_tax: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/database/silva-138-99-tax.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2

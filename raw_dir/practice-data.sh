@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## Generatate tar.gz file with all files in current direction
+## Generatate tar.gz file with all files in current directory
 # tar cf file.tar.gz *.gz
 
 # Preliminary sequencing run

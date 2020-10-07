@@ -1,5 +1,5 @@
 # Snakemake file - input raw fastq reads to generate ASVs
-## Last updated 1-1-2020 SHu
+## Last updated 8-18-2020 NS
 configfile: "config.yaml"
 
 import io 
