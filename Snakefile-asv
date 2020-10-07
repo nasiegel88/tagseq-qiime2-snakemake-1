@@ -156,7 +156,7 @@ rule import_qiime:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
    "qiime tools import \
        --type 'SampleData[PairedEndSequencesWithQuality]' \
@@ -172,7 +172,7 @@ rule rm_primers:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
     "qiime cutadapt trim-paired \
        --i-demultiplexed-sequences {input.q2_import} \
@@ -196,7 +196,7 @@ rule get_stats:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
     """
      qiime demux summarize --i-data {input.q2_import} --o-visualization {output.raw}
@@ -216,7 +216,7 @@ rule dada2:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_dada2_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
     "qiime dada2 denoise-paired \
         --i-demultiplexed-seqs {input.q2_primerRM} \
@@ -238,7 +238,7 @@ rule dada2_stats:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_dada2-stats_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
    "qiime metadata tabulate \
        --m-input-file {input.stats} \
@@ -253,7 +253,7 @@ rule assign_tax:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_sklearn_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
     "qiime feature-classifier classify-sklearn \
 	     --i-classifier {input.db_classified} \
@@ -268,7 +268,7 @@ rule gen_table:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportBIOM_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   params:
     directory(SCRATCH + "/qiime2/asv/table")
   shell:
@@ -282,7 +282,7 @@ rule convert:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportTSV_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   shell:
     "biom convert -i {input} -o {output} --to-tsv"
 
@@ -294,7 +294,7 @@ rule gen_tax:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   params:
     directory(SCRATCH + "/qiime2/asv/tax_assigned")
   shell:
@@ -309,7 +309,7 @@ rule gen_seqs:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
   conda:
-    "envs/qiime2-2019.4.yaml"
+    "envs/qiime2-2019.10.yaml"
   params:
     directory(SCRATCH + "/qiime2/asv/sequences")
   shell:
