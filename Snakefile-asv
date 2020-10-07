@@ -385,6 +385,8 @@ rule metagenome:
 rule pl_infer:
   input:
     pred_meta = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz"
+  output:
+    path_abun_unstrat = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
   conda:
@@ -398,7 +400,7 @@ rule pl_infer:
 
 rule add_describe:
 	input:
-		marker = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/marker_predicted_and_nsti.tsv.gz",
+		metagenome_unstrat = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
 		path_abun_unstrat = SCRATCH + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
 	output:
 		marker_describe = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/marker_predicted_and_nsti_descrip.tsv.gz",
