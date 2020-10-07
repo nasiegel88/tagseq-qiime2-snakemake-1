@@ -378,7 +378,7 @@ rule metagenome:
 		directory(SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out")
 	shell:
 		"metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
-			                       -o {params} --strat_out
+			                       -o {params} --strat_out"
 
 # add strat_out and metagenome_contrib to config.yaml			                       
 
