@@ -354,7 +354,7 @@ rule hsp:
 	conda:
 		"envs/picrust2-env.yaml"
 	shell:
-		"hsp.py -i 16S -t {input.picrust2tree} -o {ouput.marker} -p 1 -n
+		"hsp.py -i 16S -t {input.picrust2tree} -o {output.marker} -p 1 -n
 		 hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1"
 
 
