@@ -328,12 +328,10 @@ rule gen_seqs:
   shell:
     "qiime tools export --input-path {input.rep} --output-path {params}"
 
-
 rule asv_reftree:
 
 	input:
 		seqs = SCRATCH + "/qiime2/asv picrust2/dna-sequences.fasta"
-
 	output:
 		picrust2tree = SCRATCH + "/qiime2/asv/picrust2/out.tre"
 	log:
@@ -359,8 +357,7 @@ rule hsp:
 		"envs/picrust2-env.yaml"
 	shell:
 		"hsp.py -i 16S -t {input.picrust2tree} -o {ouput.marker} -p 1 -n
-		
-			hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1"
+		 hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1"
 
 
 rule metagenome:
@@ -411,7 +408,6 @@ rule add_describe:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust.log"
 	conda:
 		"envs/picrust2-env.yaml"
-	params
 	shell:
 		"add_descriptions.py -i {input.marker} -m EC \
 			                    -o {output.marker_describe}
