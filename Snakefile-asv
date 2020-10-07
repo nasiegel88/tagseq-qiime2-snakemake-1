@@ -79,7 +79,7 @@ rule all:
     biom = SCRATCH + "/qiime2/asv/table/feature-table.biom",
     table_tsv = SCRATCH + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
     table_tax = SCRATCH + "/qiime2/asv/tax_assigned/taxonomy.tsv",
-    seqs = SCRATCH + "/qiime2/asv/sequences/dna-sequences.fasta"
+    seqs = SCRATCH + "/qiime2/asv/picrust2/dna-sequences.fasta"
 
 rule fastqc:
   input:    
@@ -305,7 +305,7 @@ rule gen_seqs:
   input:
     rep = SCRATCH + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
   output:
-    seqs = SCRATCH + "/qiime2/asv/sequences/dna-sequences.fasta"
+    seqs = SCRATCH + "/qiime2/asv/picrust2/dna-sequences.fasta"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
   conda:
