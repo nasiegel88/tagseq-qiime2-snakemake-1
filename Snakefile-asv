@@ -384,7 +384,7 @@ rule metagenome:
 
 rule pl_infer:
   input:
-    pred_meta = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz
+    pred_meta = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
   conda:
