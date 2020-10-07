@@ -375,7 +375,7 @@ rule metagenome:
 	conda:
 		"envs/picrust2-env.yaml"
 	params: 
-		directory(SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out)
+		directory(SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out")
 	shell:
 		"metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
 			                       -o {params} --strat_out
@@ -390,7 +390,7 @@ rule pl_infer:
   conda:
     "envs/picrust2-env.yaml"
   params:
-    directory(SCRATCH + "/qiime2/asv/picrust2/pathways_out)
+    directory(SCRATCH + "/qiime2/asv/picrust2/pathways_out")
   shell:
     "pathway_pipeline.py -i {input.pred_meta} \
                           -o {params} -p 1"
