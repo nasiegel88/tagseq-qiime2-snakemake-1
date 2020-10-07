@@ -344,7 +344,6 @@ rule asv_reftree:
 			              --intermediate {params}"
 
 rule hsp:
-
 	input:
 		picrust2tree = SCRATCH + "/qiime2/asv/picrust2/out.tre"
 	output:
@@ -382,18 +381,17 @@ rule metagenome:
 # add strat_out and metagenome_contrib to config.yaml			                       
 
 rule pl_infer:
-
-input:
-	pred_meta = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz
-log:
-	SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
-conda:
-	"envs/picrust2-env.yaml"
-params:
-	directory(SCRATCH + "/qiime2/asv/picrust2/pathways_out)
-shell:
-	"pathway_pipeline.py -i {input.pred_meta} \
-		                    -o {params} -p 1"
+  input:
+    pred_meta = SCRATCH + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
+  conda:
+    "envs/picrust2-env.yaml"
+  params:
+    directory(SCRATCH + "/qiime2/asv/picrust2/pathways_out)
+  shell:
+    "pathway_pipeline.py -i {input.pred_meta} \
+                          -o {params} -p 1"
 
 
 rule add_describe:
