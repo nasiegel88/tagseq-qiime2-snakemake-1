@@ -408,9 +408,9 @@ rule add_describe:
 	conda:
 		"envs/picrust2-env.yaml"
 	shell:
-    """
-      add_descriptions.py -i {input.marker} -m EC \
-                            -o {output.marker_describe}
-      add_descriptions.py -i {input.path_abun_unstrat} -m METACYC \
-                            -o {output.path_abun_unstrat_describe}
-    """
+	    """
+	      add_descriptions.py -i {input.marker} -m EC \
+	                            -o {output.marker_describe}
+	      add_descriptions.py -i {input.path_abun_unstrat} -m METACYC \
+	                            -o {output.path_abun_unstrat_describe}
+	    """
