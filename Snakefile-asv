@@ -330,7 +330,7 @@ rule gen_seqs:
 
 rule asv_reftree:
 	input:
-		seqs = SCRATCH + "/qiime2/asv picrust2/dna-sequences.fasta"
+		seqs = SCRATCH + "/qiime2/asv/picrust2/dna-sequences.fasta"
 	output:
 		picrust2tree = SCRATCH + "/qiime2/asv/picrust2/out.tre"
 	log:
