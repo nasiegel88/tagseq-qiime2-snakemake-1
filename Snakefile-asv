@@ -393,7 +393,7 @@ rule pl_infer:
   params:
     directory(SCRATCH + "/qiime2/asv/picrust2/pathways_out")
   shell:
-    "pathway_pipeline.py -i {input.pred_meta} \
+    "pathway_pipeline.py -i {input.metagenome_unstrat} \
                           -o {params} -p 1"
 
 
