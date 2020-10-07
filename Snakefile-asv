@@ -329,7 +329,6 @@ rule gen_seqs:
     "qiime tools export --input-path {input.rep} --output-path {params}"
 
 rule asv_reftree:
-
 	input:
 		seqs = SCRATCH + "/qiime2/asv picrust2/dna-sequences.fasta"
 	output:
