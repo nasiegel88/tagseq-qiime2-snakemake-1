@@ -235,7 +235,8 @@ rule dada2:
         --p-trunc-q {config[truncation_err]} \
         --p-trunc-len-f {config[truncation_len-f]} \
         --p-trunc-len-r {config[truncation_len-r]} \
-        --p-max-ee {config[quality_err]} \
+        --p-max-ee-f {config[quality_err]} \
+        --p-max-ee-r {config[quality_err]} \
         --p-n-reads-learn {config[training]} \
         --p-chimera-method {config[chimera]} \
         --o-table {output.table} \
