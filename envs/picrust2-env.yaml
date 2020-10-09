@@ -3,14 +3,14 @@ name: picrust2
 channels:
   - bioconda
   - conda-forge
-  - picrust2=2.3.0_b
 #- conda-forge
 #- r
 #- bioconda
 #- defaults
 #- gavinmdouglas 
 #
-#dependencies:
+dependencies:
+  - picrust2=2.3.0_b
 #- biom-format >=2.1.7
 #- epa-ng=0.3.6
 #- gappa=0.5.1
