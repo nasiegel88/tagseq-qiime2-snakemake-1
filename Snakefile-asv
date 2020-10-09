@@ -339,7 +339,7 @@ rule asv_reftree:
 		"envs/picrust2-env.yaml"
 	params:
 		directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
-	script:
+	shell:
 		"place_seqs.py -s {input.seqs} -o {output.picrust2tree} -p 1 --intermediate {params}"
 
 rule hsp:
