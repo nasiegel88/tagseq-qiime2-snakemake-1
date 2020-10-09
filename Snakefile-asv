@@ -337,6 +337,8 @@ rule asv_reftree:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust.log"
 	conda:
 		"envs/picrust2-env.yaml"
+  script:
+    "place_seqs.py "
 	params:
 		directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
 	shell:
