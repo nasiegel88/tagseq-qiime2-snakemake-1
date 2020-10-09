@@ -5,6 +5,7 @@ channels:
 - r
 - bioconda
 - defaults
+- gavinmdouglas 
 
 dependencies:
 - biom-format >=2.1.7
