@@ -338,7 +338,7 @@ rule asv_reftree:
 	conda:
 		"envs/picrust2-env.yaml"
   script:
-    "place_seqs.py "
+    "place_seqs.py"
 	params:
 		directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
 	shell:
