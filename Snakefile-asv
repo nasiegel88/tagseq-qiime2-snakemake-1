@@ -340,8 +340,7 @@ rule asv_reftree:
 	params:
 		directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
 	script:
-		"place_seqs.py -s {input.seqs} -o {output.picrust2tree} -p 1 \
-			              --intermediate {params}"
+		"place_seqs.py -s {input.seqs} -o {output.picrust2tree} -p 1 --intermediate {params}"
 
 rule hsp:
 	input:
