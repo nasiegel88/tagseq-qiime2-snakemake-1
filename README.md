@@ -214,32 +214,6 @@ chimera: pooled
 --p-n-reads-learn # defaul is 1 million
 ```
 
-#### OTU parameters
-For clustering OTUs and the steps preceeding OTU clustering, set parameters in the config.yaml file:
-```
-# Primer removal information
-primer_err: 0.4
-primer_overlap: 3
-
-# Merge paired end reads
-minoverlap: 10
-maxdiff: 4
-minlength: 270
-
-# Quality filtering of merged reads
-minphred: 4
-qualwindow: 3 
-
-# Open reference OTU clustering
-perc_id: 0.90
-otu-thread: 1
-
-# Chimera checking
-chimera-thread: 1
-```
-If you're unsure about parameters, consult the QIIME2 reference manual.
-
-
 ## 3. Run a dry run of snakemake pipeline 
 
 Use *-s* to select between the two snakefiles
@@ -265,9 +239,7 @@ Once the above are figured out you can run the submit scripts provided in ```sub
 ## For ASVs:
 bash submitscripts/dry-submit-slurm-ASV.sh 
 
-## For OTUs:
-bash submitscripts/dry-submit-slurm-OTU.sh
-```
+
 Outputs should all be green and will report how many jobs and rules snakemake plans to run. This will allow you to evaluate any error and syntax messages.  
 
 
@@ -276,12 +248,7 @@ Outputs should all be green and will report how many jobs and rules snakemake pl
 To run the full pipeline make sure you enable the ```--use-conda``` flag. This is because snakemake uses the conda environments stored$
 ```
 # For ASVs
-snakemake --use-conda -s Snakefile-asv
-
-# For OTUs
-snakemake --use-conda -s Snakefile-otu
-```
-Run with screen, tmux, or nohup.
+Run the following command ```snakemake --use-conda -s Snakefile-asv```
 
 ### 4.2 Run with HPC
 Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. Run with screen, tmux, or nohup.
@@ -289,9 +256,6 @@ Once the dry run is successful with the dry run script, use the submit-slurm.sh 
 # Full run for ASVs:
 bash submitscripts/submit-slurm-ASV.sh
 
-# Full run for OTUs:
-bash submitscripts/submit-slurm-OTU.sh
-```
 Run the above in *tmux* or *screen*, as it will print out the jobs it submits to SLURM. You will be able to monitor the progress this way.
 
 
@@ -305,7 +269,7 @@ To monitor output files migrate to the ```scratch``` directory specified in the 
 ├── qiime2 	#directory with all qiime2 artifact files
 └── trimmed 	#location of all trimmed reads
 ```
-Within the ```qiime2/``` directory, there is a separate directory for each of the OTU or ASV qiime2 artifact files.
+Within the ```qiime2/``` directory, there is a separate directory for each of the ASV qiime2 artifact files.
 ```
 ├── asv #ASV artifact files from qiime2
 ├── logs #all log files for qiime2 commands
@@ -314,21 +278,19 @@ Within the ```qiime2/``` directory, there is a separate directory for each of th
 └── test-18Sv4-PE-demux.qza #Initial import artifact file
 ```
 
-### 5.2 Generate final OTU or ASV table
-The provided R script, ```scripts/make-count-table-wtax.R```, will generate a formatted text file that includes the sequence counts per OTU or ASV and the assigned taxonomy. Run this similar to the above manifest R script.
+### 5.2 Generate final ASV table
+The provided R script, ```scripts/make-count-table-wtax.R```, will generate a formatted text file that includes the sequence counts per ASV and the assigned taxonomy. Run this similar to the above manifest R script.
 
 ```
-# Enable an R environment
-conda activate r_3.5.1
+## Make sure you are in the qiime2/asv/ directory and can access the Rscript
+### Execute:
+```Rscript $PATH/tagseq-qiime2-snakemake/scripts/make-count-table-wtax.R``` will generate an ASV count table
 
-# Make sure you are in the qiime2/otu/ or qiime2/asv/ directory and can access the Rscript
-# Execute:
-Rscript $PATH/tagseq-qiime2-snakemake/scripts/make-count-table-wtax.R
 ```
 Output will be a text file with the date ```CountTable-wtax-YYYY-MM-DD.txt```. The first column of the text file is the feature ID, subsequent columns list sample names. Final columns report taxonomy assignment. A second file will also be created ```CountTable-wtax-bylevel-YYYY-MM-DD.txt```, which will separate the taxonomy names out if separated by a semi colon.    
  
 
-Find an introduction to R for processing ASV or OTU tables [here](https://github.com/shu251/PreliminaryFigures_V4_tagseq).
+Find an introduction to R for processing ASV tables [here](https://github.com/shu251/PreliminaryFigures_V4_tagseq).
 
 ## 6. How to quality check sequence data
 
@@ -341,15 +303,16 @@ Pair this with the initial multiqc outputs to have a per sample summary of how m
 Often we need to quality check all the sequence data before deciding the parameters of the OTU or ASV determination. To do this, follow all of the above instructions, but instead of executing the full snakemake run as is, run this command to stop it at the *get_stats* rule. Then you can import each of the .qzv files (see 6.1 above) and view how each QC step modified the sequences.   
 
 Run snakemake:
+
+```
 ```
 snakemake --use-conda -s Snakefile-otu --until get_stats
-# Above command will run the Snakefile for OTU clustering, but will stop at the get_stats step.
-## An alternative is to run until 'multiqc' to only perform the trimming and fastqc evaluations
 ```
+* Above command will run the Snakefile for ASVs, but will stop at the get_stats step.
+* An alternative is to run until 'multiqc' to only perform the trimming and fastqc evaluations
 
-Run on HPC:
-```
-bash submitscripts/submit-slurm-trim-stats.sh
+Run on HPC with ```bash submitscripts/submit-slurm-trim-stats.sh
+
 ## Again, an alterative is to run 'submit-slurm-trim.sh' to only run through the trimming step.
 ```
 [Or use this to trim fastq sequences](https://github.com/shu251/qc-trim).
@@ -368,8 +331,14 @@ To look for additional code error that may result in Syntax errors, try adding t
 * ```--summary``` or ```--detailed-summary```
 * ```--printshellcmds```
 * ```--debug```
+```
 
-***
+## Analysis
+### Picrust2
+
+The snakemake-asv script will conduct a metagenomic analysis of predicted pathways infered from sequencing data. To understand how picrust works the publication can be found [here](https://www.nature.com/articles/s41587-020-0548-6).
+
+If you are intersted in what exactly is going on during each command and what files are being produced please visit the [Picrust2 Tutorial](https://github.com/picrust/picrust2/wiki/PICRUSt2-Tutorial-(v2.3.0-beta)). The output from picrust2 can quickly be imported to [STAMP](https://beikolab.cs.dal.ca/software/STAMP) for visualization and statistics. Information on the files to import into stamp can be found using this [example](https://github.com/picrust/picrust2/wiki/STAMP-example).
 
 ## References
 * Köster, Johannes and Rahmann, Sven. “Snakemake - A scalable bioinformatics workflow engine”. Bioinformatics 2012. https://doi.org/10.1093/bioinformatics/bts480.
@@ -380,5 +349,5 @@ To look for additional code error that may result in Syntax errors, try adding t
 * Martin, M., 2011. Cutadapt Removes Adapter Sequences From High-Throughput Sequencing Reads. https://doi.org/10.14806/ej.17.1.200.
 * Callahan BJ, McMurdie PJ, Rosen MJ, Han AW, Johnson AJ, Holmes SP. DADA2: High-resolution sample inference from Illumina amplicon data. Nat Methods. 2016;13(7):581–583. doi:10.1038/nmeth.3869
 * R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
-***
+* Douglas, G. M., Maffei, V. J., Zaneveld, J. R., Yurgel, S. N., Brown, J. R., Taylor, C. M., … Langille, M. G. I. (2020). PICRUSt2 for prediction of metagenome functions. Nature Biotechnology. https://www.nature.com/articles/s41587-020-0548-6
 
