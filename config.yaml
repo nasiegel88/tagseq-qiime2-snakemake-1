@@ -55,16 +55,3 @@ truncation_len-r: 0
 quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
-
-## OTU clustering
-
-# Quality filtering of merged reads
-minphred: 4
-qualwindow: 3 
-
-# De novo OTU clustering
-denovo_perc_id: 0.97
-denovo_otu-thread: 1
-
-# Chimera checking
-chimera-thread: 1
