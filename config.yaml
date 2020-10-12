@@ -29,13 +29,9 @@ r2_suf: R2
 #maxdiff: 4
 #minlength: 270
 
-### 16S default (Parada et al. modified EMP primers)
-#primerF: GTGYCAGCMGCCGCGGTAA
-#primerR: GGACTACNVGGGTWTCTAAT
-## Illumina 16S V3-V4 primeres
+### Illumina 16S V3-V4 primeres
 primerF: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
 primerR: GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
-# Parada et al. 2016 MEP primers for 16S
 primer_err: 0.1
 primer_overlap: 3 
 # Merging reads for 16S
