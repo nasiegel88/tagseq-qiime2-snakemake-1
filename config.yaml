@@ -1,4 +1,9 @@
 proj_name: prelim-mld-fecal
+
+contact:
+  email: nasiegel@ucdavis.edu
+  person: Noah Siegel
+
 raw_data: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/raw_dir
 scratch:  /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch
 outputDIR: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/output
@@ -18,16 +23,6 @@ r2_suf: R2
 
 # QIIME2-specific flags
 # Defaults for amplicon tag-sequencing - uncomment only parameters you need.
-
-### 18S default (Stoeck et al. 2010 V4 primers)
-#primerF: CCAGCASCYGCGGTAATTCC
-#primerR: ACTTTCGTTCTTGATYRA
-#primer_err: 0.4
-#primer_overlap: 3
-## Merging reads for 18S:
-#minoverlap: 10
-#maxdiff: 4
-#minlength: 270
 
 ### Illumina 16S V3-V4 primeres
 primerF: TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
@@ -51,3 +46,15 @@ truncation_len-r: 0
 quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
+
+### phylogeny and analysis flags
+metadata-category: sex
+# There is only one factor to compare the the moment
+alpha-div-p-method: 'spearman'
+# Also can be 'pearson'
+beta-div-p-method: 'anosim'
+# Also can be 'permanova' or 'permdisp'
+permutations: 999
+# The number of permutations to be run when computing p-values
+# For beta indices
+sampling-depth: 100 #should be set higher for a non-test dataset
