@@ -48,6 +48,14 @@ DB = config["database"]
 DB_classifier = config["database_classified"]
 DB_tax = config["database_tax"]
 
+# Phylogeny
+META = config["metadata"]
+METACATEGORY = config["metadata-category"]
+ALPHASTATISTIC = config["alpha-div-p-method"]
+BETASTATISTIC = config["beta-div-p-method"]
+PERMNUMBER = config["permutations"]
+DEPTH = config['sampling-depth']
+
 #----DEFINE RULES----#
 
 rule all:
