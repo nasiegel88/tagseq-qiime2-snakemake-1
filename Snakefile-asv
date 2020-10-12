@@ -91,7 +91,11 @@ rule all:
   	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
-    
+
+
+####
+#QC#
+####
 
 rule fastqc:
   input:    
@@ -193,10 +197,6 @@ rule rm_primers:
        --p-error-rate {config[primer_err]} \
        --p-overlap {config[primer_overlap]} \
        --o-trimmed-sequences {output.q2_primerRM}"
-
-####
-#QC#
-####
 
 rule get_stats:
   input:
@@ -327,6 +327,10 @@ rule gen_seqs:
     directory(OUTPUTDIR + "/qiime2/asv/picrust2")
   shell:
     "qiime tools export --input-path {input.rep} --output-path {params}"
+
+#########
+#picrust#
+#########
 
 rule asv_reftree:
 	input:
