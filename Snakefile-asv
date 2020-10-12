@@ -335,7 +335,7 @@ rule convert:
   output:
     OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTSV_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -347,7 +347,7 @@ rule gen_tax:
   output:
     table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
@@ -387,7 +387,7 @@ Rule alignment:
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-
+    directory(OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output")
   shell:
     """  
       qiime phylogeny align-to-tree-mafft-fasttree \
