@@ -391,7 +391,7 @@ Rule alignment:
   shell:
     """  
       qiime phylogeny align-to-tree-mafft-fasttree \
-        --i-sequences rep-seqs.qza \
+        --i-sequences {input.rep} \
         --output-dir {params}
     """
 
