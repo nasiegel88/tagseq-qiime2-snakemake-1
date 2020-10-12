@@ -378,10 +378,10 @@ Rule alignment:
   input:
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza"
   output:
-   masked_align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ "-masked_alignment.qza",
-   rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ "-rooted_tree.qza",
-   align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ "-alignment.qza",
-   tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ "-tree.qza"
+   masked_align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ "-masked_alignment.qza",
+   rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ "-rooted_tree.qza",
+   align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ "-alignment.qza",
+   tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ "-tree.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
