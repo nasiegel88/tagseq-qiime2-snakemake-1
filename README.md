@@ -218,8 +218,7 @@ chimera: pooled
 
 Use *-s* to select between the two snakefiles
 ```
-snakemake -np -s Snakefile-asv
-snakemake -np -s Snakefile-otu
+snakemake -np -s Snakefile-asv.smk
 # output should be all green and display no errors
 ``` 
 
@@ -248,7 +247,7 @@ Outputs should all be green and will report how many jobs and rules snakemake pl
 To run the full pipeline make sure you enable the ```--use-conda``` flag. This is because snakemake uses the conda environments stored$
 ```
 # For ASVs
-Run the following command ```snakemake --use-conda -s Snakefile-asv```
+Run the following command ```snakemake --use-conda -s Snakefile-asv.smk```
 
 ### 4.2 Run with HPC
 Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. Run with screen, tmux, or nohup.
