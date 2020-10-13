@@ -108,10 +108,12 @@ rule all:
     unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-unweighted_unifrac_pcoa_results.qza",
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_pcoa_results.qza",
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted-unifrac-group-site-significance.qzv",
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-jaccard_emperor.qzv",
     unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-unweighted_unifrac_emperor.qzv",
-    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_emperor.qzv",
+    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_emperor.qzv",   
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-shannon-significance.qzv",
     shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-shannon-significance-association.qzv",
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-observed_otus-significance.qzv",
@@ -416,7 +418,7 @@ rule core_metrics:
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-jaccard_emperor.qzv",
     unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-unweighted_unifrac_emperor.qzv",
-    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_emperor.qzv"
+    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_emperor.qzv",
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
   conda:
@@ -549,7 +551,7 @@ rule weighted_unifrac:
   input:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted_unifrac_distance_matrix.qza"
   output:
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
