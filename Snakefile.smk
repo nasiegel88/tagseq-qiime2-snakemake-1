@@ -398,7 +398,8 @@ rule alignment:
 rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
+    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+    META
   output:
     evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
     faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
@@ -429,7 +430,7 @@ rule core_metrics:
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
         --p-sampling-depth DEPTH \
-        --m-metadata-file META \
+        --m-metadata-file {input} \
         --output-dir {params}
     """
 
