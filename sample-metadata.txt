@@ -1,0 +1,6 @@
+SampleID	Group	sex 	values
+NS.Blank5	NS	NA	NA
+NS.C	NS	Female	1
+NS.D	NS	Male	0
+NS.E	NS	Male	0
+NS.O	NS	Female	1
