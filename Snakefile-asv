@@ -536,7 +536,7 @@ rule unifrac:
   shell:
     """  
       qiime diversity beta-group-significance \
-        --i-distance-matrix {input.unweighted_unifrac} \
+        --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
         --p-method BETASTATISTIC
@@ -557,7 +557,7 @@ rule weighted_unifrac:
   shell:
     """  
       qiime diversity beta-group-significance \
-        --i-distance-matrix {input.weighted_unifrac} \
+        --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
         --p-method BETASTATISTIC \
