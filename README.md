@@ -216,31 +216,12 @@ chimera: pooled
 
 ## 3. Run a dry run of snakemake pipeline 
 
-Use *-s* to select between the two snakefiles
+Use *-s* to select  the snakefile
 ```
 snakemake -np -s Snakefile.smk
 # output should be all green and display no errors
 ``` 
-
-### 3.1 Enable to run on HPC with SLURM
-
-The main reason to use snakemake is that it will work with slurm on your HPC and continue to submit jobs for you. To set this up follow the instructions below.
-
-* [Read about executing snakemake on a cluster](https://snakemake.readthedocs.io/en/stable/executable.html) and another explanation on how to execute with a submit script can be found [here](https://hpc-carpentry.github.io/hpc-python/17-cluster/).    
-* Review the submit scripts available in ```submitscripts```. Files in this directory include another config file called ```cluster.yaml```, and two scripts to submit your snakemake pipeline to the cluster with and without the dry run option.   
-* Then, open and modify the ```cluster.yaml``` to fit your machine. Then test run using the provided submit scripts.
-* Make sure to look at each step in the snakefile and consider what thread, memory, and time requirements you can submit on your HPC. You can specify these in the ```cluster.yaml``` file.    
-
-Once the above are figured out you can run the submit scripts provided in ```submitscripts/```.
-
-```
-# Make sure you are still in the snake-tagseq conda environment
-## For ASVs:
-bash submitscripts/dry-submit-slurm.sh 
-
-
 Outputs should all be green and will report how many jobs and rules snakemake plans to run. This will allow you to evaluate any error and syntax messages.  
-
 
 ## 4.  Execute full run
 ### 4.1 Start run
@@ -250,7 +231,9 @@ To run the full pipeline make sure you enable the ```--use-conda``` flag. This i
 Run the following command ```snakemake --use-conda -s Snakefile.smk```
 
 ### 4.2 Run with HPC
+
 Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. Run with screen, tmux, or nohup.
+
 ```
 # Full run for ASVs:
 bash submitscripts/submit-slurm.sh
@@ -273,8 +256,8 @@ Within the ```qiime2/``` directory, there is a separate directory for each of th
 ├── asv #ASV artifact files from qiime2
 ├── logs #all log files for qiime2 commands
 ├── otu #qiime2 artifact files for OTU clustering
-├── test-18Sv4-PE-demux-noprimer.qza #artifact file post-primer removal
-└── test-18Sv4-PE-demux.qza #Initial import artifact file
+├── prelim-mld-fecal-PE-demux-noprimer.qza #artifact file post-primer removal
+└── prelim-mld-fecal-PE-demux.qza #Initial import artifact file
 ```
 
 ### 5.2 Generate final ASV table
@@ -305,7 +288,7 @@ Run snakemake:
 
 ```
 ```
-snakemake --use-conda -s Snakefile-otu --until get_stats
+snakemake --use-conda -s Snakefile.smk --until get_stats
 ```
 * Above command will run the Snakefile for ASVs, but will stop at the get_stats step.
 * An alternative is to run until 'multiqc' to only perform the trimming and fastqc evaluations
