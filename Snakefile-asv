@@ -465,7 +465,7 @@ rule richcorr:
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file META \
         --p-method ALPHASTATISTIC \
-        --o-visualization {input.shannon_correl}
+        --o-visualization {output.shannon_correl}
     """
 
 rule asv_signif:
