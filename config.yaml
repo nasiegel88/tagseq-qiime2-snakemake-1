@@ -7,7 +7,7 @@ contact:
 raw_data: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/raw_dir
 scratch:  /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/scratch
 outputDIR: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/output
-metadata: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv
+metadata: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.txt
 manifest: /mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
