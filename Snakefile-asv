@@ -397,7 +397,7 @@ rule alignment:
 
 rule core_metrics:
   input:
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
+    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
   output:
     evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
@@ -426,7 +426,7 @@ rule core_metrics:
   shell:
     """  
       qiime diversity core-metrics-phylogenetic \
-        --i-phylogeny {input.rooted} \
+        --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
         --p-sampling-depth DEPTH \
         --m-metadata-file META \
