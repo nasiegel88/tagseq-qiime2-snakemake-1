@@ -482,7 +482,7 @@ rule asv_signif:
       qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file META \
-        --o-visualization {input.observed_asv_signif}
+        --o-visualization {output.observed_asv_signif}
     """
 
 rule asv_corr:
@@ -500,7 +500,7 @@ rule asv_corr:
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file META \
         --p-method ALPHASTATISTIC \
-        --o-visualization {input.observed_asv_signif}
+        --o-visualization {output.observed_asv_signif}
     """
 
 rule evenness:
