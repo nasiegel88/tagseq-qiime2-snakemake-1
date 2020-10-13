@@ -218,7 +218,7 @@ chimera: pooled
 
 Use *-s* to select between the two snakefiles
 ```
-snakemake -np -s Snakefile-asv.smk
+snakemake -np -s Snakefile.smk
 # output should be all green and display no errors
 ``` 
 
@@ -236,7 +236,7 @@ Once the above are figured out you can run the submit scripts provided in ```sub
 ```
 # Make sure you are still in the snake-tagseq conda environment
 ## For ASVs:
-bash submitscripts/dry-submit-slurm-ASV.sh 
+bash submitscripts/dry-submit-slurm.sh 
 
 
 Outputs should all be green and will report how many jobs and rules snakemake plans to run. This will allow you to evaluate any error and syntax messages.  
@@ -247,13 +247,13 @@ Outputs should all be green and will report how many jobs and rules snakemake pl
 To run the full pipeline make sure you enable the ```--use-conda``` flag. This is because snakemake uses the conda environments stored$
 ```
 # For ASVs
-Run the following command ```snakemake --use-conda -s Snakefile-asv.smk```
+Run the following command ```snakemake --use-conda -s Snakefile.smk```
 
 ### 4.2 Run with HPC
 Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. Run with screen, tmux, or nohup.
 ```
 # Full run for ASVs:
-bash submitscripts/submit-slurm-ASV.sh
+bash submitscripts/submit-slurm.sh
 
 Run the above in *tmux* or *screen*, as it will print out the jobs it submits to SLURM. You will be able to monitor the progress this way.
 
@@ -335,7 +335,7 @@ To look for additional code error that may result in Syntax errors, try adding t
 ## Analysis
 ### Picrust2
 
-The snakemake-asv script will conduct a metagenomic analysis of predicted pathways infered from sequencing data. To understand how picrust works the publication can be found [here](https://www.nature.com/articles/s41587-020-0548-6).
+The ```Snakefile.smk``` script will conduct a metagenomic analysis of predicted pathways infered from sequencing data. To understand how picrust works the publication can be found [here](https://www.nature.com/articles/s41587-020-0548-6).
 
 If you are intersted in what exactly is going on during each command and what files are being produced please visit the [Picrust2 Tutorial](https://github.com/picrust/picrust2/wiki/PICRUSt2-Tutorial-(v2.3.0-beta)). The output from picrust2 can quickly be imported to [STAMP](https://beikolab.cs.dal.ca/software/STAMP) for visualization and statistics. Information on the files to import into stamp can be found using this [example](https://github.com/picrust/picrust2/wiki/STAMP-example).
 
