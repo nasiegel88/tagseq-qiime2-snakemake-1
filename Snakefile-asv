@@ -549,7 +549,7 @@ rule weighted_unifrac:
   input:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza"
   output:
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
