@@ -20,7 +20,7 @@ This Snakemake pipeline can be easily scaled up to larger datasets and includes 
 	4.2 Run with HPC
 5. Output from pipeline
 	5.1 File structure
-	5.2 Generate final OTU or ASV table
+	5.2 Generate final ASV table
 6. How to quality check sequence data
 	6.1 Check overall sequence quality
 	6.2 Run snakemake to get quality control information   
@@ -38,18 +38,11 @@ _Amplicon Sequence Variants_
 8. Generates ASV count and taxonomy tables
 9. Compiles ASV count + taxonomy table (R)
 
-_Operational Taxonomic Units_   
-5. Merged paired end reads and filter reads by qscore
-6. Generate visualization files to evaluate QC steps
-7. Dereplicate sequences
-8. Cluster into OTUs (open reference & closed reference currently written)
-9. Determine chimeras using uchime with the reference database
-10. Remove chimeras from representative sequences and cluster table
-11. Assign taxonomy using QIIME2 feature classifier
-12. Generate OTU count and taxonomy tables
-13. Compile OTU count + taxonomy table (R)
+_Phyologeny_
 
-### _Summary of workflow_
+_Pathway Analyis_
+
+### _Summary of workflow up to generation of ASV table_
 
 <p align="center">
   <img width="300" src="scripts/snakemake-tagseq-workflow.png">
@@ -255,7 +248,7 @@ Within the ```qiime2/``` directory, there is a separate directory for each of th
 ```
 ├── asv #ASV artifact files from qiime2
 ├── logs #all log files for qiime2 commands
-├── otu #qiime2 artifact files for OTU clustering
+├── otu #qiime2 artifact files for ASVs
 ├── prelim-mld-fecal-PE-demux-noprimer.qza #artifact file post-primer removal
 └── prelim-mld-fecal-PE-demux.qza #Initial import artifact file
 ```
