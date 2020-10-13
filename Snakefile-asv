@@ -500,7 +500,7 @@ rule asv_corr:
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file META \
         --p-method ALPHASTATISTIC \
-        --o-visualization {output.observed_asv_signif}
+        --o-visualization {output.observed_asv_correl}
     """
 
 rule evenness:
