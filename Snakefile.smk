@@ -387,7 +387,7 @@ rule alignment:
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-    directory(OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output")
+    directory(OUTPUTDIR + "/qiime2/asv/")
   shell:
     "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
