@@ -389,10 +389,10 @@ rule alignment:
   shell:
     "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
-        --o-alignment {input.align} \
-        --o-masked-alignment {input.masked_align} \
-        --o-tree {input.tree} \
-        --o-rooted-tree {input.rooted_tree}"
+        --o-alignment {output.align} \
+        --o-masked-alignment {output.masked_align} \
+        --o-tree {output.tree} \
+        --o-rooted-tree {output.rooted_tree}"
 
 rule core_metrics:
   input:
