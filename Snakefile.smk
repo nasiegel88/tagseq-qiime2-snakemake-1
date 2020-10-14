@@ -527,7 +527,7 @@ rule evenness:
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.bray_curtis_signif} \
-        --p-pairwise"
+        --p-no-pairwise"
 
 rule unifrac:
   input:
@@ -547,7 +547,7 @@ rule unifrac:
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
-        --p-pairwise"
+        --p-no-pairwise"
 
 rule weighted_unifrac:
   input:
@@ -567,7 +567,7 @@ rule weighted_unifrac:
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
-        --p-pairwise"
+        --p-no-pairwise"
 
 rule barplot:
   input:
