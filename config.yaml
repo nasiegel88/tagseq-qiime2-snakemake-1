@@ -48,7 +48,7 @@ training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
 ### phylogeny and analysis flags
-metadata-category: value
+metadata-category: sex
 # There is only one factor to compare the the moment
 alpha-div-p-method: 'spearman'
 # Also can be 'pearson'
