@@ -58,3 +58,7 @@ permutations: 999
 # The number of permutations to be run when computing p-values
 # For beta indices
 sampling-depth: 1000 #should be set higher for a non-test dataset
+
+### To do
+#### add ```--p-no-pairwise``` and ```--p-pairwise``` to configuration file
+##### date 10/14/20
