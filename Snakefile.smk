@@ -389,11 +389,9 @@ rule alignment:
   params:
     directory(OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output")
   shell:
-    """  
-      qiime phylogeny align-to-tree-mafft-fasttree \
+    "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
-        --output-dir {params}
-    """
+        --output-dir {params}"
 
 rule core_metrics:
   input:
@@ -527,8 +525,8 @@ rule unifrac:
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
-        --p-method BETASTATISTIC
-        --p-permutations PERMNUMBER
+        --p-method BETASTATISTIC \
+        --p-permutations PERMNUMBER \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-pairwise"
 
