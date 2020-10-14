@@ -47,7 +47,7 @@ quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
-### phylogeny and analysis flags
+### phylogeny flags
 metadata-category: sex
 # There is only one factor to compare the the moment
 alpha-div-p-method: 'spearman'
@@ -58,6 +58,10 @@ permutations: 999
 # The number of permutations to be run when computing p-values
 # For beta indices
 sampling-depth: 1000 #should be set higher for a non-test dataset
+
+### picrust2 flags
+#
+#
 
 ### To do
 #### add ```--p-no-pairwise``` and ```--p-pairwise``` to configuration file
