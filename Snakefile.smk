@@ -446,7 +446,8 @@ rule core_metrics:
 
 rule richness:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza"
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
   log:
@@ -456,7 +457,7 @@ rule richness:
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.shannon_vector} \
-        --m-metadata-file META \
+        --m-metadata-file {input.metadata} \
         --o-visualization {output.shannon_signif}"
 
 rule richcorr:
@@ -471,13 +472,14 @@ rule richcorr:
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
-        --m-metadata-file META \
+        --m-metadata-file {input.metadata} \
         --p-method ALPHASTATISTIC \
         --o-visualization {output.shannon_correl}"
 
 rule asv_signif:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza"
+    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
   log:
@@ -487,12 +489,13 @@ rule asv_signif:
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.observed_asv} \
-        --m-metadata-file META \
+        --m-metadata-file {input.metadata} \
         --o-visualization {output.observed_asv_signif}"
 
 rule asv_corr:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza"
+    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
@@ -502,13 +505,14 @@ rule asv_corr:
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.observed_asv} \
-        --m-metadata-file META \
-        --p-method ALPHASTATISTIC \
+        --m-metadata-file {input.metadata} \
+        --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.observed_asv_correl}"
 
 rule evenness:
   input:
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza"
+    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv"
   log:
@@ -518,16 +522,17 @@ rule evenness:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
-        --m-metadata-file META \
-        --m-metadata-column METACATEGORY \
-        --p-method BETASTATISTIC \
-        --p-permutations PERMNUMBER \
+        --m-metadata-file {input.metadata} \
+        --m-metadata-column {config[metadata-category]} \
+        --p-method {config[beta-div-p-method]} \
+        --p-permutations {config[permutations]} \
         --o-visualization {output.bray_curtis_signif} \
         --p-pairwise"
 
 rule unifrac:
   input:
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
+    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
   log:
@@ -537,16 +542,17 @@ rule unifrac:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
-        --m-metadata-file META \
+        --m-metadata-file {input.metadata} \
         --m-metadata-column METACATEGORY \
-        --p-method BETASTATISTIC \
-        --p-permutations PERMNUMBER \
+        --p-method {config[beta-div-p-method]} \
+        --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-pairwise"
 
 rule weighted_unifrac:
   input:
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza"
+    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
   log:
@@ -556,17 +562,18 @@ rule weighted_unifrac:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
-        --m-metadata-file META \
-        --m-metadata-column METACATEGORY \
-        --p-method BETASTATISTIC \
-        --p-permutations PERMNUMBER \
+        --m-metadata-file {input.metadata} \
+        --m-metadata-column {config[metadata-category]} \
+        --p-method {config[beta-div-p-method]} \
+        --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
         --p-pairwise"
 
 rule barplot:
   input:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza"
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
@@ -577,7 +584,7 @@ rule barplot:
     "qiime taxa barplot \
         --i-table {input.table} \
         --i-taxonomy {input.sklearn} \
-        --m-metadata-file META \
+        --m-metadata-file {input.metadata} \
         --o-visualization {output.barplots}"
 
 #########
