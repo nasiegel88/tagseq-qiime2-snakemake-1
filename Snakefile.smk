@@ -430,7 +430,7 @@ rule core_metrics:
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
         --p-sampling-depth DEPTH \
-        --m-metadata-file metadata \
+        --m-metadata-file {input.metadata} \
         --output-dir {params}
     """
 
