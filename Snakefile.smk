@@ -424,7 +424,7 @@ rule core_metrics:
     "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
-        --p-sampling-depth config['sampling-depth'] \
+        --p-sampling-depth {config[sampling-depth]} \
         --m-metadata-file {input.metadata} \
         --o-rarefied-table {output.rarefied_table} \
         --o-faith-pd-vector {output.faith_pd_vector} \
