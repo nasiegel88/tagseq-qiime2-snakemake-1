@@ -57,4 +57,4 @@ beta-div-p-method: 'anosim'
 permutations: 999
 # The number of permutations to be run when computing p-values
 # For beta indices
-sampling-depth: 1, 10 #should be set higher for a non-test dataset
+sampling-depth: 1000 #should be set higher for a non-test dataset
