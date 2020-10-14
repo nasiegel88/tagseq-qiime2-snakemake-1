@@ -386,12 +386,10 @@ rule alignment:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    directory(OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output")
   shell:
     "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
-        --output-dir {params}"
+        --output-dir"
 
 rule core_metrics:
   input:
@@ -414,7 +412,7 @@ rule core_metrics:
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
-    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
+    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweight  ed_unifrac_emperor.qzv",
     weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
