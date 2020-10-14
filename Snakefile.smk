@@ -421,8 +421,6 @@ rule core_metrics:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-      directory(OUTPUTDIR + "/qiime2/asv/core-metrics-results/")
   shell:
     "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
