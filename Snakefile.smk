@@ -54,7 +54,6 @@ METACATEGORY = config["metadata-category"]
 ALPHASTATISTIC = config["alpha-div-p-method"]
 BETASTATISTIC = config["beta-div-p-method"]
 PERMNUMBER = config["permutations"]
-DEPTH = config['sampling-depth']
 
 #----DEFINE RULES----#
 
@@ -425,7 +424,7 @@ rule core_metrics:
     "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
-        --p-sampling-depth DEPTH \
+        --p-sampling-depth config['sampling-depth'] \
         --m-metadata-file {input.metadata} \
         --o-rarefied-table {output.rarefied_table} \
         --o-faith-pd-vector {output.faith_pd_vector} \
