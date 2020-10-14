@@ -429,7 +429,23 @@ rule core_metrics:
         --i-table {input.table} \
         --p-sampling-depth DEPTH \
         --m-metadata-file {input.metadata} \
-        --output-dir {params}"
+        --o-rarefied-table {output.rarefied_table} \
+        --o-faith-pd-vector {output.faith_pd_vector} \
+        --o-observed-otus-vector {output.observed_otus} \
+        --o-shannon-vector {output.shannon_vector} \
+        --o-evenness-vector {output.evenness_vector} \
+        --o-unweighted-unifrac-distance-matrix {output.unweighted_unifrac_mat} \
+        --o-weighted-unifrac-distance-matrix {output.weighted_unifrac_mat} \
+        --o-jaccard-distance-matrix {output.jaccard_distance} \
+        --o-bray-curtis-distance-matrix {output.bray_curtis} \
+        --o-unweighted-unifrac-pcoa-results {output.unweighted_unifrac_pcoa} \
+        --o-weighted-unifrac-pcoa-results {output.weighted_unifrac_pcoa} \
+        --o-jaccard-pcoa-results {output.jaccard_pcoa} \
+        --o-bray-curtis-pcoa-results {output.bray_curtis_pco} \
+        --o-unweighted-unifrac-emperor {output.unweighted_unifrac} \
+        --o-weighted-unifrac-emperor {output.weighted_unifrac} \
+        --o-jaccard-emperor {output.jaccard_emperor} \
+        --o-bray-curtis-emperor {output.bray_curtis_emperor}"
 
 rule richness:
   input:
