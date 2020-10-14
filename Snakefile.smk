@@ -463,6 +463,7 @@ rule richness:
 rule richcorr:
   input:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
