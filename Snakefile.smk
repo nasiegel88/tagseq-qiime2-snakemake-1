@@ -425,14 +425,12 @@ rule core_metrics:
   params:
       directory(OUTPUTDIR + "/qiime2/asv/core-metrics-results/")
   shell:
-    """  
-      qiime diversity core-metrics-phylogenetic \
+    "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
         --p-sampling-depth DEPTH \
         --m-metadata-file {input.metadata} \
-        --output-dir {params}
-    """
+        --output-dir {params}"
 
 rule richness:
   input:
@@ -444,12 +442,10 @@ rule richness:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity alpha-group-significance \
+    "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file META \
-        --o-visualization {output.shannon_signif}
-    """
+        --o-visualization {output.shannon_signif}"
 
 rule richcorr:
   input:
@@ -461,13 +457,11 @@ rule richcorr:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity alpha-correlation \
+    "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file META \
         --p-method ALPHASTATISTIC \
-        --o-visualization {output.shannon_correl}
-    """
+        --o-visualization {output.shannon_correl}"
 
 rule asv_signif:
   input:
@@ -479,12 +473,10 @@ rule asv_signif:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity alpha-group-significance \
+    "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file META \
-        --o-visualization {output.observed_asv_signif}
-    """
+        --o-visualization {output.observed_asv_signif}"
 
 rule asv_corr:
   input:
@@ -496,13 +488,11 @@ rule asv_corr:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity alpha-correlation \
+    "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file META \
         --p-method ALPHASTATISTIC \
-        --o-visualization {output.observed_asv_correl}
-    """
+        --o-visualization {output.observed_asv_correl}"
 
 rule evenness:
   input:
@@ -514,16 +504,14 @@ rule evenness:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity beta-group-significance \
+    "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
         --p-method BETASTATISTIC \
         --p-permutations PERMNUMBER \
         --o-visualization {output.bray_curtis_signif} \
-        --p-pairwise
-    """
+        --p-pairwise"
 
 rule unifrac:
   input:
@@ -535,16 +523,14 @@ rule unifrac:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity beta-group-significance \
+    "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
         --p-method BETASTATISTIC
         --p-permutations PERMNUMBER
         --o-visualization {output.unweighted_unifrac_viz} \
-        --p-pairwise
-    """
+        --p-pairwise"
 
 rule weighted_unifrac:
   input:
@@ -556,16 +542,14 @@ rule weighted_unifrac:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime diversity beta-group-significance \
+    "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file META \
         --m-metadata-column METACATEGORY \
         --p-method BETASTATISTIC \
         --p-permutations PERMNUMBER \
         --o-visualization {output.weighted_unifrac_viz} \
-        --p-pairwise
-    """
+        --p-pairwise"
 
 rule barplot:
   input:
@@ -578,13 +562,11 @@ rule barplot:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """  
-      qiime taxa barplot \
+    "qiime taxa barplot \
         --i-table {input.table} \
         --i-taxonomy {input.sklearn} \
         --m-metadata-file META \
-        --o-visualization {output.barplots}
-    """
+        --o-visualization {output.barplots}"
 
 #########
 #picrust#
