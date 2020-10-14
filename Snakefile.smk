@@ -438,7 +438,7 @@ rule core_metrics:
         --o-unweighted-unifrac-pcoa-results {output.unweighted_unifrac_pcoa} \
         --o-weighted-unifrac-pcoa-results {output.weighted_unifrac_pcoa} \
         --o-jaccard-pcoa-results {output.jaccard_pcoa} \
-        --o-bray-curtis-pcoa-results {output.bray_curtis_pco} \
+        --o-bray-curtis-pcoa-results {output.bray_curtis_pcoa} \
         --o-unweighted-unifrac-emperor {output.unweighted_unifrac} \
         --o-weighted-unifrac-emperor {output.weighted_unifrac} \
         --o-jaccard-emperor {output.jaccard_emperor} \
