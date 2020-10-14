@@ -473,7 +473,7 @@ rule richcorr:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file {input.metadata} \
-        --p-method ALPHASTATISTIC \
+        --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.shannon_correl}"
 
 rule asv_signif:
@@ -543,7 +543,7 @@ rule unifrac:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.metadata} \
-        --m-metadata-column METACATEGORY \
+        --m-metadata-column {config[metadata-category]} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
