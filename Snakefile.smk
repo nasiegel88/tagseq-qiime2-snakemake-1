@@ -386,10 +386,12 @@ rule alignment:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
     "envs/qiime2-2019.10.yaml"
+  params:
+    directory(OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output")
   shell:
     "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
-        --output-dir"
+        --output-dir {params}"
 
 rule core_metrics:
   input:
