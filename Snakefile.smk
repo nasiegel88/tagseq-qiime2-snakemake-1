@@ -397,7 +397,6 @@ rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
-    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
     faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
@@ -425,7 +424,7 @@ rule core_metrics:
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.table} \
         --p-sampling-depth {config[sampling-depth]} \
-        --m-metadata-file {input.metadata} \
+        --m-metadata-file {config[metadata]} \
         --o-rarefied-table {output.rarefied_table} \
         --o-faith-pd-vector {output.faith_pd_vector} \
         --o-observed-otus-vector {output.observed_otus} \
