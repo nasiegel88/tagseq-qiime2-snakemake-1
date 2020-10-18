@@ -222,17 +222,16 @@ To run the full pipeline make sure you enable the ```--use-conda``` flag. This i
 ```
 # For ASVs
 Run the following command ```snakemake --use-conda -s Snakefile.smk```
-
+```
 ### 4.2 Run with HPC
 
-Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. Run with screen, tmux, or nohup.
+Once the dry run is successful with the dry run script, use the submit-slurm.sh script to submit the jobs to slurm. .Make sure to figure the bash scripts to run on the desired cluster.
 
 ```
 # Full run for ASVs:
 bash submitscripts/submit-slurm.sh
-
-Run the above in *tmux* or *screen*, as it will print out the jobs it submits to SLURM. You will be able to monitor the progress this way.
-
+```
+Although ```bash submitscripts/submit-slurm.sh``` will run the snakefile, you will need to go back and examine the multiqc output to assess how many reads should be trimmed during rule dada2. Alternatively, ```bash submit-slurm-trim.sh``` will stop the pipeline at rule multiqc so that dada2 parameters can be adjusted before moving to further steps.
 
 ## 5. Output from pipeline
 
@@ -241,16 +240,23 @@ To monitor output files migrate to the ```scratch``` directory specified in the 
 ```
 ├── fastqc 	#Individual fastqc files for each read
 ├── logs 	#log files for all pre-qiime2 commands
-├── qiime2 	#directory with all qiime2 artifact files
+├── qiime2 	#directory with the primer and removed primer qiime2 artifact files
 └── trimmed 	#location of all trimmed reads
 ```
-Within the ```qiime2/``` directory, there is a separate directory for each of the ASV qiime2 artifact files.
+Within the ```output/qiime2/asv``` directory, there are separate directories for qiime2 analysis.
 ```
-├── asv #ASV artifact files from qiime2
-├── logs #all log files for qiime2 commands
-├── otu #qiime2 artifact files for ASVs
-├── prelim-mld-fecal-PE-demux-noprimer.qza #artifact file post-primer removal
-└── prelim-mld-fecal-PE-demux.qza #Initial import artifact file
+├── core-metrics-results
+├── mafft-fasttree-output
+├── picrust2
+├── table
+├── tax_assigned
+├── viz
+├──prelim-mld-fecal-stats-dada2.qza
+├──prelim-mld-fecal-stats-dada2.qzv
+├──prelim-mld-fecal-tax_sklearn.qza
+├──prelim-mld-fecal-asv-table.qza
+├──prelim-mld-fecal-asv-table.tsv
+└──prelim-mld-fecal-rep-seqs.qza
 ```
 
 ### 5.2 Generate final ASV table
@@ -280,18 +286,16 @@ Often we need to quality check all the sequence data before deciding the paramet
 Run snakemake:
 
 ```
-```
 snakemake --use-conda -s Snakefile.smk --until get_stats
 ```
 * Above command will run the Snakefile for ASVs, but will stop at the get_stats step.
 * An alternative is to run until 'multiqc' to only perform the trimming and fastqc evaluations
 
-Run on HPC with ```bash submitscripts/submit-slurm-trim-stats.sh
+Run on HPC with ```bash submitscripts/submit-slurm-trim-stats.sh```
 
-## Again, an alterative is to run 'submit-slurm-trim.sh' to only run through the trimming step.
-```
+ Again, an alterative is to run 'submit-slurm-trim.sh' to only run through the trimming step.
+ 
 [Or use this to trim fastq sequences](https://github.com/shu251/qc-trim).
-
 
 ### Troubleshooting snakemake
 When throwing an error, snakemake will list log files. Each time snakemake is executed, a log file is created in ```CURRENT_SNAKEMAKE_DIR/.snakemake/log/```. These are dated and provide the printed output. Some common errors and steps to diagnose.   
@@ -306,9 +310,13 @@ To look for additional code error that may result in Syntax errors, try adding t
 * ```--summary``` or ```--detailed-summary```
 * ```--printshellcmds```
 * ```--debug```
-```
 
 ## Analysis
+
+### Phylogeny
+
+The phylogeny analyis conducted in the snakefile is similar that of the analysis in the [qiime2 Moving Pictures tutorial](https://docs.qiime2.org/2019.10/tutorials/moving-pictures/#generate-a-tree-for-phylogenetic-diversity-analyses). This will be a good resource to use if there are tests you wish to conduct with your own data that are not present in this pipeline.
+
 ### Picrust2
 
 The ```Snakefile.smk``` script will conduct a metagenomic analysis of predicted pathways infered from sequencing data. To understand how picrust works the publication can be found [here](https://www.nature.com/articles/s41587-020-0548-6).
