@@ -566,7 +566,6 @@ rule barplot:
   input:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
     sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza",
-    metadata = "/mnt/c/Users/noahs/PycharmProjects/tagseq-qiime2-snakemake-1/sample-metadata.tsv"
   output:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
@@ -577,7 +576,7 @@ rule barplot:
     "qiime taxa barplot \
         --i-table {input.table} \
         --i-taxonomy {input.sklearn} \
-        --m-metadata-file {input.metadata} \
+        --m-metadata-file {config[metadata]} \
         --o-visualization {output.barplots}"
 
 #########
