@@ -95,7 +95,11 @@ This command will download the practice samples from my account on [OSF](https:/
 To make the manifest file that is required for qiime2, enable an R environment and run the provided R script: ```scripts/write-manifest-current.R```
 ```
 # Enable an R working environment
-conda activate r_3.5.1
+
+```
+conda install -c r r-essentials 
+conda activate r
+```
 
 # Make sure you are in the directory with all the raw sequence files.
 Rscript $PATH/tagseq-qiime2-snakemake-1/scripts/write-manifest-current.R
