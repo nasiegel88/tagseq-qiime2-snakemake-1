@@ -307,7 +307,6 @@ rule drop_blanks:
               –o-visualization {output.filtered_table}
               --p-exclude-ids {config[samples-to-exclude]}
               –m-sample-metadata-file {config[metadata]}
-
             qiime feature-table filter-samples
               –i-table {input.table}
               –m-metadata-file {config[metadata]}
@@ -323,7 +322,6 @@ rule drop_blanks:
               –o-visualization {output.filtered_table}
               --p-no-exclude-ids
               –m-sample-metadata-file {config[metadata]}
-
             qiime feature-table filter-samples
               –i-table {input.table}
               –m-metadata-file {output.filtered_metadata.tsv}
