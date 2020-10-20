@@ -298,7 +298,7 @@ rule drop_blanks:
     "envs/qiime2-2019.10.yaml"  
   run:
 
-    if {config[exlude-samples} == 'yes':
+    if {config[exlude-samples]} == 'yes':
       shell: 
           """
             qiime feature-table summarize \
