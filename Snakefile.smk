@@ -299,7 +299,7 @@ rule drop_blanks:
     
   run:
 
-    if {config[exlude-samples} == 'yes'
+    if {config[exlude-samples} == 'yes':
       shell: 
           """"
             qiime feature-table summarize
