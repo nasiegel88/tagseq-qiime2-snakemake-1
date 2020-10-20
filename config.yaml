@@ -48,8 +48,8 @@ training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
 ## Remove blanks
-exlude-samples: 'yes' # input yes or no
-samples-to-exclude: 'NSBlank5'
+-
+samples-to-exclude: --p-exclude-ids 
 
 ### phylogeny flags
 metadata-category: sex
