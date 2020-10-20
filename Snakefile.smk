@@ -79,6 +79,8 @@ rule all:
     primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv",
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+    filtered_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table-filtered.qza",    
+    filtered_metadata = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-filtered-sample-metadata.tsv",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
