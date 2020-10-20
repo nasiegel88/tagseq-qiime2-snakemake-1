@@ -304,7 +304,7 @@ rule drop_blanks:
           """"
             qiime feature-table summarize
               –i-table {input.table}
-              –o-visualization {filtered-table.qzv}
+              –o-visualization {output.filtered_table}
               --p-exclude-ids {config[samples-to-exclude]}
               –m-sample-metadata-file {config[metadata]}
 
@@ -312,7 +312,7 @@ rule drop_blanks:
               –i-table {input.table}
               –m-metadata-file {config[metadata]}
               --p-exclude-ids {config[samples-to-exclude]}
-              –o-filtered-table {filtered-table.qza}
+              –o-filtered-table {output.filtered-table}
           """"
 
     else:
@@ -320,15 +320,15 @@ rule drop_blanks:
           """"
             qiime feature-table summarize
               –i-table {input.table}
-              –o-visualization {filtered-table.qzv}
+              –o-visualization {output.filtered_table}
               --p-no-exclude-ids
               –m-sample-metadata-file {config[metadata]}
 
             qiime feature-table filter-samples
               –i-table {input.table}
-              –m-metadata-file {filtered-sample-metadata.tsv}
+              –m-metadata-file {output.filtered_metadata.tsv}
               --p-no-exclude-ids
-              –o-filtered-table {filtered-table.qza}
+              –o-filtered-table {output.filtered-table}
           """"
 
 rule dada2_stats:
