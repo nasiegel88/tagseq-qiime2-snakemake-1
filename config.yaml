@@ -47,6 +47,10 @@ quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
+## Remove blanks
+exlude-samples: 'yes' # input yes or no
+samples-to-exclude: 'NSBlank5'
+
 ### phylogeny flags
 metadata-category: sex
 # There is only one factor to compare the the moment
