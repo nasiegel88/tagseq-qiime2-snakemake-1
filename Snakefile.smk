@@ -284,6 +284,47 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
 
+rule drop_blanks:
+  input:
+    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
+  output:
+    filtered_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table-filtered.qza",    
+    filtered_metadata = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-filtered-sample-metadata.tsv"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_filtered-table.log"
+  conda:
+    "envs/qiime2-2019.10.yaml"
+    
+  run:
+
+    if {config[exlude-samples} == 'yes'
+      shell: 
+        "qiime feature-table summarize
+          –i-table {input.table}
+          –o-visualization {filtered-table.qzv}
+          --p-exclude-ids {config[samples-to-exclude]}
+          –m-sample-metadata-file {config[metadata]}
+
+        qiime feature-table filter-samples
+          –i-table {input.table}
+          –m-metadata-file {config[metadata]}
+          --p-exclude-ids {config[samples-to-exclude]}
+          –o-filtered-table {filtered-table.qza}"
+
+    else:
+      shell:
+        "qiime feature-table summarize
+          –i-table {input.table}
+          –o-visualization {filtered-table.qzv}
+          --p-no-exclude-ids
+          –m-sample-metadata-file {config[metadata]}
+
+          qiime feature-table filter-samples
+          –i-table {input.table}
+          –m-metadata-file {filtered-sample-metadata.tsv}
+          --p-no-exclude-ids
+          –o-filtered-table {filtered-table.qza}"
+
 rule dada2_stats:
   input:
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza"
