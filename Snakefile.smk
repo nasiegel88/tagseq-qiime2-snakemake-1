@@ -301,7 +301,8 @@ rule drop_blanks:
 
     if {config[exlude-samples} == 'yes'
       shell: 
-        "qiime feature-table summarize
+        """"
+        qiime feature-table summarize
           –i-table {input.table}
           –o-visualization {filtered-table.qzv}
           --p-exclude-ids {config[samples-to-exclude]}
@@ -311,11 +312,13 @@ rule drop_blanks:
           –i-table {input.table}
           –m-metadata-file {config[metadata]}
           --p-exclude-ids {config[samples-to-exclude]}
-          –o-filtered-table {filtered-table.qza}"
+          –o-filtered-table {filtered-table.qza}
+        """"
 
     else:
       shell:
-        "qiime feature-table summarize
+        """"
+        qiime feature-table summarize
           –i-table {input.table}
           –o-visualization {filtered-table.qzv}
           --p-no-exclude-ids
@@ -325,7 +328,8 @@ rule drop_blanks:
           –i-table {input.table}
           –m-metadata-file {filtered-sample-metadata.tsv}
           --p-no-exclude-ids
-          –o-filtered-table {filtered-table.qza}"
+          –o-filtered-table {filtered-table.qza}
+        """"
 
 rule dada2_stats:
   input:
