@@ -296,20 +296,18 @@ rule drop_blanks:
     SCRATCH + "/qiime2/logs/" + PROJ + "_filtered-table.log"
   conda:
     "envs/qiime2-2019.10.yaml"  
-  run:
+  shell:
+  "qiime feature-table summarize \
+       –i-table {input.table} \
+       –o-visualization {output.filtered_table} \
+       {config[samples-to-exclude]} \
+       –m-sample-metadata-file {config[metadata]} 
 
-    if {config[exlude-samples]} == 'yes': 
-      shell("""qiime feature-table summarize \
-                    –i-table {input.table} \
-                    –o-visualization {output.filtered_table} \
-                    --p-exclude-ids {config[samples-to-exclude]} \
-                    –m-sample-metadata-file {config[metadata]} 
-
-                qiime feature-table filter-samples \
-                  –i-table {input.table} \
-                  –m-metadata-file {config[metadata]} \
-                  --p-exclude-ids {config[samples-to-exclude]} \
-                  –o-filtered-table {output.filtered-table}""")
+   qiime feature-table filter-samples \
+     –i-table {input.table} \
+     –m-metadata-file {config[metadata]} \
+     {config[samples-to-exclude]} \
+     –o-filtered-table {output.filtered-table}"
 
 rule dada2_stats:
   input:
