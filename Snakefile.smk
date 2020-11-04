@@ -287,8 +287,7 @@ rule dada2:
 
 
 rule drop_blanks:
-
-	input:
+	  input:
     	table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
 
     output:
