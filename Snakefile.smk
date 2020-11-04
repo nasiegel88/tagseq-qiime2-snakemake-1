@@ -315,7 +315,7 @@ rule drop_blanks:
               --p-exclude-ids FALSE \ 
               –o-filtered-table {output.cleaned_table} \
       else
-          print(Error)
+          print("Error")
       fi
     """
 
