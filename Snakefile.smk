@@ -79,6 +79,7 @@ rule all:
     primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv",
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
@@ -283,6 +284,43 @@ rule dada2:
         --o-table {output.table} \
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
+
+
+rule drop_blanks:
+
+	input:
+    	table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+
+    output:
+    	cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    log:
+        SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.qza"
+    conda:
+    	"envs/qiime2-2019.10.yaml"
+    shell:
+     """
+     var=({config['remove_blanks']})
+     if [ "${var}" == 'yes' ]; then
+
+         qiime feature-table filter-samples
+			–i-table {input.table}
+			–m-metadata-file {config[metadata]}
+			--p-exclude-ids TRUE
+			--p-where config['blanks']
+			–o-filtered-table {output.cleaned_table}
+
+     elif [ "${var}" == 'no' ]; then
+
+         qiime feature-table filter-samples
+			–i-table {input.table}
+			–m-metadata-file {config[metadata]}
+			--p-exclude-ids FALSE
+			–o-filtered-table {output.cleaned_table}
+
+     else
+         print('Error')
+     fi
+     """
 
 rule dada2_stats:
   input:
