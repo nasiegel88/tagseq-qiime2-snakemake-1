@@ -296,7 +296,7 @@ rule drop_blanks:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    """"
+    """
       var=(config["remove_blanks"])
       if [ "${{var}}" == 'yes' ]; then
 
@@ -317,7 +317,7 @@ rule drop_blanks:
       else
           print('Error')
       fi
-    """"
+    """
 
 rule dada2_stats:
   input:
