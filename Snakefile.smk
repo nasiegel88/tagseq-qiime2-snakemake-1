@@ -316,7 +316,7 @@ rule drop_blanks:
           –o-filtered-table {output.cleaned_table} \
     else 
       print()
-    fi
+      fi
     """
 
 rule dada2_stats:
