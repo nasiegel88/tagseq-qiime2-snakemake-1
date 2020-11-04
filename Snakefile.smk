@@ -313,7 +313,7 @@ rule drop_blanks:
           –i-table {input.table} \
           –m-metadata-file {config[metadata]} \
           --p-exclude-ids FALSE \ 
-          –o-filtered-table {output.cleaned_table} \
+          –o-filtered-table {output.cleaned_table} 
     else 
       print()
     fi
