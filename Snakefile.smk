@@ -318,6 +318,7 @@ rule drop_blanks:
       print()
       fi
     fi
+    exit
     """
 
 rule dada2_stats:
