@@ -317,6 +317,7 @@ rule drop_blanks:
     else 
       print()
       fi
+    fi
     """
 
 rule dada2_stats:
