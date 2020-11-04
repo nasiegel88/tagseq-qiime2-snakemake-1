@@ -47,9 +47,6 @@ quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
-## Remove blanks
--
-samples-to-exclude: --p-exclude-ids 
 
 ### phylogeny flags
 metadata-category: sex
