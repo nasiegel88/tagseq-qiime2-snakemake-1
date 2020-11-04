@@ -296,7 +296,8 @@ rule drop_blanks:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    "var=(config["remove_blanks"])
+    """"
+      var=(config["remove_blanks"])
       if [ "${{var}}" == 'yes' ]; then
 
           qiime feature-table filter-samples
@@ -315,7 +316,8 @@ rule drop_blanks:
               –o-filtered-table {output.cleaned_table} \
       else
           print('Error')
-      fi"
+      fi
+    """"
 
 rule dada2_stats:
   input:
