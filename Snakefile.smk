@@ -79,8 +79,6 @@ rule all:
     primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv",
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
-    filtered_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table-filtered.qza",    
-    filtered_metadata = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-filtered-sample-metadata.tsv",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
@@ -285,29 +283,6 @@ rule dada2:
         --o-table {output.table} \
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
-
-rule drop_blanks:
-  input:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
-  output:
-    filtered_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table-filtered.qza",    
-    filtered_metadata = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-filtered-sample-metadata.tsv"
-  log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_filtered-table.log"
-  conda:
-    "envs/qiime2-2019.10.yaml"  
-  shell:
-  "qiime feature-table summarize \
-       –i-table {input.table} \
-       –o-visualization {output.filtered_table} \
-       {config[samples-to-exclude]} \
-       –m-sample-metadata-file {config[metadata]} 
-
-   qiime feature-table filter-samples \
-     –i-table {input.table} \
-     –m-metadata-file {config[metadata]} \
-     {config[samples-to-exclude]} \
-     –o-filtered-table {output.filtered-table}"
 
 rule dada2_stats:
   input:
