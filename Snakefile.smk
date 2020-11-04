@@ -288,14 +288,14 @@ rule dada2:
 
 rule drop_blanks:
 	  input:
-    	table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+      table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
 
     output:
-    	cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+      cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
     log:
-        SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.qza"
+      SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.qza"
     conda:
-    	"envs/qiime2-2019.10.yaml"
+      "envs/qiime2-2019.10.yaml"
     shell:
      """
      var=({config['remove_blanks']})
