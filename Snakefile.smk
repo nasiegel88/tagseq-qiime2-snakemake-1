@@ -314,8 +314,6 @@ rule drop_blanks:
               –m-metadata-file {config[metadata]} \
               --p-exclude-ids FALSE \ 
               –o-filtered-table {output.cleaned_table} \
-      else; then
-          print("Error")
       fi
     """
 
