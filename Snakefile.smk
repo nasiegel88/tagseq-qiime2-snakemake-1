@@ -304,7 +304,7 @@ rule drop_blanks:
           –i-table {input.table} \
           –m-metadata-file {config[metadata]} \
           --p-exclude-ids TRUE \
-          --p-where {config["blanks"]} \ 
+          --p-where config["blanks"] \ 
           –o-filtered-table {output.cleaned_table} 
 
     elif [ "${{var}}" == 'no' ]; then
