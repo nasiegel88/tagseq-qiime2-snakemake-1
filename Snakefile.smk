@@ -307,7 +307,7 @@ rule drop_blanks:
 			      --p-where config["blanks"]
 			      –o-filtered-table {output.cleaned_table}
 
-     elif [ "${var}" == 'no' ]; then
+     elif [ "${{var}}" == 'no' ]; then
 
          qiime feature-table filter-samples
 			      –i-table {input.table}
