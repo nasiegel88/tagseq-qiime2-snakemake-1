@@ -47,6 +47,10 @@ quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
+## Filter blanks
+remove_blanks: yes # yes or no
+blanks: 'NS.Blank5' # for preliminary data
+
 
 ### phylogeny flags
 metadata-category: sex
