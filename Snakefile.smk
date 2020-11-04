@@ -292,33 +292,30 @@ rule drop_blanks:
   output:
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.qza"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-     """
-     var=(config["remove_blanks"])
-     if [ "${{var}}" == 'yes' ]; then
+    "var=(config["remove_blanks"])
+      if [ "${{var}}" == 'yes' ]; then
 
-         qiime feature-table filter-samples
-			      –i-table {input.table}
-			      –m-metadata-file {config[metadata]}
-			      --p-exclude-ids TRUE
-			      --p-where config["blanks"]
-			      –o-filtered-table {output.cleaned_table}
+          qiime feature-table filter-samples
+              –i-table {input.table} \
+              –m-metadata-file {config[metadata]} \
+              --p-exclude-ids TRUE \
+              --p-where config["blanks"] \ 
+              –o-filtered-table {output.cleaned_table} 
 
-     elif [ "${{var}}" == 'no' ]; then
+      elif [ "${{var}}" == 'no' ]; then
 
-         qiime feature-table filter-samples
-			      –i-table {input.table}
-			      –m-metadata-file {config[metadata]}
-			      --p-exclude-ids FALSE
-			      –o-filtered-table {output.cleaned_table}
-
-     else
-         print('Error')
-     fi
-     """
+          qiime feature-table filter-samples \
+              –i-table {input.table} \
+              –m-metadata-file {config[metadata]} \
+              --p-exclude-ids FALSE \ 
+              –o-filtered-table {output.cleaned_table} \
+      else
+          print('Error')
+      fi"
 
 rule dada2_stats:
   input:
