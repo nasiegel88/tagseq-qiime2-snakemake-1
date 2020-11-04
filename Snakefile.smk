@@ -298,7 +298,7 @@ rule drop_blanks:
   shell:
      """
      var=(config["remove_blanks"])
-     if [ "${var}" == 'yes' ]; then
+     if [ "${{var}}" == 'yes' ]; then
 
          qiime feature-table filter-samples
 			      –i-table {input.table}
