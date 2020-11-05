@@ -18,4 +18,4 @@ elif [ "${{var}}" == 'no' ]; then
         –o-filtered-table {output.cleaned_table} 
 else 
 
-fi
+done
