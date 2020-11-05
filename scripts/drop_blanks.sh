@@ -1,4 +1,5 @@
- var=(config["remove_blanks"])
+#!/bin/bash
+var=(config["remove_blanks"])
 if [ "${{var}}" == 'yes' ]; then
 
     qiime feature-table filter-samples \
