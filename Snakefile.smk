@@ -315,9 +315,8 @@ rule drop_blanks:
           --p-exclude-ids FALSE \ 
           –o-filtered-table {output.cleaned_table} 
     else 
-      print()
+
     fi
-    done
     """
 
 rule dada2_stats:
