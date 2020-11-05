@@ -296,7 +296,7 @@ rule drop_blanks:
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
-    "scripts/bash drop_blanks.sh"
+    "scripts/drop_blanks.sh"
 
 rule dada2_stats:
   input:
