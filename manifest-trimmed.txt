@@ -1,0 +1,10 @@
+sample-id,absolute-filepath,direction
+NS.Blank5,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.Blank5_R1_trim.fastq.gz,forward
+NS.Blank5,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.Blank5_R2_trim.fastq.gz,reverse
+NS.C,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.C_R1_trim.fastq.gz,forward
+NS.C,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.C_R2_trim.fastq.gz,reverse
+NS.D,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.D_R1_trim.fastq.gz,forward
+NS.D,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.D_R2_trim.fastq.gz,reverse
+NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.E_R1_trim.fastq.gz,forward
+NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.E_R2_trim.fastq.gz,reverse
+NS.O,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.O_R1_trim.fastq.gz,forward

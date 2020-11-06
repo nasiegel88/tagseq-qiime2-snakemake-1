@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 142 of /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/Snakefile.smk:
+Missing input files for rule fastqc:
+/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.O_R2.fastq.gz

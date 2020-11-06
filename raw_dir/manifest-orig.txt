@@ -1,0 +1,10 @@
+sample-id,absolute-filepath,direction
+NS.Blank5,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.Blank5_R1.fastq.gz,forward
+NS.Blank5,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.Blank5_R2.fastq.gz,reverse
+NS.C,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.C_R1.fastq.gz,forward
+NS.C,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.C_R2.fastq.gz,reverse
+NS.D,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.D_R1.fastq.gz,forward
+NS.D,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.D_R2.fastq.gz,reverse
+NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.E_R1.fastq.gz,forward
+NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.E_R2.fastq.gz,reverse
+NS.O,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/NS.O_R1.fastq.gz,forward
