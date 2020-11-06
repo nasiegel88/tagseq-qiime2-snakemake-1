@@ -1,0 +1,5 @@
+
+*.gz
+database/silva-138-99-tax.qza
+database/silva-138-99-seqs.qza
+database/silva-132-99-nb-classifier.qza
