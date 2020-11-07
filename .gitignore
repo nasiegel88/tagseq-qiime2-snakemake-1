@@ -7,3 +7,4 @@ scripts/.Rhistory
 database/silva-138-99-tax.qza
 database/silva-138-99-seqs.qza
 database/silva-132-99-nb-classifier.qza
+.snakemake/log/2020-11-06T160112.527202.snakemake.log
