@@ -45,8 +45,7 @@ chimera: pooled
 
 ## Filter blanks
 remove_blanks: 'yes' # yes or no
-blanks: 'NS.Blank5' # for preliminary data
-
+blanks: “#SampleID (‘NS.Blank5’)” # for preliminary data
 
 ### phylogeny flags
 metadata-category: sex
