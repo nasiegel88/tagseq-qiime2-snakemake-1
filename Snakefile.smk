@@ -44,9 +44,7 @@ MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').t
 MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
-DB = config["database"]
 DB_classifier = config["database_classified"]
-DB_tax = config["database_tax"]
 
 # Phylogeny
 META = config["metadata"]
