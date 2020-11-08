@@ -299,10 +299,20 @@ rule drop_blanks:
     blanks = config['blanks']
   shell:
       """
-      if [ "${{params.var}}" == 'yes' ]; then
-        qiime feature-table filter-samples –i-table {input.table} –m-metadata-file {params.metadata} --p-exclude-ids TRUE --p-where {params.blanks} –o-filtered-table {output.cleaned_table} 
+      if [ "${{params.var}}" == 'yes' ]; then 
+        qiime feature-table filter-samples \
+          –i-table {input.table} \
+          –m-metadata-file {params.metadata} \
+          --p-exclude-ids TRUE \
+          --p-where {params.blanks} \ 
+          –o-filtered-table {output.cleaned_table} 
       elif [ "${{var}}" == 'no' ]; then
-        qiime feature-table filter-samples –i-table {input.table} –m-metadata-file {params.metadata} --p-exclude-ids FALSE  –o-filtered-table {output.cleaned_table}
+        qiime feature-table filter-samples \
+          –i-table {input.table} \
+          –m-metadata-file {params.metadata} \
+          --p-exclude-ids FALSE \ 
+          –o-filtered-table {output.cleaned_table}
+      fi
       """
 
 rule dada2_stats:
