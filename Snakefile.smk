@@ -293,20 +293,23 @@ rule drop_blanks:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:
     "envs/qiime2-2019.10.yaml"
+  params:
+    metadata  = config[metadata],
+    var = config[remove_blanks],
+    blanks = config[blanks]
   shell:
       """
-      var=config[remove_blanks]
-      if [ "${{var}}" == 'yes' ]; then
+      if [ "${{params.var}}" == 'yes' ]; then
         qiime feature-table filter-samples \
           –i-table {input.table} \
-          –m-metadata-file {config[metadata]} \
+          –m-metadata-file {params.metadata} \
           --p-exclude-ids TRUE \
-          --p-where {config[blanks]} \ 
+          --p-where {params.blanks} \ 
           –o-filtered-table {output.cleaned_table} 
       elif [ "${{var}}" == 'no' ]; then
         qiime feature-table filter-samples \
           –i-table {input.table} \
-          –m-metadata-file {config[metadata]} \
+          –m-metadata-file {params.metadata} \
           --p-exclude-ids FALSE \ 
           –o-filtered-table {output.cleaned_table}
       """
