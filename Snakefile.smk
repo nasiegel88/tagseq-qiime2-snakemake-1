@@ -299,7 +299,7 @@ rule drop_blanks:
     blanks = config['blanks']
   shell:
       """
-      if [ "${{params.var}}" == 'yes' ]; then 
+      if [ "${{params.var}}" == yes ]; then 
           qiime feature-table filter-samples \
           –i-table {input.table} \
           –m-metadata-file {params.metadata} \
