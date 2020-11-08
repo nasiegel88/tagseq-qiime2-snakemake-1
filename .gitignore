@@ -19,3 +19,7 @@ manifest-trimmed.txt
 .snakemake/conda/
 
 .snakemake/locks/
+
+.snakemake/
+
+scratch/
