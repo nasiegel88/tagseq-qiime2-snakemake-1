@@ -11,3 +11,11 @@ database/silva-132-99-nb-classifier.qza
 .snakemake/log/2020-11-06T163601.309347.snakemake.log
 
 raw_dir/manifest-orig.txt
+
+*.log
+
+manifest-trimmed.txt
+
+.snakemake/conda/
+
+.snakemake/locks/
