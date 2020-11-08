@@ -294,9 +294,9 @@ rule drop_blanks:
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-    metadata  = config[metadata],
-    var = config[remove_blanks],
-    blanks = config[blanks]
+    metadata  = config['metadata'],
+    var = config['remove_blanks'],
+    blanks = config['blanks']
   shell:
       """
       if [ "${{params.var}}" == 'yes' ]; then
