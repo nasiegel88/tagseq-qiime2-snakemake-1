@@ -1,2 +1,0 @@
-SyntaxError in line 300 of /d/Documents/GitHub/tagseq-qiime2-snakemake-1/Snakefile.smk:
-Command must be given as string after the shell keyword. (Snakefile.smk, line 300)
