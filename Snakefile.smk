@@ -303,7 +303,7 @@ rule drop_blanks:
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
       fgrep -v NS.Blank5 {params.metadata} > {output.cleaned_metadata}
-      echo "All blanks dropped
+      echo "All blanks dropped"
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
