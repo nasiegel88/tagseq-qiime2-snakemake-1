@@ -299,18 +299,18 @@ rule drop_blanks:
     """
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
-        qiime feature-table filter-samples \
-        --i-table {input.table} \
-        --m-metadata-file {params.metadata} \
-        --p-exclude-ids TRUE  \
-        --p-where "SampleID IN ('NS.Blank5')"  \
-        --o-filtered-table {output.cleaned_table}
+    qiime feature-table filter-samples \
+    --i-table {input.table} \
+    --m-metadata-file {params.metadata} \
+    --p-exclude-ids TRUE  \
+    --p-where "SampleID IN ('NS.Blank5')"  \
+    --o-filtered-table {output.cleaned_table}
     elif [ "${{arr[@]}}" == 'no' ]; then
-        qiime feature-table filter-samples \
-        --i-table {input.table} \
-        --m-metadata-file {params.metadata} \
-        --p-exclude-ids FALSE \
-        --o-filtered-table {output.cleaned_table}
+    qiime feature-table filter-samples \
+    --i-table {input.table} \
+    --m-metadata-file {params.metadata} \
+    --p-exclude-ids FALSE \
+    --o-filtered-table {output.cleaned_table}
     fi
     """
 
