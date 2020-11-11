@@ -8,3 +8,4 @@ NS.D,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.D_
 NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.E_R1_trim.fastq.gz,forward
 NS.E,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.E_R2_trim.fastq.gz,reverse
 NS.O,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.O_R1_trim.fastq.gz,forward
+NS.O,/mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch/trimmed/NS.O_R2_trim.fastq.gz,reverse
