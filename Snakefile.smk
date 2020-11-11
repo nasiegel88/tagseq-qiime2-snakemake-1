@@ -297,18 +297,19 @@ rule drop_blanks:
     "envs/qiime2-2019.10.yaml"
   params:
     metadata  = config['metadata'],
-    blanks = config['blanks']
+    table_blanks = config['table_blanks'],
+    meta_blanks = config['metadata_blanks']
   shell:
     """
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
-      fgrep -v NS.Blank5 {params.metadata} > {output.cleaned_metadata}
+    fgrep -v {params.meta_blanks} {params.metadata} > {output.cleaned_metadata}
       echo "All blanks dropped"
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids TRUE  \
-      --p-where "blanks"  \
+      --p-where "{params.table_blanks}"  \
       --o-filtered-table {output.cleaned_table}
     elif [ "${{arr[@]}}" == 'no' ]; then
       cp {params.metadata} {output.cleaned_metadata}
