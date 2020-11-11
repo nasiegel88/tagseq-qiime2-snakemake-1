@@ -295,7 +295,7 @@ rule drop_blanks:
     "envs/qiime2-2019.10.yaml"
   params:
     metadata  = config['metadata'],
-    var = config['remove_blanks'],
+    arr = config['remove_blanks'],
     blanks = config['blanks']
   shell:
     """
