@@ -308,7 +308,7 @@ rule drop_blanks:
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids TRUE  \
-      --p-where "SampleID IN ('NS.Blank5')"  \
+      --p-where "blanks"  \
       --o-filtered-table {output.cleaned_table}
     elif [ "${{arr[@]}}" == 'no' ]; then
       cp {params.metadata} {output.cleaned_metadata}
