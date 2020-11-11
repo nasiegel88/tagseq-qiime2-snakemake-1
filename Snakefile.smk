@@ -300,7 +300,6 @@ rule drop_blanks:
   shell:
     """
     declare -a arr=(params.var)
-
     if [ "${arr[@]}" == yes ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
@@ -308,7 +307,6 @@ rule drop_blanks:
       --p-exclude-ids TRUE  \
       --p-where "SampleID IN ('NS.Blank5')"  \
       --o-filtered-table {output.cleaned_table}
-
     elif [ "${arr[@]}" == 'no' ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
