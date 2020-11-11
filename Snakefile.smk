@@ -14,6 +14,7 @@ PROJ = config["proj_name"]
 INPUTDIR = config["raw_data"]
 SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
+HOME = config["home"]
 
 SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
@@ -78,6 +79,7 @@ rule all:
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
@@ -287,7 +289,8 @@ rule drop_blanks:
   input:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
   output:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:
@@ -299,6 +302,8 @@ rule drop_blanks:
     """
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
+      fgrep -v NS.Blank5 {params.metadata} > {output.cleaned_metadata}
+      echo "All blanks dropped
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
@@ -306,6 +311,8 @@ rule drop_blanks:
       --p-where "SampleID IN ('NS.Blank5')"  \
       --o-filtered-table {output.cleaned_table}
     elif [ "${{arr[@]}}" == 'no' ]; then
+      cp {params.metadata} {output.cleaned_metadata}
+      echo "no blanks dropped"
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
