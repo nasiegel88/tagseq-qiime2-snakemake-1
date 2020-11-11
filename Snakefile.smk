@@ -294,7 +294,8 @@ rule drop_blanks:
     "envs/qiime2-2019.10.yaml"
   params:
     metadata  = config['metadata'],
-    blanks = config['blanks']
+    blanks = config['blanks'],
+    directory( OUTPUTDIR + "/qiime2/asv/")
   shell:
     """
     declare -a arr=("{config[remove_blanks]}")
@@ -304,13 +305,13 @@ rule drop_blanks:
       --m-metadata-file {params.metadata} \
       --p-exclude-ids TRUE  \
       --p-where "SampleID IN ('NS.Blank5')"  \
-      --o-filtered-table {output.cleaned_table}
+      --o-filtered-table {params}
     elif [ "${{arr[@]}}" == 'no' ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids FALSE \
-      --o-filtered-table {output.cleaned_table}
+      --o-filtered-table {params}
     fi
     """
 
