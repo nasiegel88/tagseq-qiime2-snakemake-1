@@ -300,6 +300,7 @@ rule drop_blanks:
   shell:
     """
     declare -a arr=("{config[remove_blanks]}")
+    print(config["remove_blanks"])
     if [ "${arr[@]}" == yes ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
