@@ -283,6 +283,7 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
 
+print ("config[remove_blanks]")
 
 rule drop_blanks:
   input:
