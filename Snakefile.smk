@@ -293,8 +293,6 @@ rule drop_blanks:
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-    metadata  = config['metadata'],
-    blanks = config['blanks'],
     directory( OUTPUTDIR + "/qiime2/asv/")
   shell:
     """
@@ -302,14 +300,14 @@ rule drop_blanks:
     if [ "${{arr[@]}}" == yes ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
-      --m-metadata-file {params.metadata} \
+      --m-metadata-file {config[metadata]} \
       --p-exclude-ids TRUE  \
       --p-where "SampleID IN ('NS.Blank5')"  \
       --o-filtered-table {params}
     elif [ "${{arr[@]}}" == 'no' ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
-      --m-metadata-file {params.metadata} \
+      --m-metadata-file {config[metadata]} \
       --p-exclude-ids FALSE \
       --o-filtered-table {params}
     fi
