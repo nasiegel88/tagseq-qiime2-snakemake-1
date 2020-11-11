@@ -311,9 +311,7 @@ rule drop_blanks:
       --m-metadata-file {params.metadata} \
       --p-exclude-ids FALSE \
       --o-filtered-table {output.cleaned_table}
-    else 
-       ## error handling
-    fi
+    done
     """
 
 rule dada2_stats:
