@@ -295,11 +295,11 @@ rule drop_blanks:
     "envs/qiime2-2019.10.yaml"
   params:
     metadata  = config['metadata'],
-    arr = config['remove_blanks'],
+    var = config['remove_blanks'],
     blanks = config['blanks']
   shell:
     """
-    declare -a arr=(params.var)
+    declare -a arr={params.var}
     if [ "${arr[@]}" == yes ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
