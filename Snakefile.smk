@@ -283,8 +283,6 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
 
-print (config["remove_blanks"])
-
 rule drop_blanks:
   input:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
@@ -299,16 +297,15 @@ rule drop_blanks:
     blanks = config['blanks']
   shell:
     """
-    print(config["remove_blanks"])
     declare -a arr=("{config[remove_blanks]}")
-    if [ "${arr[@]}" == yes ]; then
+    if [ "${{arr[@]}}" == yes ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids TRUE  \
       --p-where "SampleID IN ('NS.Blank5')"  \
       --o-filtered-table {output.cleaned_table}
-    elif [ "${arr[@]}" == 'no' ]; then
+    elif [ "${{arr[@]}}" == 'no' ]; then
       qiime feature-table filter-samples \
       --i-table {input.table} \
       --m-metadata-file {params.metadata} \
