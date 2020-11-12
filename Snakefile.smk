@@ -14,6 +14,7 @@ PROJ = config["proj_name"]
 INPUTDIR = config["raw_data"]
 SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
+HOME = config["home"]
 
 SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
@@ -44,9 +45,7 @@ MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').t
 MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
-DB = config["database"]
 DB_classifier = config["database_classified"]
-DB_tax = config["database_tax"]
 
 # Phylogeny
 META = config["metadata"]
@@ -80,6 +79,7 @@ rule all:
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
@@ -285,34 +285,42 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}"
 
-
 rule drop_blanks:
   input:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
   output:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:
     "envs/qiime2-2019.10.yaml"
+  params:
+    metadata  = config['metadata'],
+    table_blanks = config['table_blanks'],
+    meta_blanks = config['metadata_blanks']
   shell:
-      """
-      var=(config["remove_blanks"])
-      if [ "${{var}}" == 'yes' ]; then
-        qiime feature-table filter-samples \
-          –i-table {input.table} \
-          –m-metadata-file {config[metadata]} \
-          --p-exclude-ids TRUE \
-          --p-where config["blanks"] \ 
-          –o-filtered-table {output.cleaned_table} 
-      elif [ "${{var}}" == 'no' ]; then
-        qiime feature-table filter-samples \
-          –i-table {input.table} \
-          –m-metadata-file {config[metadata]} \
-          --p-exclude-ids FALSE \ 
-          –o-filtered-table {output.cleaned_table}
-      done 
-      """
+    """
+    declare -a arr=("{config[remove_blanks]}")
+    if [ "${{arr[@]}}" == yes ]; then
+    fgrep -v {params.meta_blanks} {params.metadata} > {output.cleaned_metadata}
+      echo "All blanks dropped"
+      qiime feature-table filter-samples \
+      --i-table {input.table} \
+      --m-metadata-file {params.metadata} \
+      --p-exclude-ids TRUE  \
+      --p-where "{params.table_blanks}"  \
+      --o-filtered-table {output.cleaned_table}
+    elif [ "${{arr[@]}}" == 'no' ]; then
+      cp {params.metadata} {output.cleaned_metadata}
+      echo "no blanks dropped"
+      qiime feature-table filter-samples \
+      --i-table {input.table} \
+      --m-metadata-file {params.metadata} \
+      --p-exclude-ids FALSE \
+      --o-filtered-table {output.cleaned_table}
+    fi
+    """
 
 rule dada2_stats:
   input:
@@ -346,7 +354,7 @@ rule assign_tax:
 
 rule gen_table:
   input:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
     table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom"
   log:
@@ -356,7 +364,7 @@ rule gen_table:
   params:
     directory(OUTPUTDIR + "/qiime2/asv/table")
   shell:
-    "qiime tools export --input-path {input.table} --output-path {params}"
+    "qiime tools export --input-path {input.cleaned_table} --output-path {params}"
 
 rule convert:
   input:
@@ -426,7 +434,8 @@ rule alignment:
 rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
     faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
@@ -452,9 +461,9 @@ rule core_metrics:
   shell:
     "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
-        --i-table {input.table} \
+        --i-table {input.cleaned_table} \
         --p-sampling-depth {config[sampling-depth]} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --o-rarefied-table {output.rarefied_table} \
         --o-faith-pd-vector {output.faith_pd_vector} \
         --o-observed-otus-vector {output.observed_otus} \
@@ -476,6 +485,7 @@ rule core_metrics:
 rule richness:
   input:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
   log:
@@ -485,12 +495,13 @@ rule richness:
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.shannon_vector} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --o-visualization {output.shannon_signif}"
 
 rule richcorr:
   input:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
@@ -500,13 +511,14 @@ rule richcorr:
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.shannon_correl}"
 
 rule asv_signif:
   input:
     observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
   log:
@@ -516,12 +528,13 @@ rule asv_signif:
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.observed_asv} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --o-visualization {output.observed_asv_signif}"
 
 rule asv_corr:
   input:
     observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
@@ -531,13 +544,14 @@ rule asv_corr:
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.observed_asv} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.observed_asv_correl}"
 
 rule evenness:
   input:
     bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv"
   log:
@@ -547,7 +561,7 @@ rule evenness:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {config[metadata-category]} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
@@ -557,6 +571,7 @@ rule evenness:
 rule unifrac:
   input:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
   log:
@@ -566,7 +581,7 @@ rule unifrac:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {config[metadata-category]} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
@@ -576,6 +591,7 @@ rule unifrac:
 rule weighted_unifrac:
   input:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
   log:
@@ -585,7 +601,7 @@ rule weighted_unifrac:
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {config[metadata-category]} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
@@ -594,8 +610,9 @@ rule weighted_unifrac:
 
 rule barplot:
   input:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
     sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
@@ -604,9 +621,9 @@ rule barplot:
     "envs/qiime2-2019.10.yaml"
   shell:
     "qiime taxa barplot \
-        --i-table {input.table} \
+        --i-table {input.cleaned_table} \
         --i-taxonomy {input.sklearn} \
-        --m-metadata-file {config[metadata]} \
+        --m-metadata-file {input.cleaned_metadata} \
         --o-visualization {output.barplots}"
 
 #########
