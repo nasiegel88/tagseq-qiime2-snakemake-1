@@ -33,4 +33,4 @@ output/qiime2/asv/picrust2/intermediate/place_seqs/
 output/qiime2/asv/picrust2/
 
 output/qiime2/asv/
-Snakefile_long.smk
+

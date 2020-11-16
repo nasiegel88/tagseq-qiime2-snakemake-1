@@ -1,0 +1,48 @@
+# config.yaml
+
+perform_longitudinal: yes # yes or no
+
+replicate: - 'error'
+            - 'random'
+            - 'drop'
+
+end_time: 12
+
+
+start_time: 0
+
+
+column: - 'sex'
+        - 'treatment'
+        - 'age_months'
+
+state: 'age_months'
+
+group_col: " 'treatment', 'sex' "
+
+
+id_col: 'animal_number'
+
+
+method: - 'kendall'
+        - 'pearson'
+        - 'spearman'
+
+metric: 'age_days'
+
+
+estimators: 10 # not sure how to determine this number
+
+
+random_state: 17 # not sure how to determine this number
+
+
+group_by: - 'treatment'
+          - 'sex'
+
+
+control:
+
+missing_samples: - 'error'
+                 - 'ignore'
+
