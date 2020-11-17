@@ -51,11 +51,8 @@ metadata_blanks: 'NS.Blank5' # for preliminary data
 
 ### phylogeny flags
 metadata_category : ["sex", "treatment"] 
-# There is only one factor to compare the the moment
 alpha-div-p-method: ["spearman", "pearson"]
-# Also can be 'pearson'
 beta-div-p-method: ["anosim", "permanova", "permdisp"]
-# Also can be 'permanova' or 'permdisp'
 permutations: 999
 # The number of permutations to be run when computing p-values
 # For beta indices
