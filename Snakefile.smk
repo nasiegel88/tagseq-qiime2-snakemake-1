@@ -565,7 +565,7 @@ rule evenness:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {config[metadata-category]} \
+        --m-metadata-column {METACATEGORY} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.bray_curtis_signif} \
@@ -585,7 +585,7 @@ rule unifrac:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {config[metadata-category]} \
+        --m-metadata-column {METACATEGORY} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
@@ -605,7 +605,7 @@ rule weighted_unifrac:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {config[metadata-category]} \
+        --m-metadata-column {METACATEGORY} \
         --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
