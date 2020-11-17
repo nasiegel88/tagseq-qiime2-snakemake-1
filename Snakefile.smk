@@ -88,8 +88,6 @@ rule all:
     table_tsv = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
     table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv",
     seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta",
-
-    # new files
     masked_align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
     rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
     align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-alignment.qza",
@@ -108,8 +106,6 @@ rule all:
     unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_pcoa_results.qza",
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    #weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv",
-    #unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv",
     bray_curtis_signif = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
     unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC),
     weighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
@@ -121,10 +117,7 @@ rule all:
     shannon_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC),
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv",
     observed_asv_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC),
-    #bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv",
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv",
-    # stop!
-  
     #picrust2
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre",
     marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
