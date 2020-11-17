@@ -49,7 +49,7 @@ DB_classifier = config["database_classified"]
 
 # Phylogeny
 META = config["metadata"]
-METACATEGORY = config["metadata-category"]
+METACATEGORY = config["metadata_category"]
 ALPHASTATISTIC = config["alpha-div-p-method"]
 BETASTATISTIC = config["beta-div-p-method"]
 PERMNUMBER = config["permutations"]

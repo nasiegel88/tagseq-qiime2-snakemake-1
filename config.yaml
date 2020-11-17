@@ -50,8 +50,8 @@ table_blanks: "SampleID IN ('NS.Blank5')" # for preliminary data
 metadata_blanks: 'NS.Blank5' # for preliminary data
 
 ### phylogeny flags
-metadata-category: - 'sex'
-                   - 'treatment'
+metadata_category : ["sex", "treatment"] 
+
 # There is only one factor to compare the the moment
 alpha-div-p-method: 'spearman'
 # Also can be 'pearson'
