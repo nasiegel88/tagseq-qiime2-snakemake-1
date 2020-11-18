@@ -580,6 +580,9 @@ rule unifrac:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
     "envs/qiime2-2019.10.yaml"
+  params:
+    METACATEGORY = config["metadata_category"],
+    BETASTATISTIC = config["beta-div-p-method"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
