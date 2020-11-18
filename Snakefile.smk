@@ -610,7 +610,7 @@ rule weighted_unifrac:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {parms.METACATEGORY} \
+        --m-metadata-column {params.METACATEGORY} \
         --p-method {params.BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
