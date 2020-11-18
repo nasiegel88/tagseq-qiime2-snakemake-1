@@ -50,7 +50,7 @@ table_blanks: "SampleID IN ('NS.Blank5')" # for preliminary data
 metadata_blanks: 'NS.Blank5' # for preliminary data
 
 ### phylogeny flags
-metadata_category : ["sex", "treatment"] 
+metadata_category : ["sex"] 
 alpha-div-p-method: ["spearman", "pearson"]
 beta-div-p-method: ["anosim", "permanova", "permdisp"]
 permutations: 999
