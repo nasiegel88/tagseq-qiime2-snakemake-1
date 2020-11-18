@@ -575,7 +575,7 @@ rule unifrac:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC)
+    expand(unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC)
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
