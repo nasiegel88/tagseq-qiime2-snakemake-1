@@ -187,7 +187,7 @@ rule multiqc:
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", 
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
   conda:
-   "envs/multiqc-env.yaml"
+    "envs/multiqc-env.yaml"
   shell: 
     """
     multiqc -n multiqc.html {input.raw_qc} #run multiqc
