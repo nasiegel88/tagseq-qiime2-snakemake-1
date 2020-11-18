@@ -582,7 +582,7 @@ rule unifrac:
     "envs/qiime2-2019.10.yaml"
   params:
     lambda wildcards: METACATEGORY,
-    lambda test: METACATEGORY
+    lambda test: BETASTATISTIC
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
