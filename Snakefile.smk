@@ -107,7 +107,7 @@ rule all:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
     bray_curtis_signif = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
-    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{{metadatacategory}}_{{correlation}}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC),
+  unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{{metadatacategory}}_{{correlation}}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC),
     weighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
