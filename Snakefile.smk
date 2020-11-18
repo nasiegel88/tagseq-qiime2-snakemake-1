@@ -581,14 +581,14 @@ rule unifrac:
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-    lambda wildcards: METACATEGORY,
-    lambda test: BETASTATISTIC
+    METACATEGORY = config["metadata_category"],
+    BETASTATISTIC = config["beta-div-p-method"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {wildcards.METACATEGORY} \
-        --p-method {test.BETASTATISTIC} \
+        --m-metadata-column {params.METACATEGORY} \
+        --p-method {params.BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-no-pairwise"
