@@ -1,7 +1,6 @@
-SampleID	Group	sex	value 
-NS.Blank5	NS	NA	0
-NS.C	NS	Female	2
-NS.D	NS	Male	1
-NS.E	NS	Male	1
-NS.O	NS	Female	2
-
+SampleID	Group	sex	value 	treatment
+NS.Blank5	NS	NA	0	0
+NS.C	NS	Female	2	2
+NS.D	NS	Male	1	2
+NS.E	NS	Male	1	1
+NS.O	NS	Female	2	1
