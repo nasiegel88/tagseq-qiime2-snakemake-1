@@ -20,9 +20,12 @@ SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
 R2_SUF = str(config["r2_suf"])
 
+BETASTATISTIC = config["beta-div-p-method"]
+
 # Use glob statement to find all samples in 'raw_data' directory
 ## Wildcard '{num}' must be equivalent to 'R1' or '1', meaning the read pair designation.
 SAMPLE_LIST,NUMS = glob_wildcards(INPUTDIR + "/{sample}_{num}" + SUF)
+BETASTATISTIC = glob_wildcards(BETASTATISTIC)
 # Unique the output variables from glob_wildcards
 SAMPLE_SET = set(SAMPLE_LIST)
 SET_NUMS = set(NUMS)
