@@ -71,53 +71,53 @@ rule all:
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", #next change to include proj name
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
     # QIIME2 outputs
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza",
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza",
+    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza",
+    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer_{BETASTATISTIC}.qza",
     #vizualization stats
-    raw = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux.qzv",
-    primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv",
+    raw = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux__{BETASTATISTIC}.qzv",
+    primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer__{BETASTATISTIC}.qzv",
     #ASV outputs:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
-    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza",
-    stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv",
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ +	"-tax_sklearn.qza",
+    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
+    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2_{BETASTATISTIC}.qza",
+    stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2__{BETASTATISTIC}.qzv",
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ +	"-tax_sklearn_{BETASTATISTIC}.qza",
     biom = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
     table_tsv = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
     table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv",
     seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta",
-    masked_align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-alignment.qza",
-    tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-tree.qza",
+    masked_align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-masked_alignment_{BETASTATISTIC}.qza",
+    rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-rooted_tree_{BETASTATISTIC}.qza",
+    align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-alignment_{BETASTATISTIC}.qza",
+    tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-tree_{BETASTATISTIC}.qza",
     # core metrics
-    evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
-    faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    rarefied_table = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-rarefied_table.qza",
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",   
-    bray_curtis_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results.qza",
-    jaccard_distance = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_distance_matrix.qza",
-    jaccard_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_pcoa_results.qza",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
-    unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_pcoa_results.qza",
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
-    weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{BETASTATISTIC}.qzv",
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv",
-    bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
-    jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
-    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
-    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",   
-    shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv",
-    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
-    observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv",
-    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv",
-    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv",
-    barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv",
+    evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector_{BETASTATISTIC}.qza",
+    faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector_{BETASTATISTIC}.qza",
+    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
+    rarefied_table = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-rarefied_table_{BETASTATISTIC}.qza",
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
+    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix_{BETASTATISTIC}.qza",   
+    bray_curtis_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results_{BETASTATISTIC}.qza",
+    jaccard_distance = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_distance_matrix_{BETASTATISTIC}.qza",
+    jaccard_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_pcoa_results_{BETASTATISTIC}.qza",
+    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
+    unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_pcoa_results_{BETASTATISTIC}.qza",
+    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
+    weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results_{BETASTATISTIC}.qza",
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv",
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv",
+    bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor__{BETASTATISTIC}.qzv",
+    jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor__{BETASTATISTIC}.qzv",
+    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor__{BETASTATISTIC}.qzv",
+    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor__{BETASTATISTIC}.qzv",   
+    shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance__{BETASTATISTIC}.qzv",
+    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association__{BETASTATISTIC}.qzv",
+    observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance__{BETASTATISTIC}.qzv",
+    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association__{BETASTATISTIC}.qzv",
+    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance__{BETASTATISTIC}.qzv",
+    barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots__{BETASTATISTIC}.qzv",
     #picrust2
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre",
     marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
@@ -143,7 +143,7 @@ rule fastqc:
     zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip"
   params: ""
   log:
-    SCRATCH + "/logs/fastqc/{sample}_{num}.log"
+    SCRATCH + "/logs/fastqc/{sample}_{num}_{BETASTATISTIC}.log"
   wrapper:
     "0.35.2/bio/fastqc"
 
@@ -158,7 +158,7 @@ rule trimmomatic_pe:
     r1_unpaired = SCRATCH + "/trimmed/{sample}_1.unpaired.fastq.gz",
     r2_unpaired = SCRATCH + "/trimmed/{sample}_2.unpaired.fastq.gz"
   log:
-    SCRATCH + "/trimmed/logs/trimmomatic/{sample}.log"
+    SCRATCH + "/trimmed/logs/trimmomatic/{sample}_{BETASTATISTIC}.log"
   params:
     trimmer = ["LEADING:2", "TRAILING:2", "SLIDINGWINDOW:4:2", "MINLEN:25"],
     extra = ""
@@ -173,7 +173,7 @@ rule fastqc_trim:
     zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip"
   params: ""
   log:
-    SCRATCH + "/logs/fastqc/{sample}_{num}_trimmed.log"
+    SCRATCH + "/logs/fastqc/{sample}_{num}_trimmed_{BETASTATISTIC}.log"
   wrapper:
     "0.35.2/bio/fastqc"
 
@@ -206,9 +206,9 @@ rule import_qiime:
   input:
     MANIFEST
   output:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza"
+    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -220,11 +220,11 @@ rule import_qiime:
 
 rule rm_primers:
   input:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza"
+    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza"
   output:
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer_{BETASTATISTIC}.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -238,13 +238,13 @@ rule rm_primers:
 
 rule get_stats:
   input:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza",
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza",
+    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer_{BETASTATISTIC}.qza"
   output:
-    raw = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux.qzv",
-    primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv"
+    raw = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux__{BETASTATISTIC}.qzv",
+    primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -258,13 +258,13 @@ rule get_stats:
 #####
 rule dada2:
   input:
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer_{BETASTATISTIC}.qza"
   output:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza",
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
-    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza"
+    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.qza",
+    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
+    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2_{BETASTATISTIC}.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -283,12 +283,12 @@ rule dada2:
 
 rule drop_blanks:
   input:
-    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.qza"
+    table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.qza"
   output:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
@@ -320,11 +320,11 @@ rule drop_blanks:
 
 rule dada2_stats:
   input:
-    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qza"
+    stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2_{BETASTATISTIC}.qza"
   output:
-    stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2.qzv"
+    stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2-stats_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2-stats_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -334,12 +334,12 @@ rule dada2_stats:
 
 rule assign_tax:
   input:
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
+    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
     db_classified = DB_classifier
   output:
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza"
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_sklearn_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_sklearn_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -350,11 +350,11 @@ rule assign_tax:
 
 rule gen_table:
   input:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza"
   output:
     table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportBIOM_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_exportBIOM_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
@@ -368,7 +368,7 @@ rule convert:
   output:
     OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -376,11 +376,11 @@ rule convert:
 
 rule gen_tax:
   input:
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza"
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza"
   output:
     table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
@@ -391,11 +391,11 @@ rule gen_tax:
 
 rule gen_seqs:
   input:
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza",
+    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
   output:
     seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
@@ -409,14 +409,14 @@ rule gen_seqs:
 
 rule alignment:
   input:
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza"
+    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza"
   output:
-    masked_align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-alignment.qza",
-    tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-tree.qza"
+    masked_align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-masked_alignment_{BETASTATISTIC}.qza",
+    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree_{BETASTATISTIC}.qza",
+    align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-alignment_{BETASTATISTIC}.qza",
+    tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-tree_{BETASTATISTIC}.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-aligned_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -429,29 +429,29 @@ rule alignment:
 
 rule core_metrics:
   input:
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
+    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree_{BETASTATISTIC}.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
-    faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
-    observed_otus = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    rarefied_table = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-rarefied_table.qza",
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",   
-    bray_curtis_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results.qza",
-    jaccard_distance = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_distance_matrix.qza",
-    jaccard_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_pcoa_results.qza",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
-    unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +"-unweighted_unifrac_pcoa_results.qza",
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
-    weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
-    jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
-    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
-    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",
+    evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector_{BETASTATISTIC}.qza",
+    faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector_{BETASTATISTIC}.qza",
+    observed_otus = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
+    rarefied_table = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-rarefied_table_{BETASTATISTIC}.qza",
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
+    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix_{BETASTATISTIC}.qza",   
+    bray_curtis_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results_{BETASTATISTIC}.qza",
+    jaccard_distance = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_distance_matrix_{BETASTATISTIC}.qza",
+    jaccard_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_pcoa_results_{BETASTATISTIC}.qza",
+    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
+    unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +"-unweighted_unifrac_pcoa_results_{BETASTATISTIC}.qza",
+    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
+    weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results_{BETASTATISTIC}.qza",
+    bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor__{BETASTATISTIC}.qzv",
+    jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor__{BETASTATISTIC}.qzv",
+    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor__{BETASTATISTIC}.qzv",
+    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor__{BETASTATISTIC}.qzv",
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -480,12 +480,12 @@ rule core_metrics:
 
 rule richness:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
+    shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -496,12 +496,12 @@ rule richness:
 
 rule richcorr:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
+    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association__{BETASTATISTIC}.qzv",
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association__{BETASTATISTIC}.qzv"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -513,12 +513,12 @@ rule richcorr:
 
 rule asv_signif:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
+    observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -529,12 +529,12 @@ rule asv_signif:
 
 rule asv_corr:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
+    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -546,12 +546,12 @@ rule asv_corr:
 
 rule evenness:
   input:
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
+    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv"
+    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -566,12 +566,12 @@ rule evenness:
 
 rule unifrac:
   input:
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
+    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -586,10 +586,10 @@ rule unifrac:
 
 rule weighted_unifrac:
   input:
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
+    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{BETASTATISTIC}.qzv"
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance_{BETASTATISTIC}.log"
   conda:
@@ -606,13 +606,13 @@ rule weighted_unifrac:
 
 rule barplot:
   input:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza",
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
+    barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots__{BETASTATISTIC}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots_{BETASTATISTIC}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
@@ -632,7 +632,7 @@ rule asv_reftree:
 	output:
 		picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
 	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust.log"
+		SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust_{BETASTATISTIC}.log"
 	conda:
 		"envs/picrust2-env.yaml"
 	params:
@@ -647,7 +647,7 @@ rule hsp:
 		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
 		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv.gz"
 	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
+		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
 	conda:
 		"envs/picrust2-env.yaml"
 	shell:
@@ -668,7 +668,7 @@ rule metagenome:
 		seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv.gz",
 		weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz"
 	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
+		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
 	conda:
 		"envs/picrust2-env.yaml"
 	params: 
@@ -685,7 +685,7 @@ rule pl_infer:
   output:
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust_{BETASTATISTIC}.log"
   conda:
     "envs/picrust2-env.yaml"
   params:
@@ -702,7 +702,7 @@ rule add_describe:
 		marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
 		path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
 	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust.log"
+		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust_{BETASTATISTIC}.log"
 	conda:
 		"envs/picrust2-env.yaml"
 	shell:
