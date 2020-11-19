@@ -698,7 +698,6 @@ rule pl_infer:
     "pathway_pipeline.py -i {input.metagenome_unstrat} \
                           -o {params} -p 1"
 
-
 rule add_describe:
 	input:
 		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
