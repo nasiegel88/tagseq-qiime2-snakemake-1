@@ -34,3 +34,7 @@ output/qiime2/asv/picrust2/
 
 output/qiime2/asv/
 Snakefile_long.smk
+
+test.my.bash/bash-rm-metadata.sh
+
+test.my.bash/outputfile.tsv
