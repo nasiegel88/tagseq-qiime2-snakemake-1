@@ -1,5 +1,5 @@
 proj_name: mld.run1
-analysis_type: sex
+analysis_type: -sex
 stat_type: qiime2-default
 contact:
   email: nasiegel@ucdavis.edu
