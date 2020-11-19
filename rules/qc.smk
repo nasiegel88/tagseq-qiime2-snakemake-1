@@ -55,7 +55,7 @@ rule multiqc:
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
 
   conda:
-   "envs/multiqc-env.yaml"
+   "../envs/multiqc-env.yaml"
   shell: 
     """
     multiqc -n multiqc.html {input.raw_qc} #run multiqc
@@ -66,7 +66,7 @@ rule multiqc:
     multiqc -n multiqc.html {input.trim_qc} #run multiqc
     mv multiqc.html {output.trim_multi_html} #rename html
     mv multiqc_data/multiqc_general_stats.txt {output.trim_multi_stats} #move and rename stats
-    rm -rf multiqc_data	#clean-up
+    rm -rf multiqc_data #clean-up
     """ 
 
 rule import_qiime:
@@ -77,7 +77,7 @@ rule import_qiime:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
    "qiime tools import \
        --type 'SampleData[PairedEndSequencesWithQuality]' \
@@ -93,7 +93,7 @@ rule rm_primers:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime cutadapt trim-paired \
        --i-demultiplexed-sequences {input.q2_import} \
@@ -113,7 +113,7 @@ rule get_stats:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
      qiime demux summarize --i-data {input.q2_import} --o-visualization {output.raw}

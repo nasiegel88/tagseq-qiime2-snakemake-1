@@ -11,7 +11,7 @@ rule dada2:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_dada2_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime dada2 denoise-paired \
         --i-demultiplexed-seqs {input.q2_primerRM} \
@@ -35,7 +35,7 @@ rule drop_blanks:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
     metadata  = config['metadata'],
     table_blanks = config['table_blanks'],
@@ -71,7 +71,7 @@ rule dada2_stats:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_dada2-stats_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
    "qiime metadata tabulate \
        --m-input-file {input.stats} \
@@ -86,12 +86,12 @@ rule assign_tax:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_sklearn_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime feature-classifier classify-sklearn \
-	     --i-classifier {input.db_classified} \
-	     --i-reads {input.rep} \
-	     --o-classification {output.sklearn}"
+       --i-classifier {input.db_classified} \
+       --i-reads {input.rep} \
+       --o-classification {output.sklearn}"
 
 rule gen_table:
   input:
@@ -101,7 +101,7 @@ rule gen_table:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportBIOM_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
     directory(OUTPUTDIR + "/qiime2/asv/table")
   shell:
@@ -115,7 +115,7 @@ rule convert:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "biom convert -i {input} -o {output} --to-tsv"
 
@@ -127,7 +127,7 @@ rule gen_tax:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
     directory(OUTPUTDIR + "/qiime2/asv/tax_assigned")
   shell:
@@ -142,7 +142,7 @@ rule gen_seqs:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
     directory(OUTPUTDIR + "/qiime2/asv/picrust2")
   shell:

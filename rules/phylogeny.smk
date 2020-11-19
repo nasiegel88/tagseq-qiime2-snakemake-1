@@ -13,7 +13,7 @@ rule alignment:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
@@ -48,7 +48,7 @@ rule core_metrics:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
@@ -82,7 +82,7 @@ rule richness:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.shannon_vector} \
@@ -98,7 +98,7 @@ rule richcorr:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
@@ -115,7 +115,7 @@ rule asv_signif:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.observed_asv} \
@@ -131,7 +131,7 @@ rule asv_corr:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.observed_asv} \
@@ -148,7 +148,7 @@ rule evenness:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
@@ -168,7 +168,7 @@ rule unifrac:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
@@ -188,7 +188,7 @@ rule weighted_unifrac:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
@@ -209,7 +209,7 @@ rule barplot:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     "qiime taxa barplot \
         --i-table {input.cleaned_table} \
