@@ -11,6 +11,8 @@ from snakemake.exceptions import print_exception, WorkflowError
 #----SET VARIABLES----#
 
 PROJ = config["proj_name"]
+ANALYSIS =config["analysis_type""]
+STATISTIC = config["stat_type"]
 INPUTDIR = config["raw_data"]
 SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
@@ -480,7 +482,7 @@ rule core_metrics:
 
 rule richness:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +  "-shannon_vector.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
@@ -549,7 +551,7 @@ rule evenness:
     bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv"
+    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + analysis_type + "-bray-curtis-group-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
@@ -569,7 +571,7 @@ rule unifrac:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + analysis_type + "-unweighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
@@ -586,10 +588,10 @@ rule unifrac:
 
 rule weighted_unifrac:
   input:
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
+    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +  "-weighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + analysis_type + "-weighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:

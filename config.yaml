@@ -1,4 +1,6 @@
-proj_name: mld.run1.treatment-comp
+proj_name: mld.run1
+analysis_type: treatment
+stat_type: qiime2-default
 contact:
   email: nasiegel@ucdavis.edu
   person: Noah Siegel
