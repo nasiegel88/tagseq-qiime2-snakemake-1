@@ -588,7 +588,7 @@ rule unifrac:
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {params.METACATEGORY} \
-        --p-method {params.BETASTATISTIC} \
+        --p-method {Wildcards.BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-no-pairwise"
