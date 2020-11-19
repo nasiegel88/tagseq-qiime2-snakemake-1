@@ -599,7 +599,7 @@ rule weighted_unifrac:
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {config[metadata_category]} \
-        --p-method {wildcards.BETASTATISTIC} \
+        --p-method {BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
         --p-no-pairwise"
