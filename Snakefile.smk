@@ -591,7 +591,7 @@ rule weighted_unifrac:
   output:
     weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance{{BETASTATISTIC}}.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance{{BETASTATISTIC}}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   shell:
