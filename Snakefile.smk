@@ -106,7 +106,7 @@ rule all:
     unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_pcoa_results.qza",
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv",
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance{{BETASTATISTIC}}.qzv",
     unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv",
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
@@ -589,7 +589,7 @@ rule weighted_unifrac:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance{{BETASTATISTIC}}.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
@@ -599,7 +599,7 @@ rule weighted_unifrac:
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {config[metadata_category]} \
-        --p-method {config[beta-div-p-method]} \
+        --p-method {wildcards.BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
         --p-no-pairwise"
