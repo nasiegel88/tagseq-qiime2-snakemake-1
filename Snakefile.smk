@@ -577,7 +577,7 @@ rule unifrac:
   output:
     unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY)
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
+    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
