@@ -49,7 +49,7 @@ DB_classifier = config["database_classified"]
 
 # Phylogeny
 META = config["metadata"]
-METACATEGORY = config["metadata_category"]
+METACATEGORY = config["metadata-category"]
 ALPHASTATISTIC = config["alpha-div-p-method"]
 BETASTATISTIC = config["beta-div-p-method"]
 PERMNUMBER = config["permutations"]
@@ -106,17 +106,17 @@ rule all:
     unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_pcoa_results.qza",
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    bray_curtis_signif = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
-    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY),
-    weighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv",
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv",
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
     unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
     weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",   
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv",
-    shannon_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC),
+    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv",
-    observed_asv_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC),
+    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv",
+    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv",
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv",
     #picrust2
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre",
@@ -129,6 +129,7 @@ rule all:
   	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
+
 
 ####
 #QC#
@@ -185,8 +186,9 @@ rule multiqc:
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", 
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
+
   conda:
-    "envs/multiqc-env.yaml"
+   "envs/multiqc-env.yaml"
   shell: 
     """
     multiqc -n multiqc.html {input.raw_qc} #run multiqc
@@ -497,18 +499,16 @@ rule richcorr:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    shannon_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC),
+    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    ALPHASTATISTIC = config["alpha-div-p-method"]
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file {input.cleaned_metadata} \
-        --p-method {params.ALPHASTATISTIC} \
+        --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.shannon_correl}"
 
 rule asv_signif:
@@ -532,18 +532,16 @@ rule asv_corr:
     observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    observed_asv_correl = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association_{correlation}.qzv", correlation = ALPHASTATISTIC)
+    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    ALPHASTATISTIC = config["alpha-div-p-method"]
   shell:
     "qiime diversity alpha-correlation \
         --i-alpha-diversity {input.observed_asv} \
         --m-metadata-file {input.cleaned_metadata} \
-        --p-method {params.ALPHASTATISTIC} \
+        --p-method {config[alpha-div-p-method]} \
         --o-visualization {output.observed_asv_correl}"
 
 rule evenness:
@@ -551,20 +549,17 @@ rule evenness:
     bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    bray_curtis_signif = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC)
+    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    METACATEGORY = config["metadata_category"],
-    BETASTATISTIC = config["beta-div-p-method"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.bray_curtis} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {params.METACATEGORY} \
-        --p-method {params.BETASTATISTIC} \
+        --m-metadata-column {config[metadata-category]} \
+        --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.bray_curtis_signif} \
         --p-no-pairwise"
@@ -574,17 +569,17 @@ rule unifrac:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY)
+    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance.qzv"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    METACATEGORY = config["metadata_category"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {params.METACATEGORY} \
-        --p-method {wildcards.BETASTATISTIC} \
+        --m-metadata-column {config[metadata-category]} \
+        --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-no-pairwise"
@@ -594,20 +589,17 @@ rule weighted_unifrac:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    weighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC)
+    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
     "envs/qiime2-2019.10.yaml"
-  params:
-    METACATEGORY = config["metadata_category"],
-    BETASTATISTIC = config["beta-div-p-method"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.weighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
-        --m-metadata-column {params.METACATEGORY} \
-        --p-method {params.BETASTATISTIC} \
+        --m-metadata-column {config[metadata-category]} \
+        --p-method {config[beta-div-p-method]} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.weighted_unifrac_viz} \
         --p-no-pairwise"
