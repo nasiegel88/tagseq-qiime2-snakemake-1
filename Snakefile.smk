@@ -142,7 +142,7 @@ rule fastqc:
     html = SCRATCH + "/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.html",
     zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip"
   params: ""
-  log:_{BETASTATISTIC}
+  log:
     SCRATCH + "/logs/fastqc/{sample}_{num}_{BETASTATISTIC}.log"
   wrapper:
     "0.35.2/bio/fastqc"
