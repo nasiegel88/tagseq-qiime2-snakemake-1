@@ -131,3 +131,16 @@ rule all:
   	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
+
+##### setup singularity #####
+
+# this container defines the underlying OS for each job when using the workflow
+# with --use-conda --use-singularity
+singularity: "docker://continuumio/miniconda3"
+
+##### load rules #####
+
+include: "rules/qc.smk"
+include: "rules/dada2.smk"
+include: "rules/phylogeny.smk"
+include: "rules/picrust2.smk"
