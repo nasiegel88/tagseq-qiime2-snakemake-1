@@ -62,16 +62,16 @@ PERMNUMBER = config["permutations"]
 rule all:
   input:
     # fastqc output before trimming
-    raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{BETASTATISTIC}.html",
+    raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
+    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
+    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{stat}.html",
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
     # Trimmed data output
-    trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq_{BETASTATISTIC}.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
-    trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{BETASTATISTIC}.html", #next change to include proj name
+    trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq_{stat}.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC), 
+    trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{stat}.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
+    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{stat}.html", #next change to include proj name
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
     # QIIME2 outputs
     q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza",
