@@ -44,7 +44,7 @@ PATH_TRIMMED = "trimmed" # name of directory with trimmed reads
 NEWPATH = os.path.join(SCRATCH, PATH_TRIMMED)
 MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq_{BETASTATISTIC}.gz")
 MANIFEST['absolute-filepath'] = NEWPATH+ "/" + MANIFEST['filename']    
-MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed.txt')
+MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed_{BETASTATISTIC}.txt')
 MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
@@ -65,14 +65,14 @@ rule all:
     raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
     raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
     raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{stat}.html",
-    raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
+    raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats_{BETASTATISTIC}.txt",
     # Trimmed data output
     trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq_{stat}.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC), 
     trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{stat}.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
     raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
     trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat = BETASTATISTIC),
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{stat}.html", #next change to include proj name
-    trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
+    trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats_{BETASTATISTIC}.txt",
     # QIIME2 outputs
     q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza",
     q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer_{BETASTATISTIC}.qza",
@@ -86,7 +86,7 @@ rule all:
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2_{BETASTATISTIC}.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2__{BETASTATISTIC}.qzv",
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ +	"-tax_sklearn_{BETASTATISTIC}.qza",
+    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza",
     biom = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
     table_tsv = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
     table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv",
@@ -129,7 +129,7 @@ rule all:
     metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
     seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
     weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz",
-  	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
+    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
 
@@ -182,13 +182,13 @@ rule fastqc_trim:
 
 rule multiqc:
   input:
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat=BETASTATISTIC),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{stat}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS, stat=BETASTATISTIC)
   output:
     raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{BETASTATISTIC}.html", 
-    raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
+    raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats_{BETASTATISTIC}.txt",
     trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{BETASTATISTIC}.html", 
-    trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
+    trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats_{BETASTATISTIC}.txt"
 
   conda:
    "envs/multiqc-env.yaml"
@@ -196,13 +196,13 @@ rule multiqc:
     """
     multiqc -n multiqc_{BETASTATISTIC}.html {input.raw_qc} #run multiqc
     mv multiqc_{BETASTATISTIC}.html {output.raw_multi_html} #rename html
-    mv multiqc_data/multiqc_general_stats.txt {output.raw_multi_stats} #move and rename stats
+    mv multiqc_data/multiqc_general_stats_{BETASTATISTIC}.txt {output.raw_multi_stats} #move and rename stats
     rm -rf multiqc_data #clean-up
     #repeat for trimmed data
     multiqc -n multiqc_{BETASTATISTIC}.html {input.trim_qc} #run multiqc
     mv multiqc_{BETASTATISTIC}.html {output.trim_multi_html} #rename html
-    mv multiqc_data/multiqc_general_stats.txt {output.trim_multi_stats} #move and rename stats
-    rm -rf multiqc_data	#clean-up
+    mv multiqc_data/multiqc_general_stats_{BETASTATISTIC}.txt {output.trim_multi_stats} #move and rename stats
+    rm -rf multiqc_data #clean-up
     """ 
 
 rule import_qiime:
@@ -347,9 +347,9 @@ rule assign_tax:
     "envs/qiime2-2019.10.yaml"
   shell:
     "qiime feature-classifier classify-sklearn \
-	     --i-classifier {input.db_classified} \
-	     --i-reads {input.rep} \
-	     --o-classification {output.sklearn}"
+       --i-classifier {input.db_classified} \
+       --i-reads {input.rep} \
+       --o-classification {output.sklearn}"
 
 rule gen_table:
   input:
@@ -630,57 +630,57 @@ rule barplot:
 #########
 
 rule asv_reftree:
-	input:
-		seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta"
-	output:
-		picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
-	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust_{BETASTATISTIC}.log"
-	conda:
-		"envs/picrust2-env.yaml"
-	params:
-		directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
-	shell:
-		"place_seqs.py -s {input.seqs} -o {output.picrust2tree} -p 1 --intermediate {params}"
+  input:
+    seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta"
+  output:
+    picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust_{BETASTATISTIC}.log"
+  conda:
+    "envs/picrust2-env.yaml"
+  params:
+    directory(OUTPUTDIR + "/qiime2/asv/picrust2/intermediate/place_seqs")
+  shell:
+    "place_seqs.py -s {input.seqs} -o {output.picrust2tree} -p 1 --intermediate {params}"
 
 rule hsp:
-	input:
-		picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
-	output:
-		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
-		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
-	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
-	conda:
-		"envs/picrust2-env.yaml"
-	shell:
-	    """
-			 hsp.py -i 16S -t {input.picrust2tree} -o {output.marker} -p 1 -n
-			 hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1
-	    """
+  input:
+    picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
+  output:
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
+  conda:
+    "envs/picrust2-env.yaml"
+  shell:
+      """
+       hsp.py -i 16S -t {input.picrust2tree} -o {output.marker} -p 1 -n
+       hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1
+      """
 
 
 rule metagenome:
-	input:
-		table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
-		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
-		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
-	output:
-		metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
-		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
-		seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
-		weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz"
-	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
-	conda:
-		"envs/picrust2-env.yaml"
-	params: 
-		directory(OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out")
-	shell:
-		"metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
-			                       -o {params} --strat_out"
+  input:
+    table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
+  output:
+    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
+    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
+    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
+  conda:
+    "envs/picrust2-env.yaml"
+  params: 
+    directory(OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out")
+  shell:
+    "metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
+                             -o {params} --strat_out"
 
-# add strat_out and metagenome_contrib to config.yaml			                       
+# add strat_out and metagenome_contrib to config.yaml                            
 
 rule pl_infer:
   input:
@@ -698,20 +698,20 @@ rule pl_infer:
                           -o {params} -p 1"
 
 rule add_describe:
-	input:
-		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
-		path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
-	output:
-		marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
-		path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
-	log:
-		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust_{BETASTATISTIC}.log"
-	conda:
-		"envs/picrust2-env.yaml"
-	shell:
-	    """
-	      add_descriptions.py -i {input.metagenome_unstrat} -m EC \
-	                            -o {output.marker_describe}
-	      add_descriptions.py -i {input.path_abun_unstrat} -m METACYC \
-	                            -o {output.path_abun_unstrat_describe}
-	    """
+  input:
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
+  output:
+    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
+  log:
+    SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust_{BETASTATISTIC}.log"
+  conda:
+    "envs/picrust2-env.yaml"
+  shell:
+      """
+        add_descriptions.py -i {input.metagenome_unstrat} -m EC \
+                              -o {output.marker_describe}
+        add_descriptions.py -i {input.path_abun_unstrat} -m METACYC \
+                              -o {output.path_abun_unstrat_describe}
+      """
