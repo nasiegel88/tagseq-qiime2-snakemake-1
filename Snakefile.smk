@@ -82,14 +82,14 @@ rule all:
     #ASV outputs:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.qza",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv",
     rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs_{BETASTATISTIC}.qza",
     stats = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2_{BETASTATISTIC}.qza",
     stats_viz = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-stats-dada2__{BETASTATISTIC}.qzv",
     sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza",
     biom = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
-    table_tsv = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv",
-    table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv",
+    table_tsv = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.tsv",
+    table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy_{BETASTATISTIC}.tsv",
     seqs = OUTPUTDIR + "/qiime2/asv/picrust2/dna-sequences.fasta",
     masked_align = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-masked_alignment_{BETASTATISTIC}.qza",
     rooted_tree = OUTPUTDIR + "/qiime2/asv/" + "mafft-fasttree-output/" + PROJ + "-rooted_tree_{BETASTATISTIC}.qza",
@@ -123,15 +123,15 @@ rule all:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots__{BETASTATISTIC}.qzv",
     #picrust2
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre",
-    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
-    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz",
-    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
-    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
-    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz",
-    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
-    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz",
-    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
 
 
 ####
@@ -289,7 +289,7 @@ rule drop_blanks:
     table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.qza"
   output:
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks_{BETASTATISTIC}.log"
   conda:
@@ -369,7 +369,7 @@ rule convert:
   input:
     OUTPUTDIR + "/qiime2/asv/table/feature-table.biom"
   output:
-    OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table.tsv"
+    OUTPUTDIR + "/qiime2/asv/" + PROJ + "-asv-table_{BETASTATISTIC}.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2_{BETASTATISTIC}.log"
   conda:
@@ -381,7 +381,7 @@ rule gen_tax:
   input:
     sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza"
   output:
-    table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy.tsv"
+    table_tax = OUTPUTDIR + "/qiime2/asv/tax_assigned/taxonomy_{BETASTATISTIC}.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2_{BETASTATISTIC}.log"
   conda:
@@ -434,7 +434,7 @@ rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree_{BETASTATISTIC}.qza",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector_{BETASTATISTIC}.qza",
     faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector_{BETASTATISTIC}.qza",
@@ -484,7 +484,7 @@ rule core_metrics:
 rule richness:
   input:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance__{BETASTATISTIC}.qzv"
   log:
@@ -500,7 +500,7 @@ rule richness:
 rule richcorr:
   input:
     shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association__{BETASTATISTIC}.qzv",
   log:
@@ -517,7 +517,7 @@ rule richcorr:
 rule asv_signif:
   input:
     observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance__{BETASTATISTIC}.qzv"
   log:
@@ -533,7 +533,7 @@ rule asv_signif:
 rule asv_corr:
   input:
     observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association__{BETASTATISTIC}.qzv"
   log:
@@ -550,7 +550,7 @@ rule asv_corr:
 rule evenness:
   input:
     bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance__{BETASTATISTIC}.qzv"
   log:
@@ -570,7 +570,7 @@ rule evenness:
 rule unifrac:
   input:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv"
   log:
@@ -590,7 +590,7 @@ rule unifrac:
 rule weighted_unifrac:
   input:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance__{BETASTATISTIC}.qzv"
   log:
@@ -611,7 +611,7 @@ rule barplot:
   input:
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table_{BETASTATISTIC}.qza",
     sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn_{BETASTATISTIC}.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata_{BETASTATISTIC}.tsv"
   output:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots__{BETASTATISTIC}.qzv"
   log:
@@ -647,8 +647,8 @@ rule hsp:
   input:
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
   output:
-    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
-    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
   conda:
@@ -663,13 +663,13 @@ rule hsp:
 rule metagenome:
   input:
     table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
-    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
-    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   output:
-    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
-    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
-    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz"
+    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
   conda:
@@ -684,9 +684,9 @@ rule metagenome:
 
 rule pl_infer:
   input:
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz"
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   output:
-    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust_{BETASTATISTIC}.log"
   conda:
@@ -699,11 +699,11 @@ rule pl_infer:
 
 rule add_describe:
   input:
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
-    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   output:
-    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
-    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
+    marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip_{BETASTATISTIC}.tsv_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust_{BETASTATISTIC}.log"
   conda:
