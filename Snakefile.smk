@@ -107,7 +107,7 @@ rule all:
     weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
     weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
     bray_curtis_signif = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray-curtis-group-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
-    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC),
+    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY),
     weighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC), 
     bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
     jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
@@ -575,7 +575,7 @@ rule unifrac:
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{correlation}.qzv", metadatacategory = METACATEGORY, correlation = BETASTATISTIC)
+    unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY)
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
@@ -588,7 +588,7 @@ rule unifrac:
         --i-distance-matrix {input.unweighted_unifrac_mat} \
         --m-metadata-file {input.cleaned_metadata} \
         --m-metadata-column {params.METACATEGORY} \
-        --p-method {params.BETASTATISTIC} \
+        --p-method {wildcards.BETASTATISTIC} \
         --p-permutations {config[permutations]} \
         --o-visualization {output.unweighted_unifrac_viz} \
         --p-no-pairwise"
