@@ -39,7 +39,7 @@ MANIFEST['filename'] = MANIFEST['absolute-filepath'].str.split('/').str[-1] #add
 MANIFEST.rename(columns = {'absolute-filepath':'rawreads-filepath'}, inplace = True)
 PATH_TRIMMED = "trimmed" # name of directory with trimmed reads
 NEWPATH = os.path.join(SCRATCH, PATH_TRIMMED)
-MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq.gz")
+MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq_{BETASTATISTIC}.gz")
 MANIFEST['absolute-filepath'] = NEWPATH+ "/" + MANIFEST['filename']    
 MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed.txt')
 MANIFEST = config["manifest"]
@@ -59,16 +59,16 @@ PERMNUMBER = config["permutations"]
 rule all:
   input:
     # fastqc output before trimming
-    raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html",
+    raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{BETASTATISTIC}.html",
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
     # Trimmed data output
-    trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
-    trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", #next change to include proj name
+    trimmedData = expand("{scratch}/trimmed/{sample}_{num}_trim.fastq_{BETASTATISTIC}.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
+    trim_html = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{BETASTATISTIC}.html", #next change to include proj name
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
     # QIIME2 outputs
     q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux_{BETASTATISTIC}.qza",
@@ -120,15 +120,15 @@ rule all:
     barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots__{BETASTATISTIC}.qzv",
     #picrust2
     picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre",
-    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
-    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv.gz",
-    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv.gz",
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
-    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv.gz",
-    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz",
-  	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
-    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
-    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
+    marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
+    EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz",
+    metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
+    seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
+    weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz",
+  	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz",
+    path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
 
 
 ####
@@ -139,10 +139,10 @@ rule fastqc:
   input:    
     INPUTDIR + "/{sample}_{num}" + SUF
   output:
-    html = SCRATCH + "/fastqc/{sample}_{num}_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc.zip"
+    html = SCRATCH + "/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.html",
+    zip = SCRATCH + "/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip"
   params: ""
-  log:
+  log:_{BETASTATISTIC}
     SCRATCH + "/logs/fastqc/{sample}_{num}_{BETASTATISTIC}.log"
   wrapper:
     "0.35.2/bio/fastqc"
@@ -152,11 +152,11 @@ rule trimmomatic_pe:
     r1 = INPUTDIR + "/{sample}_" + R1_SUF + SUF,
     r2 = INPUTDIR + "/{sample}_" + R2_SUF + SUF
   output:
-    r1 = SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq.gz",
-    r2 = SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq.gz",
+    r1 = SCRATCH + "/trimmed/{sample}_" + R1_SUF + "_trim.fastq_{BETASTATISTIC}.gz",
+    r2 = SCRATCH + "/trimmed/{sample}_" + R2_SUF + "_trim.fastq_{BETASTATISTIC}.gz",
     # reads where trimming entirely removed the mate
-    r1_unpaired = SCRATCH + "/trimmed/{sample}_1.unpaired.fastq.gz",
-    r2_unpaired = SCRATCH + "/trimmed/{sample}_2.unpaired.fastq.gz"
+    r1_unpaired = SCRATCH + "/trimmed/{sample}_1.unpaired.fastq_{BETASTATISTIC}.gz",
+    r2_unpaired = SCRATCH + "/trimmed/{sample}_2.unpaired.fastq_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/trimmed/logs/trimmomatic/{sample}_{BETASTATISTIC}.log"
   params:
@@ -167,10 +167,10 @@ rule trimmomatic_pe:
 
 rule fastqc_trim:
   input:
-    SCRATCH + "/trimmed/{sample}_{num}_trim.fastq.gz"
+    SCRATCH + "/trimmed/{sample}_{num}_trim.fastq_{BETASTATISTIC}.gz"
   output:
-    html = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.html",
-    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc.zip"
+    html = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.html",
+    zip = SCRATCH + "/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.zip"
   params: ""
   log:
     SCRATCH + "/logs/fastqc/{sample}_{num}_trimmed_{BETASTATISTIC}.log"
@@ -179,25 +179,25 @@ rule fastqc_trim:
 
 rule multiqc:
   input:
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc_{BETASTATISTIC}.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
   output:
-    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html", 
+    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc_{BETASTATISTIC}.html", 
     raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
-    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", 
+    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc_{BETASTATISTIC}.html", 
     trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
 
   conda:
    "envs/multiqc-env.yaml"
   shell: 
     """
-    multiqc -n multiqc.html {input.raw_qc} #run multiqc
-    mv multiqc.html {output.raw_multi_html} #rename html
+    multiqc -n multiqc_{BETASTATISTIC}.html {input.raw_qc} #run multiqc
+    mv multiqc_{BETASTATISTIC}.html {output.raw_multi_html} #rename html
     mv multiqc_data/multiqc_general_stats.txt {output.raw_multi_stats} #move and rename stats
     rm -rf multiqc_data #clean-up
     #repeat for trimmed data
-    multiqc -n multiqc.html {input.trim_qc} #run multiqc
-    mv multiqc.html {output.trim_multi_html} #rename html
+    multiqc -n multiqc_{BETASTATISTIC}.html {input.trim_qc} #run multiqc
+    mv multiqc_{BETASTATISTIC}.html {output.trim_multi_html} #rename html
     mv multiqc_data/multiqc_general_stats.txt {output.trim_multi_stats} #move and rename stats
     rm -rf multiqc_data	#clean-up
     """ 
@@ -644,8 +644,8 @@ rule hsp:
 	input:
 		picrust2tree = OUTPUTDIR + "/qiime2/asv/picrust2/out.tre"
 	output:
-		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
-		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv.gz"
+		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
+		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
 	log:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
 	conda:
@@ -660,13 +660,13 @@ rule hsp:
 rule metagenome:
 	input:
 		table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
-		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv.gz",
-		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv.gz"
+		marker = OUTPUTDIR + "/qiime2/asv/picrust2/marker_predicted_and_nsti.tsv_{BETASTATISTIC}.gz",
+		EC = OUTPUTDIR + "/qiime2/asv/picrust2/EC_predicted.tsv_{BETASTATISTIC}.gz"
 	output:
-		metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv.gz",
-		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
-		seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv.gz",
-		weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz"
+		metagenome_contrib = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv_{BETASTATISTIC}.gz",
+		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
+		seqtab_norm = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/seqtab_norm.tsv_{BETASTATISTIC}.gz",
+		weighted_nsti =OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/weighted_nsti.tsv_{BETASTATISTIC}.gz"
 	log:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust_{BETASTATISTIC}.log"
 	conda:
@@ -681,9 +681,9 @@ rule metagenome:
 
 rule pl_infer:
   input:
-    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz"
+    metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz"
   output:
-    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
+    path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust_{BETASTATISTIC}.log"
   conda:
@@ -696,11 +696,11 @@ rule pl_infer:
 
 rule add_describe:
 	input:
-		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz",
-		path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
+		metagenome_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv_{BETASTATISTIC}.gz",
+		path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv_{BETASTATISTIC}.gz"
 	output:
-		marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
-		path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
+		marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv_{BETASTATISTIC}.gz",
+		path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv_{BETASTATISTIC}.gz"
 	log:
 		SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust_{BETASTATISTIC}.log"
 	conda:
