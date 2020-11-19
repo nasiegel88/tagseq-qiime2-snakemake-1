@@ -576,13 +576,10 @@ rule unifrac:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
     unweighted_unifrac_viz = expand(OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.qzv", metadatacategory = METACATEGORY)
-  log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance_{metadatacategory}_{{BETASTATISTIC}}.log"
   conda:
     "envs/qiime2-2019.10.yaml"
   params:
-    METACATEGORY = config["metadata_category"],
-    BETASTATISTIC = config["beta-div-p-method"]
+    METACATEGORY = config["metadata_category"]
   shell:
     "qiime diversity beta-group-significance \
         --i-distance-matrix {input.unweighted_unifrac_mat} \
