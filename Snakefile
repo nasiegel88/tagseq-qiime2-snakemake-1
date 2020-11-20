@@ -17,6 +17,7 @@ INPUTDIR = config["raw_data"]
 SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
 HOME = config["home"]
+LONGITUDINAL = config['perform_longitudinal']
 
 SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
@@ -144,3 +145,9 @@ include: "rules/qc.smk"
 include: "rules/dada2.smk"
 include: "rules/phylogeny.smk"
 include: "rules/picrust2.smk"
+run:
+    if {LONGITUDINAL} == 'yes':
+        include: 'rules/longitudinal.smk'
+        print("Performing longitudinal analysis")
+    else:
+        print("no longitudinal analysis")
