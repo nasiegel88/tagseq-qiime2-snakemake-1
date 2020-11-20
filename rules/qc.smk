@@ -80,11 +80,13 @@ rule import_qiime:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-   "qiime tools import \
-       --type 'SampleData[PairedEndSequencesWithQuality]' \
-       --input-path {input} \
-       --output-path {output.q2_import} \
-       --input-format PairedEndFastqManifestPhred33"
+    """
+    qiime tools import \
+        --type 'SampleData[PairedEndSequencesWithQuality]' \
+        --input-path {input} \
+        --output-path {output.q2_import} \
+        --input-format PairedEndFastqManifestPhred33
+    """
 
 rule rm_primers:
   input:
@@ -96,13 +98,15 @@ rule rm_primers:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime cutadapt trim-paired \
+    """
+    qiime cutadapt trim-paired \
        --i-demultiplexed-sequences {input.q2_import} \
        --p-front-f {config[primerF]} \
        --p-front-r {config[primerR]} \
        --p-error-rate {config[primer_err]} \
        --p-overlap {config[primer_overlap]} \
-       --o-trimmed-sequences {output.q2_primerRM}"
+       --o-trimmed-sequences {output.q2_primerRM}
+    """
 
 rule get_stats:
   input:
