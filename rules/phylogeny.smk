@@ -16,12 +16,14 @@ rule alignment:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime phylogeny align-to-tree-mafft-fasttree \
+    """
+    qiime phylogeny align-to-tree-mafft-fasttree \
         --i-sequences {input.rep} \
         --o-alignment {output.align} \
         --o-masked-alignment {output.masked_align} \
         --o-tree {output.tree} \
-        --o-rooted-tree {output.rooted_tree}"
+        --o-rooted-tree {output.rooted_tree}
+    """
 
 rule core_metrics:
   input:
@@ -51,7 +53,8 @@ rule core_metrics:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime diversity core-metrics-phylogenetic \
+    """
+    qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
         --i-table {input.cleaned_table} \
         --p-sampling-depth {config[sampling-depth]} \
@@ -72,7 +75,8 @@ rule core_metrics:
         --o-unweighted-unifrac-emperor {output.unweighted_unifrac} \
         --o-weighted-unifrac-emperor {output.weighted_unifrac} \
         --o-jaccard-emperor {output.jaccard_emperor} \
-        --o-bray-curtis-emperor {output.bray_curtis_emperor}"
+        --o-bray-curtis-emperor {output.bray_curtis_emperor}
+    """
 
 rule richness:
   input:
@@ -85,10 +89,12 @@ rule richness:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime diversity alpha-group-significance \
+    """
+    qiime diversity alpha-group-significance \
         --i-alpha-diversity {input.shannon_vector} \
         --m-metadata-file {input.cleaned_metadata} \
-        --o-visualization {output.shannon_signif}"
+        --o-visualization {output.shannon_signif}
+    """
 
 rule richcorr:
   input:
