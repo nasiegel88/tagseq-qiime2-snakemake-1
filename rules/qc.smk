@@ -1,6 +1,7 @@
-####
-#QC#
-####
+# Quality control
+## Noah Siegel
+## UC Davis
+## nasiegel@ucdavis.edu
 
 rule fastqc:
   input:    

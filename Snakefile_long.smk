@@ -5,13 +5,6 @@ perform_longitudinal = 'yes' # yes or no depending on if you have longitudinal d
 ## add to snakefile
 LONGITUDINAL = config['perform_longitudinal']
 
-run:
-       if {LONGITUDINAL} == 'yes':
-                include: longitudinal_smk
-                print("Performing longitudinal analysis")
-       else:
-                print("no longitudinal analysis")
-
 ## snakefile-long
 
 rule longitudinal_pw_diff:
