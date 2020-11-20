@@ -146,7 +146,7 @@ include: "rules/dada2.smk"
 include: "rules/phylogeny.smk"
 include: "rules/picrust2.smk"
 run:
-    if {LONGITUDINAL} == 'yes':
+    if LONGITUDINAL == 'yes':
         include: 'rules/longitudinal.smk'
         print("Performing longitudinal analysis")
     else:
