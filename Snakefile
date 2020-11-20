@@ -148,6 +148,6 @@ include: "rules/picrust2.smk"
 
 if LONGITUDINAL == 'yes':
     include: 'rules/longitudinal.smk'
-    print("Performing longitudinal analysis")
+    print("Will perform a longitudinal analysis")
 else:
     print("no longitudinal analysis")
