@@ -1,6 +1,8 @@
-#####
-#ASV#
-#####
+# dada2
+## Noah Siegel
+## UC Davis
+## nasiegel@ucdavis.edu
+
 rule dada2:
   input:
     q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
@@ -13,7 +15,8 @@ rule dada2:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime dada2 denoise-paired \
+    """
+    qiime dada2 denoise-paired \
         --i-demultiplexed-seqs {input.q2_primerRM} \
         --p-trunc-q {config[truncation_err]} \
         --p-trunc-len-f {config[truncation_len-f]} \
@@ -24,7 +27,8 @@ rule dada2:
         --p-chimera-method {config[chimera]} \
         --o-table {output.table} \
         --o-representative-sequences {output.rep} \
-        --o-denoising-stats {output.stats}"
+        --o-denoising-stats {output.stats}
+    """
 
 rule drop_blanks:
   input:
@@ -73,9 +77,11 @@ rule dada2_stats:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-   "qiime metadata tabulate \
-       --m-input-file {input.stats} \
-       --o-visualization {output.stats_viz}"
+    """
+      qiime metadata tabulate \
+          --m-input-file {input.stats} \
+          --o-visualization {output.stats_viz}
+    """
 
 rule assign_tax:
   input:
@@ -88,10 +94,12 @@ rule assign_tax:
   conda:
     "../envs/qiime2-2019.10.yaml"
   shell:
-    "qiime feature-classifier classify-sklearn \
+    """
+    qiime feature-classifier classify-sklearn \
        --i-classifier {input.db_classified} \
        --i-reads {input.rep} \
-       --o-classification {output.sklearn}"
+       --o-classification {output.sklearn}
+    """
 
 rule gen_table:
   input:
@@ -132,7 +140,6 @@ rule gen_tax:
     directory(OUTPUTDIR + "/qiime2/asv/tax_assigned")
   shell:
     "qiime tools export --input-path {input.sklearn} --output-path {params}"
-
 
 rule gen_seqs:
   input:
