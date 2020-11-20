@@ -1,6 +1,7 @@
-#########
-#picrust#
-#########
+# picrust2 analyis
+## Noah Siegel
+## UC Davis
+## nasiegel@ucdavis.edu
 
 rule asv_reftree:
   input:
@@ -32,7 +33,6 @@ rule hsp:
        hsp.py -i EC -t {input.picrust2tree} -o {output.EC} -p 1
       """
 
-
 rule metagenome:
   input:
     table_tsv = OUTPUTDIR + "/qiime2/asv/table/feature-table.biom",
@@ -50,10 +50,10 @@ rule metagenome:
   params: 
     directory(OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out")
   shell:
-    "metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
-                             -o {params} --strat_out"
-
-# add strat_out and metagenome_contrib to config.yaml                            
+    """
+    metagenome_pipeline.py -i {input.table_tsv} -m {input.marker} -f {input.EC} \
+                             -o {params} --strat_out      
+    """                
 
 rule pl_infer:
   input:
@@ -67,8 +67,10 @@ rule pl_infer:
   params:
     directory(OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out")
   shell:
-    "pathway_pipeline.py -i {input.metagenome_unstrat} \
-                          -o {params} -p 1"
+    """
+    pathway_pipeline.py -i {input.metagenome_unstrat} \
+                          -o {params} -p 1
+    """
 
 rule add_describe:
   input:
