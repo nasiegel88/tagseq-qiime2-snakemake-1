@@ -282,8 +282,6 @@ rule longitudinal_feature_volitilty:
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
-      --p-n-estimators {10} \
-      --p-random-state {17} \
       --p-missing-samples {MISSING} \
       --output-dir {parmas}
     """
