@@ -144,33 +144,19 @@ rule all:
     OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv",
     OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza",
     OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + filtered_table.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + sample_estimator.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + feature_importance.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + accuracy_results.qzv",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + volatility_plot.qzv",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  maz_scores.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  sample_estimator.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  feature_importance.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  predictions.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  accuracy_results.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  volatility_plots.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  clustermap.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  model_summary.qzv
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "sample_estimator.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "feature_importance.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "sample_estimator.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "feature_importance.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "predictions.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "accuracy_results.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "volatility_plots.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
 
 ##### setup singularity #####
 

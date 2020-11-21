@@ -207,7 +207,7 @@ rule nmit:
 
 rule longitudinal_beta:
   input:
-    OUTPUTDIR + "/qiime2/asv/longitudinal/"
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
     OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
   log:
@@ -225,7 +225,7 @@ rule longitudinal_beta:
 
 rule longitudinal_pcoa:
   input:
-    OUTPUTDIR + "/qiime2/asv/longitudinal/"OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
     OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   log:
@@ -264,11 +264,11 @@ rule longitudinal_feature_volitilty:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + filtered_table.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + sample_estimator.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + feature_importance.qza",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + accuracy_results.qzv",
-    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + volatility_plot.qzv"
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "sample_estimator.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "feature_importance.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-vol.log"
   conda:
@@ -292,14 +292,14 @@ rule maturity_index:
   input:
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  maz_scores.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  sample_estimator.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  feature_importance.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  predictions.qza,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  accuracy_results.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  volatility_plots.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  clustermap.qzv,
-    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  model_summary.qzv
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "sample_estimator.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "feature_importance.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "predictions.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "accuracy_results.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "volatility_plots.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "maturity.log"
   conda:
