@@ -283,7 +283,7 @@ rule longitudinal_feature_volitilty:
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --p-missing-samples {MISSING} \
-      --output-dir {parmas}
+      --output-dir {params}
     """
 
 rule maturity_index:
