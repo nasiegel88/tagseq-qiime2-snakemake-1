@@ -4,7 +4,7 @@
 ## nasiegel@ucdavis.edu
 
 ## still in development ###
-rule all:
+rule logitudinal_all:
   input:
     # longitudinal
     pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv",
