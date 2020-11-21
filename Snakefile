@@ -61,9 +61,8 @@ PERMNUMBER = config["permutations"]
 ID = config['studyid']          
 STATE = config['state']      
 GROUPMETACAT = config['group_metadata_category']      
-REPLICATE = config['replicate']      
-METACATEGORY = config['']     
-CONTROL = config['control'] 
+REPLICATE = config['replicate']          
+CONTROL = config['ontrol'] 
 
 #----DEFINE RULES----#
 
