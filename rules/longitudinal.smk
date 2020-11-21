@@ -285,7 +285,7 @@ rule longitudinal_feature_volitilty:
       --p-n-estimators {10} \
       --p-random-state {17} \
       --p-missing-samples {} \
-      --output-dir {output.parmas}
+      --output-dir {parmas}
     """
 
 rule maturity_index:
@@ -318,5 +318,5 @@ rule maturity_index:
       --p-test-size 0.4 \
       --p-stratify \
       --p-random-state 1010101 \
-      --output-dir {output.params}
+      --output-dir {params}
     """
