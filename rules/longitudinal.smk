@@ -306,10 +306,6 @@ rule maturity_index:
     "envs/qiime2-2019.10.yaml"
   params:
       directory(OUTPUTDIR + "/qiime2/asv/logitudinal/maturity")
-      STATE = config['state']
-      GROUP_BY = config['group_by']
-      CONTROL = config['control']
-      STATE = config['state']
   shell:
     """
     qiime longitudinal maturity-index \
