@@ -122,8 +122,8 @@ rule longitudinal_first_diff:
 
 rule longitudinal_first_diff_beta:
   input:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + ANALYSIS + "-unweighted_unifrac_distance_matrix.qza"
   output:
     first_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza"
   log:
