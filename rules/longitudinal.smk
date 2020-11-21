@@ -10,7 +10,7 @@ rule longitudinal_pw_diff:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-     pw_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + pairwise-differences.qzv"
+     OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
     "envs/qiime2-2019.10.yaml"
   log:
@@ -35,7 +35,7 @@ rule longitudinal_pw_dist:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
-    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
+    pw_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "pwd.log"
   conda:
@@ -51,7 +51,7 @@ rule longitudinal_pw_dist:
       --p-state-2 6 \
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
-      --o-visualization {output}
+      --o-visualization {output.pw_dist}
     """
 
 rule longitudinal_me:
