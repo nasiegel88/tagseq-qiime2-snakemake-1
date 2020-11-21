@@ -207,6 +207,7 @@ rule nmit:
 
 rule longitudinal_beta:
   input:
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     nmit = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
     nmit_viz = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
