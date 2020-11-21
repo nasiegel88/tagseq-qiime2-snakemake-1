@@ -8,7 +8,7 @@
 rule longitudinal_pw_diff:
   input:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
      pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
