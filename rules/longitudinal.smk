@@ -8,7 +8,7 @@
 rule longitudinal_pw_diff:
   input:
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
      pw_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + pairwise-differences.qzv"
   conda:
@@ -27,7 +27,7 @@ rule longitudinal_pw_diff:
       --p-group-column {METACATEGORY}
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
-      --o-visualization {output.pw_dist}
+      --o-visualization {output}
     """
 
 rule longitudinal_pw_dist:
