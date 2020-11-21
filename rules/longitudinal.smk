@@ -290,6 +290,7 @@ rule longitudinal_feature_volitilty:
 
 rule maturity_index:
   input:
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
   output:
     maturity_maz =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
@@ -309,7 +310,7 @@ rule maturity_index:
   shell:
     """
     qiime longitudinal maturity-index \
-      --i-table {ecam-table.qza} \
+      --i-table {input.cleaned_table} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
       --p-group-by {METACATEGORY} \
