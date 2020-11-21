@@ -12,7 +12,7 @@ rule longitudinal_pw_diff:
   output:
      pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "pwd1.log"
   shell:
@@ -39,7 +39,7 @@ rule longitudinal_pw_dist:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "pwd.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal pairwise-distances \
@@ -63,7 +63,7 @@ rule longitudinal_me:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "lme1.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal linear-mixed-effects \
@@ -85,7 +85,7 @@ rule longitudinal_volitilty:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "vol.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal volatility \
@@ -107,7 +107,7 @@ rule longitudinal_first_diff:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-dif.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal first-differences \
@@ -129,7 +129,7 @@ rule longitudinal_first_diff_beta:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "first-diff-beta.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal first-distances \
@@ -150,7 +150,7 @@ rule longitudinal_track:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "lme.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal linear-mixed-effects \
@@ -172,7 +172,7 @@ rule longitudinal_first_diff_static:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "first-dif.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal first-distances \
@@ -194,7 +194,7 @@ rule nmit:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "nmit.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime longitudinal nmit \
@@ -213,7 +213,7 @@ rule longitudinal_beta:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-beta.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime diversity beta-group-significance \
@@ -231,7 +231,7 @@ rule longitudinal_pcoa:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-pcoa.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   shell:
     """
     qiime diversity pcoa \
@@ -248,7 +248,7 @@ rule longitudinal_emperor:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-emp.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
 
   shell:
@@ -272,7 +272,7 @@ rule longitudinal_feature_volitilty:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-vol.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
     directory(OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility") 
   shell:
@@ -303,7 +303,7 @@ rule maturity_index:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "maturity.log"
   conda:
-    "envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2019.10.yaml"
   params:
       directory(OUTPUTDIR + "/qiime2/asv/logitudinal/maturity")
   shell:
