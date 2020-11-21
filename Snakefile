@@ -132,6 +132,45 @@ rule all:
   	marker_describe = OUTPUTDIR + "/qiime2/asv/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
+    # longitudinal
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances_baseline_0.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + filtered_table.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + sample_estimator.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + feature_importance.qza",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + accuracy_results.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + volatility_plot.qzv",
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  maz_scores.qza,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  sample_estimator.qza,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  feature_importance.qza,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  predictions.qza,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  accuracy_results.qzv,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  volatility_plots.qzv,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  clustermap.qzv,
+    OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  model_summary.qzv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##### setup singularity #####
 
