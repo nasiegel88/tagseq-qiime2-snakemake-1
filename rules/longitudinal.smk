@@ -20,7 +20,7 @@ rule longitudinal_pw_diff:
     qiime longitudinal pairwise-differences \
       --m-metadata-file {input.cleaned_metadata} \
       --i-table {input.cleaned_table}\
-      --p-metric {METATEST} \
+      --p-metric {METACATEGORY} \
       --p-state-column {STATE} \
       --p-state-1 0 \
       --p-state-2 6 \
@@ -69,7 +69,7 @@ rule longitudinal_me:
     qiime longitudinal linear-mixed-effects \
       --m-metadata-file {input.cleaned_metadata} \
       --i-table {input.cleaned_table} \
-      --p-metric {METATEST} \
+      --p-metric {METACATEGORY} \
       --p-group-columns {GROUPMETACAT} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
@@ -91,7 +91,7 @@ rule longitudinal_volitilty:
     qiime longitudinal volatility \
       --m-metadata-file {input.cleaned_metadata} \
       --i-table {input.cleaned_table} \
-      --p-default-metric {METATEST} \
+      --p-default-metric {METACATEGORY} \
       --p-default-group-column {config[metadata_category]} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
@@ -114,7 +114,7 @@ rule longitudinal_first_diff:
       --i-table {input.cleaned_table} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
-      --p-metric {METATEST} \
+      --p-metric {METACATEGORY} \
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
       --o-first-differences {output.shannon_fd}
@@ -156,7 +156,7 @@ rule longitudinal_track:
     qiime longitudinal linear-mixed-effects \
       --m-metadata-file {input.cleaned_metadata} \
       --i-table {input.cleaned_table} \
-      --p-metric {METATEST} \
+      --p-metric {METACATEGORY} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --p-group-columns {GROUPMETACAT} \
