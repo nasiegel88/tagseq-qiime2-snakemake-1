@@ -62,7 +62,7 @@ ID = config['studyid']
 STATE = config['state']      
 GROUPMETACAT = config['group_metadata_category']      
 REPLICATE = config['replicate']          
-CONTROL = config['ontrol'] 
+CONTROL = config['control'] 
 
 #----DEFINE RULES----#
 
