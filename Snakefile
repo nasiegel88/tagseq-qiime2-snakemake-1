@@ -57,6 +57,14 @@ ALPHASTATISTIC = config["alpha-div-p-method"]
 BETASTATISTIC = config["beta-div-p-method"]
 PERMNUMBER = config["permutations"]
 
+# Longitudinal
+ID = config['studyid']          
+STATE = config['state']      
+GROUPMETACAT = config['group_metadata_category']      
+REPLICATE = config['replicate']      
+METACATEGORY = config['']     
+CONTROL = config['control'] 
+
 #----DEFINE RULES----#
 
 rule all:
