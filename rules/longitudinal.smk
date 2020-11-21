@@ -284,7 +284,7 @@ rule longitudinal_feature_volitilty:
       --p-individual-id-column {ID} \
       --p-n-estimators {10} \
       --p-random-state {17} \
-      --p-missing-samples {} \
+      --p-missing-samples {MISSING} \
       --output-dir {parmas}
     """
 

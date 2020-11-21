@@ -63,6 +63,7 @@ STATE = config['state']
 GROUPMETACAT = config['group_metadata_category']      
 REPLICATE = config['replicate']          
 CONTROL = config['control'] 
+MISSING = config['missing_samples']
 
 #----DEFINE RULES----#
 
