@@ -27,7 +27,7 @@ rule longitudinal_pw_diff:
       --p-group-column {METACATEGORY}
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
-      --o-visualization {output.pairwise-differences.qzv}
+      --o-visualization {output}
     """
 
 rule longitudinal_pw_dist:
