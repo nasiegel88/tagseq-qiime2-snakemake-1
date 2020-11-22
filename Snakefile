@@ -96,7 +96,7 @@ if LONGITUDINAL == "yes":
     maturity_clus = OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
     maturity_mod =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv")
 else:
-    print('')
+    print('null')
 
 
 rule all:
