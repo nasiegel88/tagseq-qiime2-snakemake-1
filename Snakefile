@@ -70,32 +70,31 @@ MISSING = config['missing_samples']
 LONG_RULE_ALL  = list()
 
 if LONGITUDINAL == "yes":
-    LONG_RULE_ALL.append(
-    "pw_diff = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + 'pairwise-differences.qzv'",
-    "pw_dist = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_pairwise-distances.qzv'",
-    "lme = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_linear-mixed-effects.qzv'",
-    "vol = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_volatility.qzv'",
-    "shannon_fd = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_shannon-first-differences.qza'",
-    "first_diff = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances.qza'",
-    "first_dist = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances_LME.qzv'",
-    "baseline_fd = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances_baseline_0.qza'",
-    "nmit = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_nmit-dm.qza'",
-    "nmit_viz = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_nmit.qzv'",
-    "nmit_pcoa = OUTPUTDIR + '/qiime2/asv/longitudinal/output/' + PROJ + ANALYSIS + '_nmit-pc.qza'",
-    "nmit_emp = OUTPUTDIR + '/qiime2/asv/longitudinal/output/' + PROJ + ANALYSIS + '_nmit_emperor.qzv'",
-    "vol_table = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'filtered_table.qza'",
-    "vol_est = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'sample_estimator.qza'",
-    "vol_imp = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'feature_importance.qza'",
-    "vol_acc = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'accuracy_results.qzv'",
-    "vol_plot = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'volatility_plot.qzv'",
-    "maturity_maz =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'maz_scores.qza'",
-    "maturity_emp =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'sample_estimator.qza'",
-    "maturity_imp =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'feature_importance.qza'",
-    "maturity_pred = OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'predictions.qza'",
-    "maturity_acc =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'accuracy_results.qzv'",
-    "maturity_vol =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'volatility_plots.qzv'",
-    "maturity_clus = OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'clustermap.qzv'",
-    "maturity_mod =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'model_summary.qzv'")
+    LONG_RULE_ALL.append("pw_diff = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + 'pairwise-differences.qzv'")
+    LONG_RULE_ALL.append("pw_dist = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_pairwise-distances.qzv'")
+    LONG_RULE_ALL.append("lme = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_linear-mixed-effects.qzv'")
+    LONG_RULE_ALL.append("vol = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_volatility.qzv'")
+    LONG_RULE_ALL.append("shannon_fd = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_shannon-first-differences.qza'")
+    LONG_RULE_ALL.append("first_diff = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances.qza'")
+    LONG_RULE_ALL.append("first_dist = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances_LME.qzv'")
+    LONG_RULE_ALL.append("baseline_fd = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_first_distances_baseline_0.qza'")
+    LONG_RULE_ALL.append("nmit = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_nmit-dm.qza'")
+    LONG_RULE_ALL.append("nmit_viz = OUTPUTDIR + '/qiime2/asv/longitudinal/' + PROJ + ANALYSIS + '_nmit.qzv'")
+    LONG_RULE_ALL.append("nmit_pcoa = OUTPUTDIR + '/qiime2/asv/longitudinal/output/' + PROJ + ANALYSIS + '_nmit-pc.qza'")
+    LONG_RULE_ALL.append("nmit_emp = OUTPUTDIR + '/qiime2/asv/longitudinal/output/' + PROJ + ANALYSIS + '_nmit_emperor.qzv'")
+    LONG_RULE_ALL.append("vol_table = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'filtered_table.qza'")
+    LONG_RULE_ALL.append("vol_est = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'sample_estimator.qza'")
+    LONG_RULE_ALL.append("vol_imp = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'feature_importance.qza'")
+    LONG_RULE_ALL.append("vol_acc = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'accuracy_results.qzv'")
+    LONG_RULE_ALL.append("vol_plot = OUTPUTDIR + '/qiime2/asv/longitudinal/mld_feat_volatility/' + PROJ + ANALYSIS + 'volatility_plot.qzv'")
+    LONG_RULE_ALL.append("maturity_maz =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'maz_scores.qza'")
+    LONG_RULE_ALL.append("maturity_emp =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'sample_estimator.qza'")
+    LONG_RULE_ALL.append("maturity_imp =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'feature_importance.qza'")
+    LONG_RULE_ALL.append("maturity_pred = OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'predictions.qza'")
+    LONG_RULE_ALL.append("maturity_acc =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'accuracy_results.qzv'")
+    LONG_RULE_ALL.append("maturity_vol =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'volatility_plots.qzv'")
+    LONG_RULE_ALL.append("maturity_clus = OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'clustermap.qzv'")
+    LONG_RULE_ALL.append("maturity_mod =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'model_summary.qzv'")
 else:
     print('null')
 
