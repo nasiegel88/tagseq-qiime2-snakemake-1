@@ -102,6 +102,7 @@ else:
 
 rule all:
   input:
+    LONG_RULE_ALL
     # fastqc output before trimming
     raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
@@ -174,7 +175,7 @@ rule all:
     path_abun_unstrat = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/qiime2/asv/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz",
     # longitudinal
-    LONG_RULE_ALL
+    
 
 
 ##### setup singularity #####
