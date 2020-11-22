@@ -94,13 +94,13 @@ if LONGITUDINAL == "yes":
     myout.append("maturity_acc =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'accuracy_results.qzv'")
     myout.append("maturity_vol =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'volatility_plots.qzv'")
     myout.append("maturity_clus = OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'clustermap.qzv'")
-    myout.append("maturity_mod =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'model_summary.qzv'")
+    myout.append("maturity_mod =  OUTPUTDIR + '/qiime2/asv/longitudinal/maturity/' + PROJ + ANALYSIS +  'model_summary.qzv'",)
 else:
     print('null')
 
 rule all:
   input:
-    myout,
+    myout
     # fastqc output before trimming
     raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
     raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
