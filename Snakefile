@@ -70,8 +70,7 @@ MISSING = config['missing_samples']
 LONG_RULE_ALL  = list()
 
 if LONGITUDINAL == "yes":
-    LONG_RULE_ALL.append(
-    "pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"",
+    LONG_RULE_ALL.append("pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"",
     "pw_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"",
     "lme = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"",
     "vol = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"",
