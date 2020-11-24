@@ -113,8 +113,8 @@ rule get_stats:
     q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza",
     q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
   output:
-    raw = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux.qzv",
-    primer = OUTPUTDIR + "/qiime2/asv/viz/" + PROJ + "-PE-demux-noprimer.qzv"
+    raw = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux.qzv",
+    primer = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux-noprimer.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
   conda:

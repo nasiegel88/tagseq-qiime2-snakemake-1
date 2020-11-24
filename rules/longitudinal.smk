@@ -7,10 +7,10 @@
 
 rule longitudinal_pw_diff:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-     pw_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
+     pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
     "../envs/qiime2-2020.8.yaml"
   log:
@@ -32,10 +32,10 @@ rule longitudinal_pw_diff:
 
 rule longitudinal_pw_dist:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
-    pw_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
+    pw_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "pwd.log"
   conda:
@@ -56,10 +56,10 @@ rule longitudinal_pw_dist:
 
 rule longitudinal_me:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    lme = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
+    lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "lme1.log"
   conda:
@@ -78,10 +78,10 @@ rule longitudinal_me:
 
 rule longitudinal_volitilty:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    vol = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
+    vol = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "vol.log"
   conda:
@@ -100,10 +100,10 @@ rule longitudinal_volitilty:
 
 rule longitudinal_first_diff:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    shannon_fd = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
+    shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-dif.log"
   conda:
@@ -122,10 +122,10 @@ rule longitudinal_first_diff:
 
 rule longitudinal_first_diff_beta:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +  "-unweighted_unifrac_distance_matrix.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ +  "-unweighted_unifrac_distance_matrix.qza"
   output:
-    first_diff = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza"
+    first_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "first-diff-beta.log"
   conda:
@@ -143,10 +143,10 @@ rule longitudinal_first_diff_beta:
 
 rule longitudinal_track:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    first_dist = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
+    first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "lme.log"
   conda:
@@ -165,10 +165,10 @@ rule longitudinal_track:
 
 rule longitudinal_first_diff_static:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
-    baseline_fd = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_first_distances_baseline_0.qza"
+    baseline_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_baseline_0.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "first-dif.log"
   conda:
@@ -187,10 +187,10 @@ rule longitudinal_first_diff_static:
 
 rule nmit:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    nmit = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "nmit.log"
   conda:
@@ -207,10 +207,10 @@ rule nmit:
 
 rule longitudinal_beta:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    nmit = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
-    nmit_viz = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
+    nmit_viz = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-beta.log"
   conda:
@@ -226,9 +226,9 @@ rule longitudinal_beta:
 
 rule longitudinal_pcoa:
   input:
-    nmit = OUTPUTDIR + "/qiime2/asv/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
-    nmit_pcoa = OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
+    nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-pcoa.log"
   conda:
@@ -242,10 +242,10 @@ rule longitudinal_pcoa:
 
 rule longitudinal_emperor:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    nmit_pcoa = OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   output:
-    nmit_emp = OUTPUTDIR + "/qiime2/asv/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
+    nmit_emp = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-emp.log"
   conda:
@@ -262,20 +262,20 @@ rule longitudinal_emperor:
 
 rule longitudinal_feature_volitilty:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    vol_table = OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
-    vol_est = OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "sample_estimator.qza",
-    vol_imp = OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "feature_importance.qza",
-    vol_acc = OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
-    vol_plot = OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv"
+    vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
+    vol_est = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "sample_estimator.qza",
+    vol_imp = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "feature_importance.qza",
+    vol_acc = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
+    vol_plot = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-vol.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:
-    directory(OUTPUTDIR + "/qiime2/asv/longitudinal/mld_feat_volatility") 
+    directory(OUTPUTDIR + "/longitudinal/mld_feat_volatility") 
   shell:
     """
     qiime longitudinal feature-volatility \
@@ -289,23 +289,23 @@ rule longitudinal_feature_volitilty:
 
 rule maturity_index:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    maturity_maz =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
-    maturity_emp =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "sample_estimator.qza",
-    maturity_imp =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "feature_importance.qza",
-    maturity_pred = OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "predictions.qza",
-    maturity_acc =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "accuracy_results.qzv",
-    maturity_vol =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "volatility_plots.qzv",
-    maturity_clus = OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
-    maturity_mod =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
+    maturity_maz =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
+    maturity_emp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "sample_estimator.qza",
+    maturity_imp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "feature_importance.qza",
+    maturity_pred = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "predictions.qza",
+    maturity_acc =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "accuracy_results.qzv",
+    maturity_vol =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "volatility_plots.qzv",
+    maturity_clus = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
+    maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "maturity.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:
-      directory(OUTPUTDIR + "/qiime2/asv/logitudinal/maturity")
+      directory(OUTPUTDIR + "/logitudinal/maturity")
   shell:
     """
     qiime longitudinal maturity-index \

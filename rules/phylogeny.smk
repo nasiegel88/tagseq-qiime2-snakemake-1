@@ -5,12 +5,12 @@
 
 rule alignment:
   input:
-    rep = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-rep-seqs.qza"
+    rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza"
   output:
-    masked_align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    align = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-alignment.qza",
-    tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-tree.qza"
+    masked_align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
+    rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
+    align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-alignment.qza",
+    tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-tree.qza"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
@@ -27,27 +27,27 @@ rule alignment:
 
 rule core_metrics:
   input:
-    rooted_tree = OUTPUTDIR + "/qiime2/asv/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    evenness_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-evenness_vector.qza",
-    faith_pd_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
-    observed_otus = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    rarefied_table = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-rarefied_table.qza",
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",   
-    bray_curtis_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results.qza",
-    jaccard_distance = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_distance_matrix.qza",
-    jaccard_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_pcoa_results.qza",
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
-    unweighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +"-unweighted_unifrac_pcoa_results.qza",
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
-    weighted_unifrac_pcoa = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
-    bray_curtis_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
-    jaccard_emperor = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
-    unweighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
-    weighted_unifrac = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",
+    evenness_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-evenness_vector.qza",
+    faith_pd_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
+    observed_otus = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    rarefied_table = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-rarefied_table.qza",
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    bray_curtis = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",   
+    bray_curtis_pcoa = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-bray_curtis_pcoa_results.qza",
+    jaccard_distance = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-jaccard_distance_matrix.qza",
+    jaccard_pcoa = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-jaccard_pcoa_results.qza",
+    unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
+    unweighted_unifrac_pcoa = OUTPUTDIR + "/core-metrics-results/" + PROJ +"-unweighted_unifrac_pcoa_results.qza",
+    weighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-weighted_unifrac_distance_matrix.qza",
+    weighted_unifrac_pcoa = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-weighted_unifrac_pcoa_results.qza",
+    bray_curtis_emperor = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-bray_curtis_emperor.qzv",
+    jaccard_emperor = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-jaccard_emperor.qzv",
+    unweighted_unifrac = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
+    weighted_unifrac = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
   conda:
@@ -80,10 +80,10 @@ rule core_metrics:
 
 rule richness:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +  "-shannon_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ +  "-shannon_vector.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    shannon_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
+    shannon_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance.log"
   conda:
@@ -98,10 +98,10 @@ rule richness:
 
 rule richcorr:
   input:
-    shannon_vector = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    shannon_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
+    shannon_correl = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
   conda:
@@ -117,10 +117,10 @@ rule richcorr:
 
 rule asv_signif:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    observed_asv = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    observed_asv_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
+    observed_asv_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
@@ -135,10 +135,10 @@ rule asv_signif:
 
 rule asv_corr:
   input:
-    observed_asv = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    observed_asv = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    observed_asv_correl = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
+    observed_asv_correl = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
@@ -154,10 +154,10 @@ rule asv_corr:
 
 rule evenness:
   input:
-    bray_curtis = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    bray_curtis = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    bray_curtis_signif = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + ANALYSIS + "-bray-curtis-group-significance.qzv"
+    bray_curtis_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-bray-curtis-group-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
@@ -176,10 +176,10 @@ rule evenness:
 
 rule unifrac:
   input:
-    unweighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    unweighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + ANALYSIS + "-unweighted-unifrac-group-site-significance.qzv"
+    unweighted_unifrac_viz = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-unweighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
@@ -198,10 +198,10 @@ rule unifrac:
 
 rule weighted_unifrac:
   input:
-    weighted_unifrac_mat = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ +  "-weighted_unifrac_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    weighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ +  "-weighted_unifrac_distance_matrix.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    weighted_unifrac_viz = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + ANALYSIS + "-weighted-unifrac-group-site-significance.qzv"
+    weighted_unifrac_viz = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-weighted-unifrac-group-site-significance.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
@@ -220,11 +220,11 @@ rule weighted_unifrac:
 
 rule barplot:
   input:
-    cleaned_table = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-no_blanks-asv-table.qza",
-    sklearn = OUTPUTDIR + "/qiime2/asv/" + PROJ + "-tax_sklearn.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
+    sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    barplots = OUTPUTDIR + "/qiime2/asv/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
+    barplots = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots.log"
   conda:
