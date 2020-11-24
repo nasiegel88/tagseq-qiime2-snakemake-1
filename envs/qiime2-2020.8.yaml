@@ -1,5 +1,7 @@
-name: null
 channels:
+  - qiime2/label/r2020.8
+  - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - _libgcc_mutex=0.1
@@ -405,4 +407,3 @@ dependencies:
   - zipp=3.1.0
   - zlib=1.2.11
   - zstd=1.4.5
-prefix: /tmp/build/669e1b31/test-env
