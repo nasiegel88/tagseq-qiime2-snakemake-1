@@ -36,7 +36,7 @@ maxdiff: 4
 minlength: 200
 
 ## Database
-database_classified: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/database/silva-132-99-nb-classifier.qza
+database_classified: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/database/silva-138-99-nb-classifier_2020.8.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2
