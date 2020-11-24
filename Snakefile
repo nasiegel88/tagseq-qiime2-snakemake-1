@@ -166,6 +166,7 @@ maturity_vol =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYS
 maturity_clus = OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
 maturity_mod =  OUTPUTDIR + "/qiime2/asv/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
 
+# List of non-longitudinal input files
 rule_all_input_list = [raw_html, raw_zip, raw_multi_html,
 raw_multi_stats , trimmedData , trim_html , raw_qc , trim_qc ,
 trim_multi_html , trim_multi_stats , q2_import, q2_primerRM, raw ,
@@ -183,7 +184,7 @@ barplots , picrust2tree, marker, EC , metagenome_contrib,
 metagenome_unstrat , seqtab_norm , weighted_nsti , marker_describe ,
 path_abun_unstrat , path_abun_unstrat_describe]
 
-
+# List of longitudinal input fils
 rule_all_longitudinal_input = [pw_diff, pw_dist, lme, vol, shannon_fd,
 first_diff, first_dist, baseline_fd, nmit, nmit_viz, nmit_pcoa,
 nmit_emp, vol_table, vol_est, vol_imp , vol_acc, vol_plot,
@@ -192,11 +193,16 @@ maturity_acc, maturity_vol, maturity_clus , maturity_mod]
 
 
 if LONGITUDINAL == 'yes':
+
     rule_all_input_list.extend(rule_all_longitudinal_input)
+
+    include: 'rules/longitudinal.smk'
+
     print("Will perform a longitudinal analysis")
 
 else:
-    print("go!")
+    print("no longitudinal analysis")
+
 
 rule all:
     input:
@@ -215,8 +221,3 @@ include: "rules/dada2.smk"
 include: "rules/phylogeny.smk"
 include: "rules/picrust2.smk"
 
-if LONGITUDINAL == 'yes':
-    include: 'rules/longitudinal.smk'
-    print("Will perform a longitudinal analysis")
-else:
-    print("no longitudinal analysis")
