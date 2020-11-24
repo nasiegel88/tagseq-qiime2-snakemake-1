@@ -61,7 +61,7 @@ rule core_metrics:
         --m-metadata-file {input.cleaned_metadata} \
         --o-rarefied-table {output.rarefied_table} \
         --o-faith-pd-vector {output.faith_pd_vector} \
-        --o-observed-otus-vector {output.observed_otus} \
+        --o-observed-features-vector {output.observed_otus} \
         --o-shannon-vector {output.shannon_vector} \
         --o-evenness-vector {output.evenness_vector} \
         --o-unweighted-unifrac-distance-matrix {output.unweighted_unifrac_mat} \
