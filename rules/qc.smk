@@ -78,7 +78,7 @@ rule import_qiime:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_q2.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime tools import \
@@ -96,7 +96,7 @@ rule rm_primers:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime cutadapt trim-paired \
@@ -118,7 +118,7 @@ rule get_stats:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
      qiime demux summarize --i-data {input.q2_import} --o-visualization {output.raw}

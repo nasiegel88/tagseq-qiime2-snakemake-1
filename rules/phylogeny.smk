@@ -14,7 +14,7 @@ rule alignment:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime phylogeny align-to-tree-mafft-fasttree \
@@ -51,7 +51,7 @@ rule core_metrics:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity core-metrics-phylogenetic \
@@ -87,7 +87,7 @@ rule richness:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity alpha-group-significance \
@@ -105,7 +105,7 @@ rule richcorr:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity alpha-correlation \
@@ -124,7 +124,7 @@ rule asv_signif:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity alpha-group-significance \
@@ -142,7 +142,7 @@ rule asv_corr:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity alpha-correlation \
@@ -161,7 +161,7 @@ rule evenness:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity beta-group-significance \
@@ -183,7 +183,7 @@ rule unifrac:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity beta-group-significance \
@@ -205,7 +205,7 @@ rule weighted_unifrac:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime diversity beta-group-significance \
@@ -228,7 +228,7 @@ rule barplot:
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots.log"
   conda:
-    "../envs/qiime2-2019.10.yaml"
+    "../envs/qiime2-2020.8.yaml"
   shell:
     """
     qiime taxa barplot \
