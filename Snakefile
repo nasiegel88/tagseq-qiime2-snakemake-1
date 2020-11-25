@@ -13,7 +13,7 @@ from snakemake.exceptions import print_exception, WorkflowError
 PROJ = config["proj_name"]
 ANALYSIS = config["analysis_type"]
 STATISTIC = config["stat_type"]
-INPUTDIR = config["raw_data"]
+INPUTDIR = config["raw-data"]
 SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
 HOME = config["home"]
