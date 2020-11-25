@@ -1,10 +1,7 @@
+name: snake-tagseq
 channels:
-  - bioconda
-  - conda-forge
+    - conda-forge
+    - bioconda
+    - defaults
 dependencies:
-  - snakemake =5.5.2
-  - python =3.6
-  - jinja2 =2.10
-  - networkx =2.1
-  - matplotlib
-  - graphviz =2.38.0
+    - snakemake =5.5.2
