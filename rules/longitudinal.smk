@@ -262,7 +262,7 @@ rule longitudinal_emperor:
 
 rule longitudinal_feature_volitilty:
   input:
-    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
     vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",

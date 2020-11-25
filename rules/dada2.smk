@@ -35,7 +35,7 @@ rule drop_blanks:
     table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
   output:
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
-    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   log:
     SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
   conda:

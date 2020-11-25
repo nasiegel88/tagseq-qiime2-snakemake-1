@@ -7,7 +7,7 @@ contact:
 raw_data: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir
 scratch:  /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/scratch
 outputDIR: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/output
-home: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1
+home: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/
 metadata: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/sample-metadata.tsv
 manifest: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
@@ -51,7 +51,7 @@ remove_blanks: 'yes' # yes or no
 table_blanks: "SampleID IN ('NS.Blank5')" # for preliminary data
 metadata_blanks: 'NS.Blank5' # for preliminary data
 
-### phylogeny flags
+### phylogeny
 metadata_category: "sex" # , "treatment"
 alpha-div-p-method: 'spearman' # , "pearson"
 beta-div-p-method: 'anosim' # , "permanova", "permdisp"
@@ -61,15 +61,11 @@ permutations: 999
 sampling-depth: 1000 #should be set higher for a non-test dataset
 
 ### picrust2 flags
-#
-#
-
 ### To do
 #### add ```--p-no-pairwise``` and ```--p-pairwise``` to configuration file
 ##### date 10/14/20
 
 # longitudinal analysis
-
 perform_longitudinal: 'yes' # yes for longitudinal analysis 
 state: 'age_months'
 studyid: 'animal_number'

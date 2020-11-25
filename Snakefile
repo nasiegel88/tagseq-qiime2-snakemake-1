@@ -168,7 +168,7 @@ maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "mode
 
 # List of non-longitudinal input files
 rule_all_input_list = [raw_html, raw_zip, raw_multi_html,
-raw_multi_stats , trimmedData , trim_html , raw_qc , trim_qc ,
+raw_multi_stats, trimmedData, trim_html, raw_qc, trim_qc ,
 trim_multi_html , trim_multi_stats , q2_import, q2_primerRM, raw ,
 primer, table , cleaned_table , cleaned_metadata, rep , stats ,
 stats_viz , sklearn , biom , table_tsv , table_tax , seqs ,
