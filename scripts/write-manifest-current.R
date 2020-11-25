@@ -31,5 +31,3 @@ manifest_orig$direction <- ifelse(grepl("R1_001.fastq.gz|_1.fastq.gz|R1.fastq.gz
 
 # Write output as a manifest file
 write.table(manifest_orig, "manifest-orig.txt",quote=FALSE,col.names=TRUE,row.names=FALSE,sep=",")
-
-

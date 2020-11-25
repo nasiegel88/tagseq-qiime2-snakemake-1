@@ -6,7 +6,6 @@ import io
 import os
 import pandas as pd
 import pathlib
-import glob # only using to fix conditional statement
 from snakemake.exceptions import print_exception, WorkflowError
 
 #----SET VARIABLES----#
