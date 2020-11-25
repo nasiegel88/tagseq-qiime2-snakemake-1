@@ -74,9 +74,9 @@ rule import_qiime:
   input:
     MANIFEST
   output:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza"
+    q2_import = SCRATCH + "/" + PROJ + "-PE-demux.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_q2.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -90,11 +90,11 @@ rule import_qiime:
 
 rule rm_primers:
   input:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza"
+    q2_import = SCRATCH + "/" + PROJ + "-PE-demux.qza"
   output:
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_primerRM = SCRATCH + "/" + PROJ + "-PE-demux-noprimer.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_primer_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_primer_q2.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -110,13 +110,13 @@ rule rm_primers:
 
 rule get_stats:
   input:
-    q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza",
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_import = SCRATCH + "/" + PROJ + "-PE-demux.qza",
+    q2_primerRM = SCRATCH + "/" + PROJ + "-PE-demux-noprimer.qza"
   output:
     raw = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux.qzv",
     primer = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux-noprimer.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_getviz_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_getviz_q2.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:

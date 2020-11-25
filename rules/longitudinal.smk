@@ -14,7 +14,7 @@ rule longitudinal_pw_diff:
   conda:
     "../envs/qiime2-2020.8.yaml"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "pwd1.log"
+    SCRATCH + "/logs/" + PROJ + "pwd1.log"
   shell:
     """
     qiime longitudinal pairwise-differences \
@@ -37,7 +37,7 @@ rule longitudinal_pw_dist:
   output:
     pw_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "pwd.log"
+    SCRATCH + "/logs/" + PROJ + "pwd.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -61,7 +61,7 @@ rule longitudinal_me:
   output:
     lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "lme1.log"
+    SCRATCH + "/logs/" + PROJ + "lme1.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -83,7 +83,7 @@ rule longitudinal_volitilty:
   output:
     vol = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "vol.log"
+    SCRATCH + "/logs/" + PROJ + "vol.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -105,7 +105,7 @@ rule longitudinal_first_diff:
   output:
     shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-dif.log"
+    SCRATCH + "/logs/" + PROJ + "longitudinal-dif.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -127,7 +127,7 @@ rule longitudinal_first_diff_beta:
   output:
     first_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "first-diff-beta.log"
+    SCRATCH + "/logs/" + PROJ + "first-diff-beta.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -148,7 +148,7 @@ rule longitudinal_track:
   output:
     first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "lme.log"
+    SCRATCH + "/logs/" + PROJ + "lme.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -170,7 +170,7 @@ rule longitudinal_first_diff_static:
   output:
     baseline_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_baseline_0.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "first-dif.log"
+    SCRATCH + "/logs/" + PROJ + "first-dif.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -192,7 +192,7 @@ rule nmit:
   output:
     nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "nmit.log"
+    SCRATCH + "/logs/" + PROJ + "nmit.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -212,7 +212,7 @@ rule longitudinal_beta:
   output:
     nmit_viz = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-beta.log"
+    SCRATCH + "/logs/" + PROJ + "longitudinal-beta.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -230,7 +230,7 @@ rule longitudinal_pcoa:
   output:
     nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-pcoa.log"
+    SCRATCH + "/logs/" + PROJ + "longitudinal-pcoa.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -247,7 +247,7 @@ rule longitudinal_emperor:
   output:
     nmit_emp = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-emp.log"
+    SCRATCH + "/logs/" + PROJ + "longitudinal-emp.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:
@@ -262,7 +262,7 @@ rule longitudinal_emperor:
 
 rule longitudinal_feature_volitilty:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
     vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
@@ -271,7 +271,7 @@ rule longitudinal_feature_volitilty:
     vol_acc = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
     vol_plot = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "longitudinal-vol.log"
+    SCRATCH + "/logs/" + PROJ + "longitudinal-vol.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:
@@ -301,7 +301,7 @@ rule maturity_index:
     maturity_clus = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
     maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "maturity.log"
+    SCRATCH + "/logs/" + PROJ + "maturity.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:

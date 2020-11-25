@@ -9,7 +9,7 @@ rule asv_reftree:
   output:
     picrust2tree = OUTPUTDIR + "/picrust2/out.tre"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTREE_picrust.log"
+    SCRATCH + "/logs/" + PROJ + "_exportTREE_picrust.log"
   conda:
     "../envs/picrust2-env.yaml"
   params:
@@ -24,7 +24,7 @@ rule hsp:
     marker = OUTPUTDIR + "/picrust2/marker_predicted_and_nsti.tsv.gz",
     EC = OUTPUTDIR + "/picrust2/EC_predicted.tsv.gz"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
+    SCRATCH + "/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
   conda:
     "../envs/picrust2-env.yaml"
   shell:
@@ -44,7 +44,7 @@ rule metagenome:
     seqtab_norm = OUTPUTDIR + "/picrust2/EC_metagenome_out/seqtab_norm.tsv.gz",
     weighted_nsti =OUTPUTDIR + "/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
+    SCRATCH + "/logs/" + PROJ + "_marker_EC_predictions_picrust.log"
   conda:
     "../envs/picrust2-env.yaml"
   params: 
@@ -61,7 +61,7 @@ rule pl_infer:
   output:
     path_abun_unstrat = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_pre_metagenome_picrust.log"
+    SCRATCH + "/logs/" + PROJ + "_pre_metagenome_picrust.log"
   conda:
     "../envs/picrust2-env.yaml"
   params:
@@ -80,7 +80,7 @@ rule add_describe:
     marker_describe = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
     path_abun_unstrat_describe = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_metagenome_description_picrust.log"
+    SCRATCH + "/logs/" + PROJ + "_metagenome_description_picrust.log"
   conda:
     "../envs/picrust2-env.yaml"
   shell:

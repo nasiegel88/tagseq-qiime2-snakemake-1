@@ -5,13 +5,13 @@
 
 rule dada2:
   input:
-    q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza"
+    q2_primerRM = SCRATCH + "/" + PROJ + "-PE-demux-noprimer.qza"
   output:
     table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza",
     rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza",
     stats = OUTPUTDIR + "/" + PROJ + "-stats-dada2.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_dada2_q2.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -35,9 +35,9 @@ rule drop_blanks:
     table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
   output:
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-remove-blanks.log"
+    SCRATCH + "/logs/" + PROJ + "-remove-blanks.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   params:
@@ -73,7 +73,7 @@ rule dada2_stats:
   output:
     stats_viz = OUTPUTDIR + "/" + PROJ + "-stats-dada2.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_dada2-stats_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_dada2-stats_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   shell:
@@ -90,7 +90,7 @@ rule assign_tax:
   output:
     sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_sklearn_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_sklearn_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   shell:
@@ -107,7 +107,7 @@ rule gen_table:
   output:
     table_tsv = OUTPUTDIR + "/table/feature-table.biom"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportBIOM_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_exportBIOM_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   params:
@@ -121,7 +121,7 @@ rule convert:
   output:
     OUTPUTDIR + "/" + PROJ + "-asv-table.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTSV_q2.log"
+    SCRATCH + "/logs/" + PROJ + "-exportTSV_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   shell:
@@ -133,7 +133,7 @@ rule gen_tax:
   output:
     table_tax = OUTPUTDIR + "/tax_assigned/taxonomy.tsv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-exportTAXTSV_q2.log"
+    SCRATCH + "/logs/" + PROJ + "-exportTAXTSV_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   params:
@@ -147,7 +147,7 @@ rule gen_seqs:
   output:
     seqs = OUTPUTDIR + "/picrust2/dna-sequences.fasta"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "_exportTAXTSV_q2.log"
+    SCRATCH + "/logs/" + PROJ + "_exportTAXTSV_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   params:

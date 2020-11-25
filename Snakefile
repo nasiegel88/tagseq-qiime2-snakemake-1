@@ -10,7 +10,6 @@ import glob # only using to fix conditional statement
 from snakemake.exceptions import print_exception, WorkflowError
 
 #----SET VARIABLES----#
-
 PROJ = config["proj_name"]
 ANALYSIS = config["analysis_type"]
 STATISTIC = config["stat_type"]
@@ -81,8 +80,8 @@ trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= 
 trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", #next change to include proj name
 trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt",
 # QIIME2 outputs
-q2_import = SCRATCH + "/qiime2/" + PROJ + "-PE-demux.qza",
-q2_primerRM = SCRATCH + "/qiime2/" + PROJ + "-PE-demux-noprimer.qza",
+q2_import = SCRATCH + "/" + PROJ + "-PE-demux.qza",
+q2_primerRM = SCRATCH + "/" + PROJ + "-PE-demux-noprimer.qza",
 #vizualization stats
 raw = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux.qzv",
 primer = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux-noprimer.qzv",

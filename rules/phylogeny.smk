@@ -12,7 +12,7 @@ rule alignment:
     align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-alignment.qza",
     tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-tree.qza"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-aligned.log"
+    SCRATCH + "/logs/" + PROJ + "-aligned.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -49,7 +49,7 @@ rule core_metrics:
     unweighted_unifrac = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_emperor.qzv",
     weighted_unifrac = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-weighted_unifrac_emperor.qzv",
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-core-metrics.log"
+    SCRATCH + "/logs/" + PROJ + "-core-metrics.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -85,7 +85,7 @@ rule richness:
   output:
     shannon_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon-significance.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ +  "-shannon-significance.log"
+    SCRATCH + "/logs/" + PROJ +  "-shannon-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -103,7 +103,7 @@ rule richcorr:
   output:
     shannon_correl = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-shannon-significance-association.qzv"
+    SCRATCH + "/logs/" + PROJ + "-shannon-significance-association.qzv"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -122,7 +122,7 @@ rule asv_signif:
   output:
     observed_asv_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
+    SCRATCH + "/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -140,7 +140,7 @@ rule asv_corr:
   output:
     observed_asv_correl = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-observed_otus-significance.log"
+    SCRATCH + "/logs/" + PROJ + "-observed_otus-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -159,7 +159,7 @@ rule evenness:
   output:
     bray_curtis_signif = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-bray-curtis-group-significance.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-bray-curtis-group-significance.log"
+    SCRATCH + "/logs/" + PROJ + "-bray-curtis-group-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -181,7 +181,7 @@ rule unifrac:
   output:
     unweighted_unifrac_viz = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-unweighted-unifrac-group-site-significance.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
+    SCRATCH + "/logs/" + PROJ + "-unweighted-unifrac-group-site-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -203,7 +203,7 @@ rule weighted_unifrac:
   output:
     weighted_unifrac_viz = OUTPUTDIR + "/core-metrics-results/" + PROJ + ANALYSIS + "-weighted-unifrac-group-site-significance.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
+    SCRATCH + "/logs/" + PROJ + "-weighted-unifrac-group-site-significance.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
@@ -226,7 +226,7 @@ rule barplot:
   output:
     barplots = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
-    SCRATCH + "/qiime2/logs/" + PROJ + "-taxa-bar-plots.log"
+    SCRATCH + "/logs/" + PROJ + "-taxa-bar-plots.log"
   conda:
     "../envs/qiime2-2020.8.yaml"
   shell:
