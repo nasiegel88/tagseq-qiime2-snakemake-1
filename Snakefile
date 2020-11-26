@@ -17,6 +17,7 @@ SCRATCH = config["scratch"]
 OUTPUTDIR = config["outputDIR"]
 HOME = config["home"]
 LONGITUDINAL = config['perform_longitudinal']
+DROP_BLANKS = config['remove_blanks']
 
 SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
@@ -188,6 +189,13 @@ first_diff, first_dist, baseline_fd, nmit, nmit_viz, nmit_pcoa,
 nmit_emp, vol_table, vol_est, vol_imp , vol_acc, vol_plot,
 maturity_maz, maturity_emp, maturity_imp, maturity_pred ,
 maturity_acc, maturity_vol, maturity_clus , maturity_mod]
+
+if DROP_BLANKS == 'yes':
+
+    print('dropping blanks')
+
+else:
+    print('no samples dropped')
 
 
 if LONGITUDINAL == 'yes':
