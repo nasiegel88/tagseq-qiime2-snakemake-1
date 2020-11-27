@@ -138,6 +138,11 @@ weighted_nsti =OUTPUTDIR + "/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz",
 marker_describe = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
 path_abun_unstrat = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
 path_abun_unstrat_describe = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz",
+# differential analysis
+differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qza",
+viz_differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qzv",
+sig_diff = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-sig-differential.qza",
+sig_table =  OUTPUTDIR + "/differential-expression/differentials.tsv",
 # longitudinal
 pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv",
 pw_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv",
@@ -181,7 +186,7 @@ unweighted_unifrac, weighted_unifrac , shannon_signif , shannon_correl
 , observed_asv_signif, observed_asv_correl , bray_curtis_signif ,
 barplots , picrust2tree, marker, EC , metagenome_contrib,
 metagenome_unstrat , seqtab_norm , weighted_nsti , marker_describe ,
-path_abun_unstrat , path_abun_unstrat_describe]
+path_abun_unstrat , path_abun_unstrat_describe,differentials, viz_differentials, sig_diff, sig_table]
 
 # List of longitudinal input fils
 rule_all_longitudinal_input = [pw_diff, pw_dist, lme, vol, shannon_fd,
@@ -226,4 +231,5 @@ include: "rules/qc.smk"
 include: "rules/dada2.smk"
 include: "rules/phylogeny.smk"
 include: "rules/picrust2.smk"
+include: "rules/differential.smk"
 
