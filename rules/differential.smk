@@ -1,3 +1,7 @@
+# differential abundance testing
+## Noah Siegel
+## UC Davis
+## nasiegel@ucdavis.edu
 
 rule aldex2:
     input:
@@ -58,3 +62,15 @@ rule convert_sig:
         directory(OUTPUTDIR + "/differential-expression")
     shell:
         "qiime tools export --input-path {input.sig_diff} --output-path {params}"
+
+rule convert_corncob:
+    input:
+        corncob = OUTPUTDIR + "/corncobresults/" + PROJ + ANALYSIS + "-corncob.qza"
+    output: 
+        corncob_table = OUTPUTDIR + "/corncobresults/" + PROJ + ANALYSIS + "-corncob.tsv"
+    conda:
+       "../envs/qiime2-2019.10.yaml"
+    params:
+        directory(OUTPUTDIR + "/corncobresults")
+    shell:
+        "qiime tools export --input-path {input.corncob} --output-path {params}"

@@ -186,7 +186,8 @@ unweighted_unifrac, weighted_unifrac , shannon_signif , shannon_correl
 , observed_asv_signif, observed_asv_correl , bray_curtis_signif ,
 barplots , picrust2tree, marker, EC , metagenome_contrib,
 metagenome_unstrat , seqtab_norm , weighted_nsti , marker_describe ,
-path_abun_unstrat , path_abun_unstrat_describe,differentials, viz_differentials, sig_diff, sig_table]
+path_abun_unstrat , path_abun_unstrat_describe,differentials, viz_differentials,
+ sig_diff, sig_table]
 
 # List of longitudinal input fils
 rule_all_longitudinal_input = [pw_diff, pw_dist, lme, vol, shannon_fd,
