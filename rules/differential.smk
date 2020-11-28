@@ -10,7 +10,7 @@ rule aldex2:
     output:
         differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qza"
     conda:
-        "../envs/test.yml"
+        "../envs/qiime2-2019.7.yml"
     shell:
         """
         qiime aldex2 aldex2 \
@@ -26,7 +26,7 @@ rule aldex2_effect:
     output:
         viz_differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qzv"
     conda:
-        "../envs/test.yml"
+        "../envs/qiime2-2019.7.yml"
     shell:
         """
         qiime aldex2 effect-plot \
@@ -40,7 +40,7 @@ rule extract_sig:
     output:
         sig_diff = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-sig-differential.qza"
     conda:
-        "../envs/test.yml"
+        "../envs/qiime2-2019.7.yml"
     shell:
         """
         qiime aldex2 extract-differences \
@@ -57,20 +57,8 @@ rule convert_sig:
     output: 
         sig_table =  OUTPUTDIR + "/differential-expression/differentials.tsv"
     conda:
-        "../envs/test.yml"
+        "../envs/qiime2-2019.7.yml"
     params:
         directory(OUTPUTDIR + "/differential-expression")
     shell:
         "qiime tools export --input-path {input.sig_diff} --output-path {params}"
-
-rule convert_corncob:
-    input:
-        corncob = OUTPUTDIR + "/corncobresults/" + PROJ + ANALYSIS + "-corncob.qza"
-    output: 
-        corncob_table = OUTPUTDIR + "/corncobresults/" + PROJ + ANALYSIS + "-corncob.tsv"
-    conda:
-       "../envs/qiime2-2019.10.yaml"
-    params:
-        directory(OUTPUTDIR + "/corncobresults")
-    shell:
-        "qiime tools export --input-path {input.corncob} --output-path {params}"
