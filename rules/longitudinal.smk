@@ -284,7 +284,11 @@ rule longitudinal_feature_volitilty:
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --p-missing-samples {MISSING} \
-      --output-dir {params}
+      --o-filtered-table  {output.vol_table} \
+      --o-feature-importance {output.vol_imp} \
+      --o-volatility-plot {output.vol_plot} \
+      --o-accuracy-results {output.vol_acc} \
+      --o-sample-estimator {output.vol_est}
     """
 
 rule maturity_index:
@@ -318,5 +322,11 @@ rule maturity_index:
       --p-test-size 0.4 \
       --p-stratify \
       --p-random-state 1010101 \
-      --output-dir {params}
+      --o-feature-importance {output.maturity_imp} \
+      --o-predictions {output.maturity_pred} \
+      --o-model-summary {output.maturity_mod} \
+      --o-accuracy-results {output.} \
+      --o-maz-scores {output.maturity_maz} \
+      --o-clustermap {output.maturity_clus} \
+      --o-volatility-plots {output.maturity_vol}
     """
