@@ -70,7 +70,7 @@ rule longitudinal_pw_dist:
 rule longitudinal_me:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
     lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
   log:
@@ -80,7 +80,7 @@ rule longitudinal_me:
   shell:
     """
     qiime longitudinal linear-mixed-effects \
-      --m-metadata-file {input.cleaned_metadata} \
+      --m-metadata-file {input.relative_frequency} \
       --i-table {input.cleaned_table} \
       --p-metric {METACATEGORY} \
       --p-group-columns {GROUPMETACAT} \
@@ -114,7 +114,7 @@ rule longitudinal_volitilty:
 rule longitudinal_first_diff:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
     shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
   log:
@@ -124,7 +124,7 @@ rule longitudinal_first_diff:
   shell:
     """
     qiime longitudinal first-differences \
-      --i-table {input.cleaned_table} \
+      --i-table {input.relative_frequency} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
       --p-metric {METACATEGORY} \
@@ -157,7 +157,7 @@ rule longitudinal_first_diff_beta:
 rule longitudinal_track:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
     first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
   log:
@@ -167,7 +167,7 @@ rule longitudinal_track:
   shell:
     """
     qiime longitudinal linear-mixed-effects \
-      --m-metadata-file {input.cleaned_metadata} \
+      --m-metadata-file {input.relative_frequency} \
       --i-table {input.cleaned_table} \
       --p-metric {METACATEGORY} \
       --p-state-column {STATE} \
