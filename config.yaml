@@ -47,7 +47,7 @@ training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
 
 ## Filter blanks
-remove_blanks: 'no' # yes or no
+remove_blanks: 'yes' # yes or no
 table_blanks: "SampleID IN (
   'BLANK.47453', 'BLANK.47455', 'BLANK.47457', 'BLANK.47467',
 'BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
