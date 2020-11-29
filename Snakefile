@@ -144,7 +144,7 @@ viz_differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS +
 sig_diff = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-sig-differential.qza",
 sig_table =  OUTPUTDIR + "/differential-expression/differentials.tsv",
 # longitudinal
-relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza",
 pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv",
 pw_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv",
 lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv",
