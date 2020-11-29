@@ -5,18 +5,18 @@
 
 
 rule rel_freq:
-input:
-  cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
-output:
-  relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
-conda:
-  "../envs/qiime2-2020.8.yaml"
-shell:
-  """
-  qiime feature-table relative-frequency \
-    --i-table {input.cleaned_table} \
-    --o-relative-frequency-table {output.relative_frequency}
-  """
+  input:
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+  output:
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+  conda:
+    "../envs/qiime2-2020.8.yaml"
+  shell:
+    """
+    qiime feature-table relative-frequency \
+      --i-table {input.cleaned_table} \
+      --o-relative-frequency-table {output.relative_frequency}
+    """
 
 rule longitudinal_pw_diff:
   input:
