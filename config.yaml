@@ -55,7 +55,13 @@ table_blanks: "SampleID IN (
 'BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
 'BLANK.48408', 'BLANK.48429'
 )" # for preliminary data
-metadata_blanks: 'NS.Blank5' # for preliminary data
+metadata_blanks: (
+'BLANK.47453', 'BLANK.47455', 'BLANK.47457', 'BLANK.47467',
+'BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
+'BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
+'BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
+'BLANK.48408', 'BLANK.48429'
+)
 
 ### phylogeny
 metadata_category: "treatment" # , "sex"
