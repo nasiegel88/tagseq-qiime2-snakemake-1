@@ -21,7 +21,7 @@ rule rel_freq:
 rule longitudinal_pw_diff:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
      pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
