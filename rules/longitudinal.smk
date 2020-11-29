@@ -92,7 +92,7 @@ rule longitudinal_me:
 rule longitudinal_volitilty:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
     vol = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
   log:
@@ -103,7 +103,7 @@ rule longitudinal_volitilty:
     """
     qiime longitudinal volatility \
       --m-metadata-file {input.cleaned_metadata} \
-      --i-table {input.cleaned_table} \
+      --i-table {input.relative_frequency} \
       --p-default-metric {METACATEGORY} \
       --p-default-group-column {config[metadata_category]} \
       --p-state-column {STATE} \
