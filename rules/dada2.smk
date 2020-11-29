@@ -42,13 +42,12 @@ rule drop_blanks:
      "../envs/qiime2-2020.8.yaml"
   params:
     metadata  = config['metadata'],
-    table_blanks = config['table_blanks'],
-    meta_blanks = config['metadata_blanks']
+    table_blanks = config['table_blanks']
   shell:
     """
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
-    fgrep -v {params.meta_blanks} {params.metadata} > {output.cleaned_metadata}
+    sed -e '/BLANK|NS.B6.47455F/,/^/d' {params.metadata} > {output.cleaned_metadata} # NS.B6.47455F was used as an additional control
       echo "All blanks dropped"
       qiime feature-table filter-samples \
       --i-table {input.table} \
