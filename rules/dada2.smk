@@ -47,7 +47,7 @@ rule drop_blanks:
     """
     declare -a arr=("{config[remove_blanks]}")
     if [ "${{arr[@]}}" == yes ]; then
-    sed -e '/BLANK/,/^/d' -e '/NS.B6.47455F/,/^/d' {params.metadata} > {output.cleaned_metadata} # NS.B6.47455F was used as an additional control
+    sed -e '/BLANK*/d' -e '/NS.B6.47455F/d' {params.metadata} > {output.cleaned_metadata} # NS.B6.47455F was used as an additional control
       echo "All blanks dropped"
       qiime feature-table filter-samples \
       --i-table {input.table} \

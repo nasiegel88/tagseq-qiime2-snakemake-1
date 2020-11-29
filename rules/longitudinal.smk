@@ -21,7 +21,7 @@ rule rel_freq:
 rule longitudinal_pw_diff:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
      pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
   conda:
@@ -32,12 +32,12 @@ rule longitudinal_pw_diff:
     """
     qiime longitudinal pairwise-differences \
       --m-metadata-file {input.cleaned_metadata} \
-      --i-table {input.cleaned_table}\
-      --p-metric {METACATEGORY} \
+      --m-metadata-file {input.shannon_vector}\
+      --p-metric shannon_entropy \
       --p-state-column {STATE} \
       --p-state-1 0 \
       --p-state-2 6 \
-      --p-group-column {METACATEGORY}
+      --p-group-column {METACATEGORY} \
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
       --o-visualization {output.pw_diff}
@@ -70,7 +70,7 @@ rule longitudinal_pw_dist:
 rule longitudinal_me:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
   log:
@@ -80,10 +80,9 @@ rule longitudinal_me:
   shell:
     """
     qiime longitudinal linear-mixed-effects \
-      --m-metadata-file {input.relative_frequency} \
-      --i-table {input.cleaned_table} \
-      --p-metric {METACATEGORY} \
-      --p-group-columns {GROUPMETACAT} \
+      --m-metadata-file {input.cleaned_metadata} \
+      --m-metadata-file {input.shannon_vector} \
+      --p-metric shannon_entropy \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --o-visualization {output.lme}
@@ -92,7 +91,7 @@ rule longitudinal_me:
 rule longitudinal_volitilty:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     vol = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
   log:
@@ -103,8 +102,8 @@ rule longitudinal_volitilty:
     """
     qiime longitudinal volatility \
       --m-metadata-file {input.cleaned_metadata} \
-      --i-table {input.relative_frequency} \
-      --p-default-metric {METACATEGORY} \
+      --m-metadata-file {input.shannon_vector} \
+      --p-default-metric shannon_entropy \
       --p-default-group-column {config[metadata_category]} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
@@ -114,7 +113,7 @@ rule longitudinal_volitilty:
 rule longitudinal_first_diff:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
   log:
@@ -124,10 +123,10 @@ rule longitudinal_first_diff:
   shell:
     """
     qiime longitudinal first-differences \
-      --i-table {input.relative_frequency} \
+      --m-metadata-file {shannon_vector} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
-      --p-metric {METACATEGORY} \
+      --p-metric shannon_entropy \
       --p-individual-id-column {ID} \
       --p-replicate-handling {REPLICATE} \
       --o-first-differences {output.shannon_fd}
@@ -157,7 +156,7 @@ rule longitudinal_first_diff_beta:
 rule longitudinal_track:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+    shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
   log:
@@ -167,12 +166,11 @@ rule longitudinal_track:
   shell:
     """
     qiime longitudinal linear-mixed-effects \
-      --m-metadata-file {input.relative_frequency} \
-      --i-table {input.cleaned_table} \
-      --p-metric {METACATEGORY} \
+      --m-metadata-file {input.cleaned_metadata} \
+      --m-metadata-file {input.shannon_vector} \
+      --p-metric shannon_entropy \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
-      --p-group-columns {GROUPMETACAT} \
       --o-visualization {output.first_dist}
     """
 
@@ -241,7 +239,7 @@ rule longitudinal_pcoa:
   input:
     nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   output:
-    nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
+    nmit_pcoa = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-pcoa.log"
   conda:
@@ -258,7 +256,7 @@ rule longitudinal_emperor:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
   output:
-    nmit_emp = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
+    nmit_emp = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-emp.log"
   conda:
@@ -268,7 +266,7 @@ rule longitudinal_emperor:
   shell:
     """
     qiime emperor plot \
-      --i-pcoa {input} \
+      --i-pcoa {input.nmit_pcoa} \
       --m-metadata-file {input.cleaned_metadata} \
       --o-visualization {output.nmit_emp}
     """
