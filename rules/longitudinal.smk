@@ -335,10 +335,11 @@ rule maturity_index:
       --p-test-size 0.4 \
       --p-stratify \
       --p-random-state 1010101 \
+      --o-sample-estimator {output.maturity_emp} \
       --o-feature-importance {output.maturity_imp} \
       --o-predictions {output.maturity_pred} \
       --o-model-summary {output.maturity_mod} \
-      --o-accuracy-results {output.} \
+      --o-accuracy-results {output.maturity_acc} \
       --o-maz-scores {output.maturity_maz} \
       --o-clustermap {output.maturity_clus} \
       --o-volatility-plots {output.maturity_vol}
