@@ -3,7 +3,20 @@
 ## UC Davis
 ## nasiegel@ucdavis.edu
 
-## still in development ###
+
+rule rel_freq:
+input:
+  cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+output:
+  relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
+conda:
+  "../envs/qiime2-2020.8.yaml"
+shell:
+  """
+  qiime feature-table relative-frequency \
+    --i-table {input.cleaned_table} \
+    --o-relative-frequency-table {output.relative_frequency}
+  """
 
 rule longitudinal_pw_diff:
   input:
@@ -188,7 +201,7 @@ rule longitudinal_first_diff_static:
 rule nmit:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
     nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
   log:
@@ -198,7 +211,7 @@ rule nmit:
   shell:
     """
     qiime longitudinal nmit \
-      --i-table {input.cleaned_table} \
+      --i-table {input.relative_frequency} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-individual-id-column {ID} \
       --p-corr-method {ALPHASTATISTIC} \

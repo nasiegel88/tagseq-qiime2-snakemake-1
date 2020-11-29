@@ -144,6 +144,7 @@ viz_differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS +
 sig_diff = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-sig-differential.qza",
 sig_table =  OUTPUTDIR + "/differential-expression/differentials.tsv",
 # longitudinal
+relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
 pw_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv",
 pw_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv",
 lme = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv",
@@ -176,7 +177,7 @@ raw_multi_stats, trimmedData, trim_html, raw_qc, trim_qc ,
 trim_multi_html , trim_multi_stats , q2_import, q2_primerRM, raw ,
 primer, table , cleaned_table , cleaned_metadata, rep , stats ,
 stats_viz , sklearn , biom , table_tsv , table_tax , seqs ,
-masked_align , rooted_tree, align , tree, evenness_vector ,
+masked_align,relative_frequency , rooted_tree, align , tree, evenness_vector ,
 faith_pd_vector , observed_asv, rarefied_table , shannon_vector ,
 bray_curtis , bray_curtis_pcoa, jaccard_distance , jaccard_pcoa,
 unweighted_unifrac_mat , unweighted_unifrac_pcoa ,
