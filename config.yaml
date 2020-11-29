@@ -73,7 +73,7 @@ sampling-depth: 1000 #should be set higher for a non-test dataset
 
 # longitudinal analysis
 perform_longitudinal: 'yes' # yes for longitudinal analysis 
-state: 'age_months'
+state: 'age_month'
 studyid: 'animal_number'
 replicate: 'random'
 test_metadata: 'weight'
