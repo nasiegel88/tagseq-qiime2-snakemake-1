@@ -221,7 +221,7 @@ rule weighted_unifrac:
 rule barplot:
   input:
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
-    sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza",
+    filtered_sklearn = OUTPUTDIR + "/" + PROJ + "-filtered_tax_sklearn.qza",
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
     barplots = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
@@ -233,7 +233,7 @@ rule barplot:
     """
     qiime taxa barplot \
         --i-table {input.cleaned_table} \
-        --i-taxonomy {input.sklearn} \
+        --i-taxonomy {input.filtered_sklearn} \
         --m-metadata-file {input.cleaned_metadata} \
         --o-visualization {output.barplots}
     """
