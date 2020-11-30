@@ -33,15 +33,6 @@ output/qiime2/asv/picrust2/intermediate/place_seqs/
 output/qiime2/asv/picrust2/
 
 output/qiime2/asv/
-<<<<<<< HEAD
-Snakefile_long.smk
-
-test.my.bash/bash-rm-metadata.sh
-
-test.my.bash/outputfile.tsv
-=======
-
->>>>>>> master
 
 noblank-sample-metadata.tsv
 
