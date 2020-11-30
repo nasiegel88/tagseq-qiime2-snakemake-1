@@ -40,24 +40,26 @@ database_classified: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/datab
 
 ## DADA2 - ASV flags
 truncation_err: 2
-truncation_len-f: 250
-truncation_len-r: 200
+truncation_len-f: 0
+truncation_len-r: 0
 quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled
+seqs-to-exclude: 'chloroplast,mitochondria,eukaryota,archea'
 
 ## Filter blanks
-remove_blanks: 'yes' # yes or no
+remove_blanks: 'no' # yes or no
 table_blanks: "SampleID IN (
   'BLANK.47453', 'BLANK.47455', 'BLANK.47457', 'BLANK.47467',
-'BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
-'BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
-'BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
-'BLANK.48408', 'BLANK.48429', 'NS.B6.47455F'
-)" # for preliminary data
+''BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
+''BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
+''BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
+''BLANK.48408', 'BLANK.48429'
+)" # for run1
+metadata_blanks: 'NS.Blank5' # not sure if this is the correct format for this flag
 
 ### phylogeny
-metadata_category: "treatment" # "sex" or "treatment"
+metadata_category: "treatment" # "sex" "treatment"
 alpha-div-p-method: 'spearman' # , "pearson"
 beta-div-p-method: 'anosim' # , "permanova", "permdisp"
 permutations: 999
@@ -71,9 +73,9 @@ sampling-depth: 1000 #should be set higher for a non-test dataset
 ##### date 10/14/20
 
 # longitudinal analysis
-perform_longitudinal: 'yes' # yes for longitudinal analysis 
-state: age_month
-studyid: animal_number
+perform_longitudinal: 'no' # yes for longitudinal analysis 
+state: 'age_months'
+studyid: 'animal_number'
 replicate: 'random'
 test_metadata: 'weight'
 group_metadata_category: 'sex, treatment'
