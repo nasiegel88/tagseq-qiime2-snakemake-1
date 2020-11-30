@@ -44,7 +44,7 @@ rule filter_seqs:
     """
     qiime taxa filter-seqs \
       --i-sequences {input.rep} \
-      --i-taxonomy input.table \
+      --i-taxonomy {input.table} \
       --p-include p__ \
       --p-exclude {EXCLUDESEQS} \
       --o-filtered-sequences {output.filtered_rep}
