@@ -51,7 +51,7 @@ rule filter_seqs:
     """
 rule filter_table:
   input:
-    filtered_sklearn = OUTPUTDIR + "/" + PROJ + "-filtered_tax_sklearn.qza",
+    sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza",
     table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
   output:
     filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza"
@@ -63,7 +63,7 @@ rule filter_table:
     """
     qiime taxa filter-table \
       --i-table {input.table} \
-      --i-taxonomy {input.filtered_sklearn} \
+      --i-taxonomy {input.sklearn} \
       --p-mode exact \
       --p-exclude {EXCLUDESEQS} \
       --o-filtered-table {output.filtered_table}
