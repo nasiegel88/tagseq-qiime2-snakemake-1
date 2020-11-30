@@ -40,8 +40,8 @@ database_classified: /mnt/c/Users/noahs/projects/tagseq-qiime2-snakemake-1/datab
 
 ## DADA2 - ASV flags
 truncation_err: 2
-truncation_len-f: 0
-truncation_len-r: 0
+truncation_len-f: 250
+truncation_len-r: 200
 quality_err: 2
 training: 1000 #should be set higher for a non-test dataset
 chimera: pooled

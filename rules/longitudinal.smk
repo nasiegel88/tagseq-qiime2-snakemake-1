@@ -276,11 +276,11 @@ rule longitudinal_feature_volitilty:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "filtered_table.qza",
-    vol_est = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "sample_estimator.qza",
-    vol_imp = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "feature_importance.qza",
-    vol_acc = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "accuracy_results.qzv",
-    vol_plot = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "volatility_plot.qzv"
+    vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-filtered_table.qza",
+    vol_est = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-sample_estimator.qza",
+    vol_imp = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-feature_importance.qza",
+    vol_acc = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-accuracy_results.qzv",
+    vol_plot = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-volatility_plot.qzv"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-vol.log"
   conda:
@@ -307,14 +307,14 @@ rule maturity_index:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
-    maturity_maz =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "maz_scores.qza",
-    maturity_emp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "sample_estimator.qza",
-    maturity_imp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "feature_importance.qza",
-    maturity_pred = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "predictions.qza",
-    maturity_acc =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "accuracy_results.qzv",
-    maturity_vol =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "volatility_plots.qzv",
-    maturity_clus = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "clustermap.qzv",
-    maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "model_summary.qzv"
+    maturity_maz =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-maz_scores.qza",
+    maturity_emp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-sample_estimator.qza",
+    maturity_imp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-feature_importance.qza",
+    maturity_pred = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-predictions.qza",
+    maturity_acc =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-accuracy_results.qzv",
+    maturity_vol =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-volatility_plots.qzv",
+    maturity_clus = OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-clustermap.qzv",
+    maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-model_summary.qzv"
   log:
     SCRATCH + "/logs/" + PROJ + "maturity.log"
   conda:
