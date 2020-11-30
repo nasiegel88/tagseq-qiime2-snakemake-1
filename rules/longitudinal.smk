@@ -83,6 +83,7 @@ rule longitudinal_me:
       --m-metadata-file {input.cleaned_metadata} \
       --m-metadata-file {input.shannon_vector} \
       --p-metric shannon_entropy \
+      --p-group-columns GROUPMETACAT \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --o-visualization {output.lme}
@@ -115,7 +116,7 @@ rule longitudinal_first_diff:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
-    shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_shannon-first-differences.qza"
+    shannon_fd = OUTPUTDIR + "/longitudinal/" + PROJ + "_shannon-first-differences.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-dif.log"
   conda:
@@ -137,7 +138,7 @@ rule longitudinal_first_diff_beta:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ +  "-unweighted_unifrac_distance_matrix.qza"
   output:
-    first_diff = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances.qza"
+    first_diff = OUTPUTDIR + "/longitudinal/" + PROJ + "_first_distances.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "first-diff-beta.log"
   conda:
@@ -158,7 +159,7 @@ rule longitudinal_track:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
-    first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_LME.qzv"
+    first_dist = OUTPUTDIR + "/longitudinal/" + PROJ + "_first_distances_LME.qzv"
   log:
     SCRATCH + "/logs/" + PROJ + "lme.log"
   conda:
@@ -179,7 +180,7 @@ rule longitudinal_first_diff_static:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
-    baseline_fd = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_first_distances_baseline_0.qza"
+    baseline_fd = OUTPUTDIR + "/longitudinal/" + PROJ + "_first_distances_baseline_0.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "first-dif.log"
   conda:
@@ -201,7 +202,7 @@ rule nmit:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
     relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   output:
-    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ  + "_nmit-dm.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "nmit.log"
   conda:
@@ -219,7 +220,7 @@ rule nmit:
 rule longitudinal_beta:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ  + "_nmit-dm.qza"
   output:
     nmit_viz = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
   log:
@@ -237,9 +238,9 @@ rule longitudinal_beta:
 
 rule longitudinal_pcoa:
   input:
-    nmit = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-dm.qza"
+    nmit = OUTPUTDIR + "/longitudinal/" + PROJ  + "_nmit-dm.qza"
   output:
-    nmit_pcoa = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit-pc.qza"
+    nmit_pcoa = OUTPUTDIR + "/longitudinal/" + PROJ + "_nmit-pc.qza"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-pcoa.log"
   conda:
@@ -254,9 +255,9 @@ rule longitudinal_pcoa:
 rule longitudinal_emperor:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    nmit_pcoa = OUTPUTDIR + "/longitudinal/output/" + PROJ + ANALYSIS + "_nmit-pc.qza"
+    nmit_pcoa = OUTPUTDIR + "/longitudinal/" + PROJ  + "_nmit-pc.qza"
   output:
-    nmit_emp = OUTPUTDIR + "/longitudinal/" + PROJ + ANALYSIS + "_nmit_emperor.qzv"
+    nmit_emp = OUTPUTDIR + "/longitudinal/" + PROJ + "_nmit_emperor.qzv"
   log:
     SCRATCH + "/logs/" + PROJ + "longitudinal-emp.log"
   conda:
