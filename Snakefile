@@ -18,6 +18,7 @@ OUTPUTDIR = config["outputDIR"]
 HOME = config["home"]
 LONGITUDINAL = config['perform_longitudinal']
 DROP_BLANKS = config['remove_blanks']
+EXCLUDESEQS =config['seqs-to-exclude']
 
 SUF = config["suffix"]
 R1_SUF = str(config["r1_suf"])
@@ -86,6 +87,7 @@ q2_primerRM = SCRATCH + "/" + PROJ + "-PE-demux-noprimer.qza",
 raw = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux.qzv",
 primer = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux-noprimer.qzv",
 #ASV outputs:
+filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza",
 tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.tsv",
 table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza",
 cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
@@ -176,7 +178,7 @@ maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-mod
 rule_all_input_list = [raw_html, raw_zip, raw_multi_html,
 raw_multi_stats, trimmedData, trim_html, raw_qc, trim_qc ,
 trim_multi_html , trim_multi_stats , q2_import, q2_primerRM, raw ,
-primer, table , cleaned_table , cleaned_metadata, rep , stats ,
+primer, table , cleaned_table ,filtered_rep ,cleaned_metadata, rep , stats ,
 stats_viz , sklearn , biom , tabulated_cleaned_metadata,table_tsv , table_tax , seqs ,
 masked_align,relative_frequency , rooted_tree, align , tree, evenness_vector ,
 faith_pd_vector , observed_asv, rarefied_table , shannon_vector ,

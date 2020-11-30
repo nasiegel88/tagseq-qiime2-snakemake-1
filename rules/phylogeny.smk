@@ -5,7 +5,7 @@
 
 rule alignment:
   input:
-    rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza"
+    filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza"
   output:
     masked_align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
     rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
@@ -18,7 +18,7 @@ rule alignment:
   shell:
     """
     qiime phylogeny align-to-tree-mafft-fasttree \
-        --i-sequences {input.rep} \
+        --i-sequences {input.filtered_rep} \
         --o-alignment {output.align} \
         --o-masked-alignment {output.masked_align} \
         --o-tree {output.tree} \

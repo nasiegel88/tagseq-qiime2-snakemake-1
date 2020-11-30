@@ -29,6 +29,26 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}
     """
+
+rule filter_seqs:
+  input:
+    rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza",
+    table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
+  output:
+    filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza"
+  log:
+    SCRATCH + "/logs/" + PROJ + "_filtered-seqs.log"
+  conda:
+    "../envs/qiime2-2020.8.yaml" 
+  shell:
+    """
+    qiime taxa filter-seqs \
+      --i-sequences {input.rep} \
+      --i-taxonomy input.table \
+      --p-include p__ \
+      --p-exclude {EXCLUDESEQS} \
+      --o-filtered-sequences {output.filtered_rep}
+    """
   
 rule metadata:
   input:
@@ -100,7 +120,7 @@ rule dada2_stats:
 
 rule assign_tax:
   input:
-    rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza",
+    filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza",
     db_classified = DB_classifier
   output:
     sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza"
@@ -112,7 +132,7 @@ rule assign_tax:
     """
     qiime feature-classifier classify-sklearn \
        --i-classifier {input.db_classified} \
-       --i-reads {input.rep} \
+       --i-reads {input.filtered_rep} \
        --o-classification {output.sklearn}
     """
 
@@ -158,7 +178,7 @@ rule gen_tax:
 
 rule gen_seqs:
   input:
-    rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza",
+    filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza",
   output:
     seqs = OUTPUTDIR + "/picrust2/dna-sequences.fasta"
   log:
@@ -168,4 +188,4 @@ rule gen_seqs:
   params:
     directory(OUTPUTDIR + "/picrust2")
   shell:
-    "qiime tools export --input-path {input.rep} --output-path {params}"
+    "qiime tools export --input-path {input.filtered_rep} --output-path {params}"
