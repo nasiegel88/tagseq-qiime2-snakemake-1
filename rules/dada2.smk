@@ -29,6 +29,22 @@ rule dada2:
         --o-representative-sequences {output.rep} \
         --o-denoising-stats {output.stats}
     """
+  
+rule metadata:
+  input:
+    cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
+  output:
+    tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.tsv"
+  log:
+    SCRATCH + "/logs/tabulated-metadata.log"
+  conda:
+    "../envs/qiime2-2020.8.yaml"
+  shell:
+    """
+    qiime metadata tabulate \
+      --m-input-file {input.cleaned_metadata} \
+      --o-visualization {output.tabulated_cleaned_metadata}
+    """
 
 rule drop_blanks:
   input:
