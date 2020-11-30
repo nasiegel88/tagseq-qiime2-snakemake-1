@@ -1,5 +1,5 @@
 proj_name: mld.run1
-analysis_type: -treatment
+analysis_type: -sex
 stat_type: qiime2-default
 contact:
   email: nasiegel@ucdavis.edu
@@ -57,7 +57,7 @@ table_blanks: "SampleID IN (
 )" # for preliminary data
 
 ### phylogeny
-metadata_category: "treatment" # , "sex"
+metadata_category: "sex" # "sex" or "treatment"
 alpha-div-p-method: 'spearman' # , "pearson"
 beta-div-p-method: 'anosim' # , "permanova", "permdisp"
 permutations: 999
