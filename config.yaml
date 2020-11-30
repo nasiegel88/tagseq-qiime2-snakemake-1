@@ -48,15 +48,14 @@ chimera: pooled
 seqs-to-exclude: 'chloroplast,mitochondria,eukaryota,archea'
 
 ## Filter blanks
-remove_blanks: 'no' # yes or no
+remove_blanks: 'yes' # yes or no
 table_blanks: "SampleID IN (
   'BLANK.47453', 'BLANK.47455', 'BLANK.47457', 'BLANK.47467',
 ''BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
 ''BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
 ''BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
-''BLANK.48408', 'BLANK.48429'
+''BLANK.48408', 'BLANK.48429', 'NS.B6.47455F'
 )" # for run1
-metadata_blanks: 'NS.Blank5' # not sure if this is the correct format for this flag
 
 ### phylogeny
 metadata_category: "treatment" # "sex" "treatment"
@@ -73,7 +72,7 @@ sampling-depth: 1000 #should be set higher for a non-test dataset
 ##### date 10/14/20
 
 # longitudinal analysis
-perform_longitudinal: 'no' # yes for longitudinal analysis 
+perform_longitudinal: 'yes' # yes for longitudinal analysis 
 state: 'age_months'
 studyid: 'animal_number'
 replicate: 'random'
