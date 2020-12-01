@@ -28,7 +28,7 @@ rule alignment:
 rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza",
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
     evenness_vector = OUTPUTDIR + "/core-metrics-results/" + PROJ + "-evenness_vector.qza",
@@ -56,7 +56,7 @@ rule core_metrics:
     """
     qiime diversity core-metrics-phylogenetic \
         --i-phylogeny {input.rooted_tree} \
-        --i-table {input.cleaned_table} \
+        --i-table {input.id_filtered_table} \
         --p-sampling-depth {config[sampling-depth]} \
         --m-metadata-file {input.cleaned_metadata} \
         --o-rarefied-table {output.rarefied_table} \
@@ -220,7 +220,7 @@ rule weighted_unifrac:
 
 rule barplot:
   input:
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza",
     filtered_sklearn = OUTPUTDIR + "/" + PROJ + "-filtered_tax_sklearn.qza",
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
@@ -232,7 +232,7 @@ rule barplot:
   shell:
     """
     qiime taxa barplot \
-        --i-table {input.cleaned_table} \
+        --i-table {input.id_filtered_table} \
         --i-taxonomy {input.filtered_sklearn} \
         --m-metadata-file {input.cleaned_metadata} \
         --o-visualization {output.barplots}

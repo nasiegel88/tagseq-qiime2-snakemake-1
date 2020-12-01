@@ -51,10 +51,10 @@ seqs-to-exclude: 'chloroplast,mitochondria,eukaryota,archea'
 remove_blanks: 'yes' # yes or no
 table_blanks: "SampleID IN (
   'BLANK.47453', 'BLANK.47455', 'BLANK.47457', 'BLANK.47467',
-''BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
-''BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
-''BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
-''BLANK.48408', 'BLANK.48429', 'NS.B6.47455F'
+'BLANK.47470', 'BLANK.47487', 'BLANK.47505', 'BLANK.47510',
+'BLANK.47538', 'BLANK.47548', 'BLANK.47549', 'BLANK.47551',
+'BLANK.47552', 'BLANK.47554', 'BLANK.47557', 'BLANK.48381',
+'BLANK.48408', 'BLANK.48429', 'NS.B6.47455F'
 )" # for run1
 
 ### phylogeny
@@ -73,10 +73,10 @@ sampling-depth: 1000 #should be set higher for a non-test dataset
 
 # longitudinal analysis
 perform_longitudinal: 'yes' # yes for longitudinal analysis 
-state: 'age_months'
+state: 'age_month'
 studyid: 'animal_number'
 replicate: 'random'
 test_metadata: 'weight'
-group_metadata_category: 'sex, treatment'
+group_metadata_category: 'sex,treatment'
 control: 'control'
 missing_samples: 'ignore'

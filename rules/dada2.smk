@@ -49,10 +49,11 @@ rule filter_seqs:
       --p-exclude {EXCLUDESEQS} \
       --o-filtered-sequences {output.filtered_rep}
     """
+
 rule filter_table:
   input:
     sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza",
-    table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
+    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
   output:
     filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza"
   log:
@@ -62,18 +63,37 @@ rule filter_table:
   shell:
     """
     qiime taxa filter-table \
-      --i-table {input.table} \
+      --i-table {input.cleaned_table} \
       --i-taxonomy {input.sklearn} \
       --p-mode exact \
       --p-exclude {EXCLUDESEQS} \
       --o-filtered-table {output.filtered_table}
     """
+
+rule filter_features:
+  input:
+    filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza",
+    filtered_sklearn = OUTPUTDIR + "/" + PROJ + "-filtered_tax_sklearn.qza"
+  output:
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza"
+  log:
+    SCRATCH + "/logs/" + PROJ + "_filtered-features.log"
+  conda:
+    "../envs/qiime2-2020.8.yaml"
+  shell:
+    """
+    qiime feature-table filter-features \
+      --i-table {input.filtered_table} \
+      --m-metadata-file {input.filtered_sklearn} \
+      --o-filtered-table {output.id_filtered_table}
+    """
+
   
 rule metadata:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
   output:
-    tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.tsv"
+    tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.qzv"
   log:
     SCRATCH + "/logs/tabulated-metadata.log"
   conda:
@@ -87,7 +107,7 @@ rule metadata:
 
 rule drop_blanks:
   input:
-    filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza"
+    table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza"
   output:
     cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
@@ -105,7 +125,7 @@ rule drop_blanks:
     sed -e '/BLANK*/d' -e '/NS.B6.47455F/d' {params.metadata} > {output.cleaned_metadata} # NS.B6.47455F was used as an additional control
       echo "All blanks dropped"
       qiime feature-table filter-samples \
-      --i-table {input.filtered_table} \
+      --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids TRUE  \
       --p-where "{params.table_blanks}"  \
@@ -114,7 +134,7 @@ rule drop_blanks:
       cp {params.metadata} {output.cleaned_metadata}
       echo "no blanks dropped"
       qiime feature-table filter-samples \
-      --i-table {input.filtered_table} \
+      --i-table {input.table} \
       --m-metadata-file {params.metadata} \
       --p-exclude-ids FALSE \
       --o-filtered-table {output.cleaned_table}
@@ -175,7 +195,7 @@ rule filtered_assign_tax:
 
 rule gen_table:
   input:
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza"
   output:
     table_tsv = OUTPUTDIR + "/table/feature-table.biom"
   log:
@@ -185,7 +205,7 @@ rule gen_table:
   params:
     directory(OUTPUTDIR + "/table")
   shell:
-    "qiime tools export --input-path {input.cleaned_table} --output-path {params}"
+    "qiime tools export --input-path {input.id_filtered_table} --output-path {params}"
 
 rule convert:
   input:

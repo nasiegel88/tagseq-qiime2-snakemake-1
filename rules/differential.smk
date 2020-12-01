@@ -5,7 +5,7 @@
 
 rule aldex2:
     input:
-        cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
+        filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza",
         cleaned_metadata = HOME + "/noblank-sample-metadata.tsv"
     output:
         differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qza"
@@ -14,7 +14,7 @@ rule aldex2:
     shell:
         """
         qiime aldex2 aldex2 \
-            --i-table {input.cleaned_table} \
+            --i-table {input.filtered_table} \
             --m-metadata-file {input.cleaned_metadata} \
             --m-metadata-column {config[metadata_category]} \
             --o-differentials {output.differentials}

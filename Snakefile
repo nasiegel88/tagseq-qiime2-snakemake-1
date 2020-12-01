@@ -61,7 +61,7 @@ PERMNUMBER = config["permutations"]
 # Longitudinal
 ID = config['studyid']          
 STATE = config['state']      
-GROUPMETACAT = config['group_metadata_category']      
+GROUPMETACAT = config['group_metadata_category']   
 REPLICATE = config['replicate']          
 CONTROL = config['control'] 
 MISSING = config['missing_samples']
@@ -88,8 +88,9 @@ raw = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux.qzv",
 primer = OUTPUTDIR + "/viz/" + PROJ + "-PE-demux-noprimer.qzv",
 #ASV outputs:
 filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza",
+id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza",
 filtered_table = OUTPUTDIR + "/" + PROJ + "-filtered-asv-table.qza",
-tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.tsv",
+tabulated_cleaned_metadata = HOME + "/tabulated-sample-metadata.qzv",
 table = OUTPUTDIR + "/" + PROJ + "-asv-table.qza",
 cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza",
 cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
@@ -183,7 +184,7 @@ trim_multi_html , trim_multi_stats , q2_import, q2_primerRM, raw ,
 primer, table , cleaned_table ,filtered_rep, filtered_table ,cleaned_metadata, rep , stats ,
 stats_viz , sklearn ,filtered_sklearn, biom , tabulated_cleaned_metadata,table_tsv , table_tax , seqs ,
 masked_align,relative_frequency , rooted_tree, align , tree, evenness_vector ,
-faith_pd_vector , observed_asv, rarefied_table , shannon_vector ,
+faith_pd_vector , observed_asv, rarefied_table ,id_filtered_table ,shannon_vector ,
 bray_curtis , bray_curtis_pcoa, jaccard_distance , jaccard_pcoa,
 unweighted_unifrac_mat , unweighted_unifrac_pcoa ,
 weighted_unifrac_mat , weighted_unifrac_pcoa , weighted_unifrac_viz ,

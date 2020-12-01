@@ -3,10 +3,9 @@
 ## UC Davis
 ## nasiegel@ucdavis.edu
 
-
 rule rel_freq:
   input:
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza"
   output:
     relative_frequency = OUTPUTDIR  + "/" + PROJ + "-relative_frequency_table.qza"
   conda:
@@ -14,7 +13,7 @@ rule rel_freq:
   shell:
     """
     qiime feature-table relative-frequency \
-      --i-table {input.cleaned_table} \
+      --i-table {input.id_filtered_table} \
       --o-relative-frequency-table {output.relative_frequency}
     """
 
@@ -83,7 +82,7 @@ rule longitudinal_me:
       --m-metadata-file {input.cleaned_metadata} \
       --m-metadata-file {input.shannon_vector} \
       --p-metric shannon_entropy \
-      --p-group-columns GROUPMETACAT \
+      --p-group-columns {GROUPMETACAT} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
       --o-visualization {output.lme}
@@ -275,7 +274,7 @@ rule longitudinal_emperor:
 rule longitudinal_feature_volitilty:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza"
   output:
     vol_table = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-filtered_table.qza",
     vol_est = OUTPUTDIR + "/longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-sample_estimator.qza",
@@ -291,7 +290,7 @@ rule longitudinal_feature_volitilty:
   shell:
     """
     qiime longitudinal feature-volatility \
-      --i-table {input.cleaned_table} \
+      --i-table {input.id_filtered_table} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
       --p-individual-id-column {ID} \
@@ -306,7 +305,7 @@ rule longitudinal_feature_volitilty:
 rule maturity_index:
   input:
     cleaned_metadata = HOME + "/noblank-sample-metadata.tsv",
-    cleaned_table = OUTPUTDIR + "/" + PROJ + "-no_blanks-asv-table.qza"
+    id_filtered_table = OUTPUTDIR + "/" + PROJ + "-id_filtered-asv-table.qza"
   output:
     maturity_maz =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-maz_scores.qza",
     maturity_emp =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-sample_estimator.qza",
@@ -325,7 +324,7 @@ rule maturity_index:
   shell:
     """
     qiime longitudinal maturity-index \
-      --i-table {input.cleaned_table} \
+      --i-table {input.id_filtered_table} \
       --m-metadata-file {input.cleaned_metadata} \
       --p-state-column {STATE} \
       --p-group-by {METACATEGORY} \
