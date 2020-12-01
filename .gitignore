@@ -28,6 +28,10 @@ scratch/
 
 *.qzv
 
+*.pdf
+
+analysis.rmd
+
 output/qiime2/asv/picrust2/intermediate/place_seqs/
 
 output/qiime2/asv/picrust2/
