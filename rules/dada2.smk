@@ -171,7 +171,7 @@ rule assign_tax:
     """
     qiime feature-classifier classify-sklearn \
        --i-classifier {input.db_classified} \
-       --i-reads {input.filtered_rep} \
+       --i-reads {input.rep} \
        --o-classification {output.sklearn}
     """
 
