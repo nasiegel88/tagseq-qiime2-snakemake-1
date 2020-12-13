@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -login
 #SBATCH -p high                # partition, or queue, to assign to
 #SBATCH -J 16s                 # name for job
 #SBATCH -N 1                   # one "node", or computer
@@ -14,8 +14,6 @@
 conda activate snake-tagseq
 
 # go to the directory you ran 'sbatch' in, OR just hardcode it...
-#cd $SLURM_SUBMIT_DIR
-cd ~/MLD/tagseq-qiime2-snakemake-1
 
 # fail on weird errors
 set -o nounset
