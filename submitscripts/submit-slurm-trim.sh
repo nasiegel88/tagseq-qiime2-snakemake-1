@@ -1,11 +1,11 @@
 #!/bin/bash -login
 #SBATCH -p high                # partition, or queue, to assign to
-#SBATCH -J make-table          # name for job
+#SBATCH -J multiqc             # name for job
 #SBATCH -N 1                   # one "node", or computer
 #SBATCH -n 1                   # one task for this node
-#SBATCH -c 8                   # eight cores per task
-#SBATCH -t 8:00:00             # ask for no more than 30 minutes
-#SBATCH --mem=10gb             # ask for no more than 10 GB of memory
+#SBATCH -c 1                   # eight cores per task
+#SBATCH -t 4:00:00             # 4 hours for job
+#SBATCH --mem=20gb             # 20Gb should be enough memory
 
 # initialize conda
 . ~/miniconda3/etc/profile.d/conda.sh
@@ -24,7 +24,7 @@ set -x
 
 # run the snakemake!
 # Select which snakefile you want to submit
-snakemake -p -j 8 -s Snakefile.smk --use-conda --until multiqc
+snakemake -p -j 8 --use-conda --until multiqc
 
 # print out various information about the job
 env | grep SLURM            # Print out values of the current jobs SLURM environment variables
