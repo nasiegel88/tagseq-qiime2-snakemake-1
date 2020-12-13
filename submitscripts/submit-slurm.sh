@@ -1,6 +1,6 @@
 #!/bin/bash -login
 #SBATCH -p high                # partition, or queue, to assign to
-#SBATCH -J 16s                 # name for job
+#SBATCH -J mld                 # name for job
 #SBATCH -N 1                   # one "node", or computer
 #SBATCH -n 1                   # one task for this node
 #SBATCH -c 1                   # one core per task
