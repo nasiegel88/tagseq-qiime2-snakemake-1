@@ -1,10 +1,10 @@
 #!/bin/bash -login
 #SBATCH -p high                # partition, or queue, to assign to
-#SBATCH -J make-table          # name for job
+#SBATCH -J 16s-dry             # name for job
 #SBATCH -N 1                   # one "node", or computer
 #SBATCH -n 1                   # one task for this node
 #SBATCH -c 1                   # one core per task
-#SBATCH -t 4:00:00             # ask for no more than 30 minutes
+#SBATCH -t 4:00:00             # 4 hours for run
 #SBATCH --mem=20gb             # ask for no more than 10 GB of memory
 
 # initialize conda
@@ -24,7 +24,7 @@ set -x
 
 # run the snakemake!
 # Select which snakefile you want to submit
-snakemake -p -j 8 -s Snakefile --use-conda -n
+snakemake -p -j 8 --use-conda -n
 
 # print out various information about the job
 env | grep SLURM            # Print out values of the current jobs SLURM environment variables
