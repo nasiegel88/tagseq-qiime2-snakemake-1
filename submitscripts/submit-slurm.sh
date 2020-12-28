@@ -22,7 +22,8 @@ set -x
 
 # run the snakemake!
 # Select which snakefile you want to submit
-snakemake -p -j 8 --use-conda
+cd /home/nasiegel/MLD/tagseq-qiime2-snakemake-1
+snakemake --use-conda
 
 # print out various information about the job
 env | grep SLURM            # Print out values of the current jobs SLURM environment variables
