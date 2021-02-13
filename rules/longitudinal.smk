@@ -331,7 +331,7 @@ rule maturity_index:
       --p-individual-id-column {ID} \
       --p-control {CONTROL} \
       --p-test-size 0.4 \
-      --p-stratify \
+      --p-stratify=FALSE \ # might need to change back of checking beta metrics
       --p-random-state 1010101 \
       --o-sample-estimator {output.maturity_emp} \
       --o-feature-importance {output.maturity_imp} \
