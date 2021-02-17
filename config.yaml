@@ -4,12 +4,12 @@ stat_type: qiime2-default
 contact:
   email: nasiegel@ucdavis.edu
   person: Noah Siegel
-raw-data: $PWD/raw_dir
-scratch:  $PWD/scratch
-outputDIR: $PWD/output
-home: $PWD
-metadata: $PWD/metadata.tsv
-manifest: $PWD/raw_dir/manifest-orig.txt
+raw-data: $HOME/tagseq-qiime2-snakemake-1/raw_dir
+scratch:  $HOME/tagseq-qiime2-snakemake-1/scratch
+outputDIR: $HOME/tagseq-qiime2-snakemake-1/output
+home: $HOME/tagseq-qiime2-snakemake-1
+metadata: $HOME/tagseq-qiime2-snakemake-1/metadata.tsv
+manifest: $HOME/tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
 
 # Fastq file suffix, following the read pair designation
@@ -36,7 +36,7 @@ maxdiff: 4
 minlength: 200
 
 ## Database
-database_classified: $PWD/database/silva-138-99-nb-classifier_2020.8.qza
+database_classified: $HOME/tagseq-qiime2-snakemake-1/database/silva-138-99-nb-classifier_2020.8.qza
 
 ## DADA2 - ASV flags
 truncation_err: 2
