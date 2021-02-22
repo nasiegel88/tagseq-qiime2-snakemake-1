@@ -1,7 +1,5 @@
 name: snake-tagseq
 channels:
-    - conda-forge
     - bioconda
-    - defaults
 dependencies:
     - snakemake =5.5.2
