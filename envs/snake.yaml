@@ -1,5 +1,0 @@
-name: snake-tagseq
-channels:
-    - bioconda
-dependencies:
-    - snakemake =5.5.2
