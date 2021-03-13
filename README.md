@@ -68,7 +68,8 @@ git clone https://github.com/nasiegel88/tagseq-qiime2-snakemake-1.git
 cd tagseq-qiime2-snakemake-1
 
 # Create conda environment from exisiting yaml file:
-conda env create --name snake-tagseq --file envs/snake.yaml
+conda install -c conda-forge mamba
+mamba create -c conda-forge -c bioconda -n snakemake snakemake=5.5.2
 
 # Enter environment
 source activate snake-tagseq
