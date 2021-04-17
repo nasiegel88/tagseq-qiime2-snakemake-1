@@ -1,6 +1,6 @@
 # Pipeline to run qiime2 with snakemake
 * *Noah Siegel*
-* *August 2020*
+* *April 2021*
 * *adapted from [https://github.com/shu251/tagseq-qiime2-snakemake](https://github.com/shu251/tagseq-qiime2-snakemake)*
 
 Run [QIIME2](https://www.nature.com/articles/s41587-019-0209-9) using [snakemake](https://academic.oup.com/bioinformatics/article/28/19/2520/290322). Requires input of raw .fastq reads. Below describes steps to set up environment and run a test dataset.
@@ -68,10 +68,11 @@ git clone https://github.com/nasiegel88/tagseq-qiime2-snakemake-1.git
 cd tagseq-qiime2-snakemake-1
 
 # Create conda environment from exisiting yaml file:
-conda env create --name snake-tagseq --file envs/snake.yaml
+conda install -c conda-forge mamba
+mamba create -c conda-forge -c bioconda -n tagseq-snakemake snakemake=5.5.2
 
 # Enter environment
-source activate snake-tagseq
+conda activate snake-tagseq
 
 # Check versions and correct environment set up
 snakemake --version
@@ -204,14 +205,14 @@ chimera: pooled
 --p-chimera-method
 
 #Number of reads to consider in training set for error model
---p-n-reads-learn # defaul is 1 million
+--p-n-reads-learn # default is 1 million
 ```
 
 ## 3. Run a dry run of snakemake pipeline
 
 Use *-s* to select  the snakefile
 ```
-snakemake -np -s Snakefile.smk
+snakemake -np --use-conda
 # output should be all green and display no errors
 ```
 Outputs should all be green and will report how many jobs and rules snakemake plans to run. This will allow you to evaluate any error and syntax messages.
@@ -221,7 +222,7 @@ Outputs should all be green and will report how many jobs and rules snakemake pl
 To run the full pipeline make sure you enable the ```--use-conda``` flag. This is because snakemake uses the conda environments stored$
 ```
 # For ASVs
-Run the following command ```snakemake --use-conda -s Snakefile.smk```
+Run the following command ```snakemake --use-conda```
 ```
 ### 4.2 Run with HPC
 

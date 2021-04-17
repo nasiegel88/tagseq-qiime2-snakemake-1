@@ -41,3 +41,4 @@ output/qiime2/asv/
 noblank-sample-metadata.tsv
 
 raw_dir/mldrun1.data.sh
+.Rproj.user

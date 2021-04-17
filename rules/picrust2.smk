@@ -57,7 +57,8 @@ rule metagenome:
 
 rule pl_infer:
   input:
-    metagenome_unstrat = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz"
+    metagenome_contrib = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_contrib.tsv.gz"
+    #metagenome_unstrat = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_unstrat.tsv.gz"
   output:
     path_abun_unstrat = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat.tsv.gz"
   log:
@@ -68,7 +69,7 @@ rule pl_infer:
     directory(OUTPUTDIR + "/picrust2/pathways_out")
   shell:
     """
-    pathway_pipeline.py -i {input.metagenome_unstrat} \
+    pathway_pipeline.py -i {input.metagenome_contrib} \
                           -o {params} -p 1
     """
 
