@@ -49,30 +49,23 @@ rule fastqc_trim:
   wrapper:
     "0.35.2/bio/fastqc"
 
-rule multiqc:
-  input:
-    raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-    trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
-  output:
-    raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html", 
-    raw_multi_stats = SCRATCH + "/fastqc/raw_multiqc_general_stats.txt",
-    trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html", 
-    trim_multi_stats = SCRATCH + "/fastqc/trimmed_multiqc_general_stats.txt"
+rule multiqc_raw:
+    input:
+      raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+      trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    output: trim_multi_html = SCRATCH + "/fastqc/trimmed_multiqc.html"
+    log: SCRATCH + "/logs/" + PROJ + "_raw.log"
+    wrapper:
+        "v1.1.0/bio/multiqc"
 
-  conda:
-   "../envs/multiqc-env.yaml"
-  shell: 
-    """
-    multiqc -n multiqc.html {input.raw_qc} #run multiqc
-    mv multiqc.html {output.raw_multi_html} #rename html
-    mv multiqc_data/multiqc_general_stats.txt {output.raw_multi_stats} #move and rename stats
-    rm -rf multiqc_data #clean-up
-    #repeat for trimmed data
-    multiqc -n multiqc.html {input.trim_qc} #run multiqc
-    mv multiqc.html {output.trim_multi_html} #rename html
-    mv multiqc_data/multiqc_general_stats.txt {output.trim_multi_stats} #move and rename stats
-    rm -rf multiqc_data #clean-up
-    """ 
+rule multiqc_trimmed:
+    input:
+      raw_qc = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+      trim_qc = expand("{scratch}/fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    output: raw_multi_html = SCRATCH + "/fastqc/raw_multiqc.html"
+    log: SCRATCH + "/logs/" + PROJ + "_raw.log"
+    wrapper:
+        "v1.1.0/bio/multiqc"
 
 rule import_qiime:
   input:
