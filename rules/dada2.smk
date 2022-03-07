@@ -160,7 +160,7 @@ rule dada2_stats:
 rule assign_tax:
   input:
     rep = OUTPUTDIR + "/" + PROJ + "-rep-seqs.qza",
-    db_classified = DB_classifier
+    db_classified = CLASSIFIER
   output:
     sklearn = OUTPUTDIR + "/" + PROJ + "-tax_sklearn.qza"
   log:
@@ -178,7 +178,7 @@ rule assign_tax:
 rule filtered_assign_tax:
   input:
     filtered_rep = OUTPUTDIR + "/" + PROJ + "-filtered-rep-seqs.qza",
-    db_classified = DB_classifier
+    db_classified = CLASSIFIER
   output:
     filtered_sklearn = OUTPUTDIR + "/" + PROJ + "-filtered_tax_sklearn.qza"
   log:

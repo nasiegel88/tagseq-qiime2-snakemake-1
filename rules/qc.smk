@@ -3,6 +3,10 @@
 ## UC Davis
 ## nasiegel@ucdavis.edu
 
+rule download_classifier:
+    output: CLASSIFIER
+    shell: "curl -L -o {output} {DB_classifier}"
+
 rule fastqc:
   input:    
     INPUTDIR + "/{sample}_{num}" + SUF

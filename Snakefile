@@ -49,6 +49,7 @@ MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').t
 MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
+CLASSIFIER = config['classifier']
 DB_classifier = config["database_classified"]
 
 # Phylogeny
@@ -149,6 +150,7 @@ weighted_nsti =OUTPUTDIR + "/picrust2/EC_metagenome_out/weighted_nsti.tsv.gz",
 marker_describe = OUTPUTDIR + "/picrust2/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz",
 path_abun_unstrat = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat.tsv.gz",
 path_abun_unstrat_describe = OUTPUTDIR + "/picrust2/pathways_out/path_abun_unstrat_descrip.tsv.gz",
+
 # differential analysis
 differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qza",
 viz_differentials = OUTPUTDIR + "/differential-expression/"  + PROJ + ANALYSIS + "-differential.qzv",
@@ -185,6 +187,7 @@ maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-mod
 
 # List of non-longitudinal input files
 rule_all_input_list = [# Preprocessing
+CLASSIFIER,
 raw_html,
 raw_zip,
 raw_multi_html,
@@ -258,7 +261,7 @@ path_abun_unstrat_describe,
 differentials,
 viz_differentials,
 sig_diff,
-sig_tablee]
+sig_table]
 
 # List of longitudinal input fils
 rule_all_longitudinal_input = [pw_diff,
