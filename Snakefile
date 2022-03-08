@@ -37,16 +37,16 @@ SET_NUMS = set(NUMS)
 #print(SUF)
 #print(R1_SUF)
 
-# Create final manifest file for qiime2
-MANIFEST = pd.read_csv(config["manifest"]) #Import manifest
-MANIFEST['filename'] = MANIFEST['absolute-filepath'].str.split('/').str[-1] #add new column with only file name
-MANIFEST.rename(columns = {'absolute-filepath':'rawreads-filepath'}, inplace = True)
-PATH_TRIMMED = "trimmed" # name of directory with trimmed reads
-NEWPATH = os.path.join(SCRATCH, PATH_TRIMMED)
-MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq.gz")
-MANIFEST['absolute-filepath'] = NEWPATH+ "/" + MANIFEST['filename']    
-MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed.txt')
-MANIFEST = config["manifest"]
+## Create final manifest file for qiime2
+#MANIFEST = pd.read_csv(config["manifest"]) #Import manifest
+#MANIFEST['filename'] = MANIFEST['absolute-filepath'].str.split('/').str[-1] #add new column with only file name
+#MANIFEST.rename(columns = {'absolute-filepath':'rawreads-filepath'}, inplace = True)
+#PATH_TRIMMED = "trimmed" # name of directory with trimmed reads
+#NEWPATH = os.path.join(SCRATCH, PATH_TRIMMED)
+#MANIFEST['filename'] = MANIFEST['filename'].str.replace(SUF, "_trim.fastq.gz")
+#MANIFEST['absolute-filepath'] = NEWPATH+ "/" + MANIFEST['filename']    
+#MANIFEST[['sample-id','absolute-filepath','direction']].set_index('sample-id').to_csv('manifest-trimmed.txt')
+#MANIFEST = config["manifest"]
 
 # Database information to assign taxonomy
 CLASSIFIER = config['classifier']
@@ -69,6 +69,7 @@ MISSING = config['missing_samples']
 
 #----DEFINE RULES----#
 
+manifest = INPUTDIR + "/manifest-orig.txt"
 # fastqc output before trimming
 raw_html = expand("{scratch}/fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
 raw_zip = expand("{scratch}/fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
@@ -186,6 +187,7 @@ maturity_mod =  OUTPUTDIR + "/longitudinal/maturity/" + PROJ + ANALYSIS +  "-mod
 # List of non-longitudinal input files
 rule_all_input_list = [# Preprocessing
 CLASSIFIER,
+manifest,
 raw_html,
 raw_zip,
 raw_multi_html,

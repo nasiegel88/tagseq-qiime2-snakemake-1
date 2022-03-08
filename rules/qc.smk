@@ -67,9 +67,18 @@ rule multiqc_trimmed:
     wrapper:
         "v1.1.0/bio/multiqc"
 
+rule mapping:
+  output: INPUTDIR + "/manifest-orig.txt"
+  conda:
+    "../envs/r-env.yaml"
+  shell:
+    """
+    cd raw_dir
+    Rscript ../scripts/write-manifest-current.R
+    """
+
 rule import_qiime:
-  input:
-    MANIFEST
+  input: INPUTDIR + "/manifest-orig.txt"
   output:
     q2_import = SCRATCH + "/" + PROJ + "-PE-demux.qza"
   log:
