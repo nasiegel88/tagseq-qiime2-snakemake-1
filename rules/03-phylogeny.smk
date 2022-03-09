@@ -7,10 +7,10 @@ rule alignment:
   input:
     filtered_rep = OUTPUTDIR + PROJ + "-filtered-rep-seqs.qza"
   output:
-    masked_align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
-    rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
-    align = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-alignment.qza",
-    tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-tree.qza"
+    masked_align = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
+    rooted_tree = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
+    align = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-alignment.qza",
+    tree = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-tree.qza"
   log:
     SCRATCH + "logs/" + PROJ + "-aligned.log"
   conda:
@@ -27,7 +27,7 @@ rule alignment:
 
 rule core_metrics:
   input:
-    rooted_tree = OUTPUTDIR + "/mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
+    rooted_tree = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
     id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza",
     cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
   output:
