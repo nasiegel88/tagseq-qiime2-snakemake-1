@@ -4,10 +4,10 @@ stat_type: qiime2-default
 contact:
   email: nasiegel@ucdavis.edu
   person: Noah Siegel
-raw-data: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/raw_dir
-scratch:  /home/nasiegel/2022-tagseq-qiime2-snakemake-1/scratch
-outputDIR: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/output
-home: /home/nasiegel/2022-tagseq-qiime2-snakemake-1
+raw-data: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/raw_dir/
+scratch:  /home/nasiegel/2022-tagseq-qiime2-snakemake-1/scratch/
+outputDIR: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/output/
+home: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/
 metadata: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/metadata.tsv
 manifest: /home/nasiegel/2022-tagseq-qiime2-snakemake-1/raw_dir/manifest-orig.txt
 manifest-trimmed: manifest-trimmed.txt
