@@ -56,7 +56,7 @@ rule multiqc_raw:
     output: trim_multi_html = SCRATCH + "fastqc/trimmed_multiqc.html"
     log: SCRATCH + "logs/" + PROJ + "_raw.log"
     wrapper:
-        "v1.1.0/bio/multiqc"
+        "v1.0.0/bio/multiqc"
 
 rule multiqc_trimmed:
     input:
@@ -65,7 +65,7 @@ rule multiqc_trimmed:
     output: raw_multi_html = SCRATCH + "fastqc/raw_multiqc.html"
     log: SCRATCH + "logs/" + PROJ + "_raw.log"
     wrapper:
-        "v1.1.0/bio/multiqc"
+        "v1.0.0/bio/multiqc"
 
 rule mapping:
   output: INPUTDIR + "/manifest-orig.txt"
