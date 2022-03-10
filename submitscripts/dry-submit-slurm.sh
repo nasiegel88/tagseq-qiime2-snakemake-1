@@ -6,6 +6,8 @@
 #SBATCH -c 1                   # one core per task
 #SBATCH -t 4:00:00             # 4 hours for run
 #SBATCH --mem=20gb             # ask for no more than 10 GB of memory
+#SBATCH --mail-user=nasiegel@ucdavis.edu        # email address to recieve notification
+#SBATCH --mail-type=ALL                         # NOTIFICATIONS OF SLURM JOB STATUS
 
 # initialize conda
 . ~/miniconda3/etc/profile.d/conda.sh
