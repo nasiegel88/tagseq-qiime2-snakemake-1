@@ -223,13 +223,13 @@ rule gen_tax:
   input:
     filtered_sklearn = OUTPUTDIR + PROJ + "-filtered_tax_sklearn.qza"
   output:
-    table_tax = OUTPUTDIR + "/tax_assigned/taxonomy.tsv"
+    table_tax = OUTPUTDIR + "tax_assigned/" + "taxonomy.tsv"
   log:
     SCRATCH + "logs/" + PROJ + "-exportTAXTSV_q2.log"
   conda:
      "../envs/qiime2-2020.8.yaml"
   params:
-    directory(OUTPUTDIR + "/tax_assigned")
+    directory(OUTPUTDIR + "tax_assigned")
   shell:
     "qiime tools export --input-path {input.filtered_sklearn} --output-path {params}"
 

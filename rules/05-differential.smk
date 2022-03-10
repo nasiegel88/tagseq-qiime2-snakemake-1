@@ -6,7 +6,7 @@
 rule aldex2:
     input:
         filtered_table = OUTPUTDIR + PROJ + "-filtered-asv-table.qza",
-        cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+        cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
     output:
         differentials = OUTPUTDIR + "differential-expression/"  + PROJ + ANALYSIS + "-differential.qza"
     conda:

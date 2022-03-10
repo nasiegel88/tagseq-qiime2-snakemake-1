@@ -320,7 +320,7 @@ rule maturity_index:
   conda:
     "../envs/qiime2-2020.8.yaml"
   params:
-      directory(OUTPUTDIR + "/logitudinal/maturity")
+      directory(OUTPUTDIR + "longitudinal/maturity")
   shell:
     """
     qiime longitudinal maturity-index \

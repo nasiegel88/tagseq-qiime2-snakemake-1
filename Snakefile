@@ -2,12 +2,6 @@
 ## Last updated 8-18-2020 NS
 configfile: "config.yaml"
 
-import io 
-import os
-import pandas as pd
-import pathlib
-from snakemake.exceptions import print_exception, WorkflowError
-
 #----SET VARIABLES----#
 PROJ = config["proj_name"]
 ANALYSIS = config["analysis_type"]
@@ -73,13 +67,13 @@ manifest = INPUTDIR + "manifest-orig.txt"
 # fastqc output before trimming
 raw_html = expand("{scratch}fastqc/{sample}_{num}_fastqc.html", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
 raw_zip = expand("{scratch}fastqc/{sample}_{num}_fastqc.zip", scratch = SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-raw_multi_html = SCRATCH + "fastqc/raw_multiqc.html",
+raw_multi_html = SCRATCH + "raw_multiqc.html",
 # Trimmed data output
 trimmedData = expand("{scratch}trimmed/{sample}_{num}_trim.fastq.gz", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS), 
 trim_html = expand("{scratch}fastqc/{sample}_{num}_trimmed_fastqc.html", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
 raw_qc = expand("{scratch}fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
 trim_qc = expand("{scratch}fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-trim_multi_html = SCRATCH + "fastqc/trimmed_multiqc.html", #next change to include proj name,
+trim_multi_html = SCRATCH + "trimmed_multiqc.html", #next change to include proj name,
 
 # QIIME2 outputs
 q2_import = SCRATCH + PROJ + "-PE-demux.qza",
@@ -93,7 +87,7 @@ primer = OUTPUTDIR + "viz/" + PROJ + "-PE-demux-noprimer.qzv",
 filtered_rep = OUTPUTDIR + PROJ + "-filtered-rep-seqs.qza",
 id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza",
 filtered_table = OUTPUTDIR + PROJ + "-filtered-asv-table.qza",
-tabulated_cleaned_metadata = OUTPUTDIR + "viz/" "tabulated-sample-metadata.qzv",
+tabulated_cleaned_metadata = OUTPUTDIR + "viz/" + "tabulated-sample-metadata.qzv",
 table = OUTPUTDIR + PROJ + "-asv-table.qza",
 cleaned_table = OUTPUTDIR + PROJ + "-no_blanks-asv-table.qza",
 cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
@@ -104,7 +98,7 @@ sklearn = OUTPUTDIR + PROJ + "-tax_sklearn.qza",
 filtered_sklearn = OUTPUTDIR + PROJ + "-filtered_tax_sklearn.qza",
 biom = OUTPUTDIR + "table/" + "feature-table.biom",
 table_tsv = OUTPUTDIR + PROJ + "-asv-table.tsv",
-table_tax = OUTPUTDIR + "tax_assigned/taxonomy.tsv",
+table_tax = OUTPUTDIR + "tax_assigned/" + "taxonomy.tsv",
 seqs = OUTPUTDIR + "picrust2/dna-sequences.fasta",
 masked_align = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-masked_alignment.qza",
 rooted_tree = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",

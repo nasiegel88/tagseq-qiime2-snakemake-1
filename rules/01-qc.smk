@@ -51,9 +51,9 @@ rule fastqc_trim:
 
 rule multiqc_raw:
     input:
-      raw_qc = expand("{scratch}{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
-      trim_qc = expand("{scratch}{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
-    output: trim_multi_html = SCRATCH + "fastqc/trimmed_multiqc.html"
+      raw_qc = expand("{scratch}fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
+      trim_qc = expand("{scratch}fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
+    output: trim_multi_html = SCRATCH + "trimmed_multiqc.html"
     log: SCRATCH + "logs/" + PROJ + "_raw.log"
     wrapper:
         "v1.0.0/bio/multiqc"
@@ -62,7 +62,7 @@ rule multiqc_trimmed:
     input:
       raw_qc = expand("{scratch}fastqc/{sample}_{num}_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS),
       trim_qc = expand("{scratch}fastqc/{sample}_{num}_trimmed_fastqc.zip", scratch= SCRATCH, sample=SAMPLE_SET, num=SET_NUMS)
-    output: raw_multi_html = SCRATCH + "fastqc/raw_multiqc.html"
+    output: raw_multi_html = SCRATCH + "raw_multiqc.html"
     log: SCRATCH + "logs/" + PROJ + "_raw.log"
     wrapper:
         "v1.0.0/bio/multiqc"
