@@ -11,7 +11,7 @@
 . ~/miniconda3/etc/profile.d/conda.sh
 
 # activate your desired conda environment
-conda activate snake-tagseq
+conda activate qiime2-snakemake
 
 # go to the directory you ran 'sbatch' in, OR just hardcode it...
 #cd $SLURM_SUBMIT_DIR

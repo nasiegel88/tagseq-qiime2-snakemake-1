@@ -11,11 +11,7 @@
 . ~/miniconda3/etc/profile.d/conda.sh
 
 # activate your desired conda environment
-conda activate snake-tagseq
-
-# go to the directory you ran 'sbatch' in, OR just hardcode it...
-#cd $SLURM_SUBMIT_DIR
-cd ~/MLD/tagseq-qiime2-snakemake-1
+conda activate qiime2-snakemake
 
 # fail on weird errors
 set -o nounset
@@ -24,7 +20,8 @@ set -x
 
 # run the snakemake!
 # Select which snakefile you want to submit
-snakemake -p -j 8 --use-conda --until get_stats
+cd /home/nasiegel/2022-tagseq-qiime2-snakemake-2
+snakemake -p -j 8 --use-conda --until multiqc
 
 # print out various information about the job
 env | grep SLURM            # Print out values of the current jobs SLURM environment variables

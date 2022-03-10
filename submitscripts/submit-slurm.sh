@@ -13,7 +13,7 @@
 . ~/miniconda3/etc/profile.d/conda.sh
 
 # activate your desired conda environment
-conda activate snakemake
+conda activate qiime2-snakemake
 
 # go to the directory you ran 'sbatch' in, OR just hardcode it...
 
