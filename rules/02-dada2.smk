@@ -91,9 +91,9 @@ rule filter_features:
   
 rule metadata:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
-    tabulated_cleaned_metadata = HOME + "tabulated-sample-metadata.qzv"
+    tabulated_cleaned_metadata = OUTPUTDIR + "viz/" + "tabulated-sample-metadata.qzv"
   log:
     SCRATCH + "logs/tabulated-metadata.log"
   conda:
@@ -110,7 +110,7 @@ rule drop_blanks:
     table = OUTPUTDIR + PROJ + "-asv-table.qza"
   output:
     cleaned_table = OUTPUTDIR + PROJ + "-no_blanks-asv-table.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   log:
     SCRATCH + "logs/" + PROJ + "-remove-blanks.log"
   conda:

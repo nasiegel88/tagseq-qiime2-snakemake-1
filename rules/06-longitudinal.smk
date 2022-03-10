@@ -19,7 +19,7 @@ rule rel_freq:
 
 rule longitudinal_pw_diff:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
      pw_diff = OUTPUTDIR + "longitudinal/" + PROJ + ANALYSIS + "pairwise-differences.qzv"
@@ -44,7 +44,7 @@ rule longitudinal_pw_diff:
 
 rule longitudinal_pw_dist:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
     pw_dist = OUTPUTDIR + "longitudinal/" + PROJ + ANALYSIS + "_pairwise-distances.qzv"
@@ -68,7 +68,7 @@ rule longitudinal_pw_dist:
 
 rule longitudinal_me:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     lme = OUTPUTDIR + "longitudinal/" + PROJ + ANALYSIS + "_linear-mixed-effects.qzv"
@@ -90,7 +90,7 @@ rule longitudinal_me:
 
 rule longitudinal_volitilty:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     vol = OUTPUTDIR + "longitudinal/" + PROJ + ANALYSIS + "_volatility.qzv"
@@ -112,7 +112,7 @@ rule longitudinal_volitilty:
 
 rule longitudinal_first_diff:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     shannon_fd = OUTPUTDIR + "longitudinal/" + PROJ + "_shannon-first-differences.qza"
@@ -134,7 +134,7 @@ rule longitudinal_first_diff:
 
 rule longitudinal_first_diff_beta:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "core-metrics-results/" + PROJ +  "-unweighted_unifrac_distance_matrix.qza"
   output:
     first_diff = OUTPUTDIR + "longitudinal/" + PROJ + "_first_distances.qza"
@@ -155,7 +155,7 @@ rule longitudinal_first_diff_beta:
 
 rule longitudinal_track:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza"
   output:
     first_dist = OUTPUTDIR + "longitudinal/" + PROJ + "_first_distances_LME.qzv"
@@ -176,7 +176,7 @@ rule longitudinal_track:
 
 rule longitudinal_first_diff_static:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     unweighted_unifrac_mat = OUTPUTDIR + "core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza"
   output:
     baseline_fd = OUTPUTDIR + "longitudinal/" + PROJ + "_first_distances_baseline_0.qza"
@@ -198,7 +198,7 @@ rule longitudinal_first_diff_static:
 
 rule nmit:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     relative_frequency = OUTPUTDIR  + PROJ + "-relative_frequency_table.qza"
   output:
     nmit = OUTPUTDIR + "longitudinal/" + PROJ  + "_nmit-dm.qza"
@@ -218,7 +218,7 @@ rule nmit:
 
 rule longitudinal_beta:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     nmit = OUTPUTDIR + "longitudinal/" + PROJ  + "_nmit-dm.qza"
   output:
     nmit_viz = OUTPUTDIR + "longitudinal/" + PROJ + ANALYSIS + "_nmit.qzv"
@@ -253,7 +253,7 @@ rule longitudinal_pcoa:
 
 rule longitudinal_emperor:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     nmit_pcoa = OUTPUTDIR + "longitudinal/" + PROJ  + "_nmit-pc.qza"
   output:
     nmit_emp = OUTPUTDIR + "longitudinal/" + PROJ + "_nmit_emperor.qzv"
@@ -273,7 +273,7 @@ rule longitudinal_emperor:
 
 rule longitudinal_feature_volitilty:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza"
   output:
     vol_table = OUTPUTDIR + "longitudinal/mld_feat_volatility/" + PROJ + ANALYSIS + "-filtered_table.qza",
@@ -304,7 +304,7 @@ rule longitudinal_feature_volitilty:
 
 rule maturity_index:
   input:
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv",
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv",
     id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza"
   output:
     maturity_maz =  OUTPUTDIR + "longitudinal/maturity/" + PROJ + ANALYSIS +  "-maz_scores.qza",

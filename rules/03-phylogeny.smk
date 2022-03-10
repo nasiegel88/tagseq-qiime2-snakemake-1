@@ -29,7 +29,7 @@ rule core_metrics:
   input:
     rooted_tree = OUTPUTDIR + "mafft-fasttree-output/" + PROJ + "-rooted_tree.qza",
     id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     evenness_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-evenness_vector.qza",
     faith_pd_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-faith_pd_vector.qza",
@@ -81,7 +81,7 @@ rule core_metrics:
 rule richness:
   input:
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ +  "-shannon_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     shannon_signif = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon-significance.qzv"
   log:
@@ -99,7 +99,7 @@ rule richness:
 rule richcorr:
   input:
     shannon_vector = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     shannon_correl = OUTPUTDIR + "core-metrics-results/" + PROJ + "-shannon-significance-association.qzv",
   log:
@@ -118,7 +118,7 @@ rule richcorr:
 rule asv_signif:
   input:
     observed_asv = OUTPUTDIR + "core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     observed_asv_signif = OUTPUTDIR + "core-metrics-results/" + PROJ + "-observed_otus-significance.qzv"
   log:
@@ -136,7 +136,7 @@ rule asv_signif:
 rule asv_corr:
   input:
     observed_asv = OUTPUTDIR + "core-metrics-results/" + PROJ + "-observed_otus_vector.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     observed_asv_correl = OUTPUTDIR + "core-metrics-results/" + PROJ + "-observed-otus-significance-association.qzv"
   log:
@@ -155,7 +155,7 @@ rule asv_corr:
 rule evenness:
   input:
     bray_curtis = OUTPUTDIR + "core-metrics-results/" + PROJ + "-bray_curtis_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     bray_curtis_signif = OUTPUTDIR + "core-metrics-results/" + PROJ + ANALYSIS + "-bray-curtis-group-significance.qzv"
   log:
@@ -177,7 +177,7 @@ rule evenness:
 rule unifrac:
   input:
     unweighted_unifrac_mat = OUTPUTDIR + "core-metrics-results/" + PROJ + "-unweighted_unifrac_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     unweighted_unifrac_viz = OUTPUTDIR + "core-metrics-results/" + PROJ + ANALYSIS + "-unweighted-unifrac-group-site-significance.qzv"
   log:
@@ -199,7 +199,7 @@ rule unifrac:
 rule weighted_unifrac:
   input:
     weighted_unifrac_mat = OUTPUTDIR + "core-metrics-results/" + PROJ +  "-weighted_unifrac_distance_matrix.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     weighted_unifrac_viz = OUTPUTDIR + "core-metrics-results/" + PROJ + ANALYSIS + "-weighted-unifrac-group-site-significance.qzv"
   log:
@@ -222,7 +222,7 @@ rule barplot:
   input:
     id_filtered_table = OUTPUTDIR + PROJ + "-id_filtered-asv-table.qza",
     filtered_sklearn = OUTPUTDIR + PROJ + "-filtered_tax_sklearn.qza",
-    cleaned_metadata = HOME + "noblank-sample-metadata.tsv"
+    cleaned_metadata = OUTPUTDIR + "table/" + "noblank-sample-metadata.tsv"
   output:
     barplots = OUTPUTDIR + "core-metrics-results/" + PROJ + "-taxa-bar-plots.qzv"
   log:
