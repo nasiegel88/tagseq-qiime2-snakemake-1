@@ -1,0 +1,8 @@
+name: qiime2-snakemake
+channels:
+ - bioconda
+ - conda-forge
+dependencies:
+ - snakemake-minimal=7.0.0=pyhdfd78af_0
+
+ 
